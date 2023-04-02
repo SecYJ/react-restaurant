@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply text-[1.5rem] text-black/70;
+    }
+}
+
+@layer utilities {
+    .grid-auto-layout {
+        @apply grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-8;
+    }
+}
+
+.triangle-top {
+    @apply border-[3px] border-primary border-l-primary border-r-transparent;
+}
