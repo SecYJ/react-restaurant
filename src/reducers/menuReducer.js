@@ -1,15 +1,15 @@
 const reducer = (state, action) => {
     const filterProducts = ({ arrProp, condition = "全部" }) => {
-        if (condition === "全部") return [...state.products];
-        return state.products.filter((p) => p[arrProp] === condition);
+        if (condition === "全部") return [...state.menu];
+        return state.menu.filter((p) => p[arrProp] === condition);
     };
 
     switch (action.type) {
-        case "SET_PRODUCTS": {
+        case "SET_MENU": {
             return {
                 ...state,
-                products: [...action.payload],
-                filtered_products: [...action.payload],
+                menu: [...action.payload],
+                filtered_menu: [...action.payload],
             };
         }
 
@@ -17,20 +17,20 @@ const reducer = (state, action) => {
             if (action.payload === "") {
                 return {
                     ...state,
-                    filtered_products: filterProducts({
+                    filtered_menu: filterProducts({
                         arrProp: "category",
                         condition: state.currentSelect,
                     }),
                 };
             }
 
-            const filtered_products = state.products.filter((p) =>
+            const filtered_menu = state.menu.filter((p) =>
                 p.name.toLowerCase().includes(action.payload)
             );
 
             return {
                 ...state,
-                filtered_products,
+                filtered_menu,
             };
         }
 
@@ -41,7 +41,7 @@ const reducer = (state, action) => {
             if (isAllProducts) {
                 return {
                     ...state,
-                    filtered_products: state.products,
+                    filtered_menu: state.menu,
                     currentSelect: payload,
                 };
             }
@@ -49,7 +49,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 currentSelect: payload,
-                filtered_products: filterProducts({
+                filtered_menu: filterProducts({
                     arrProp: "category",
                     condition: payload,
                 }),

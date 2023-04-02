@@ -1,13 +1,14 @@
 import { useId } from "react";
-import { useProductsCtx } from "../contexts/ProductsCtx";
+import { useMenuCtx } from "../contexts/MenuCtx";
 import { BsSearch } from "react-icons/bs";
 import Skeleton from "./skeleton/Skeleton";
+import useFoodMenu from "../hooks/useFoodMenu";
 
 const Search = ({ search, onSearchChange }) => {
-    const { products } = useProductsCtx();
+    const { menu } = useMenuCtx();
     const id = useId();
 
-    if (products.length === 0) {
+    if (menu.data.length === 0) {
         return <Skeleton classes="h-12 mb-4" />;
     }
 

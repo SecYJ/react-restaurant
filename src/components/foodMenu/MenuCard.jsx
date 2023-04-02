@@ -1,5 +1,5 @@
-import { useCartCtx } from "../contexts/CartCtx";
-import Button from "./Button";
+import { useCartCtx } from "../../contexts/CartCtx";
+import Button from "../Button";
 
 const ProductCard = ({
     img,
@@ -10,7 +10,7 @@ const ProductCard = ({
     stock,
     id,
 }) => {
-    const { dispatch } = useCartCtx();
+    // const { dispatch } = useCartCtx();
     const [cName, ...eName] = name.split(" ");
 
     return (
@@ -29,16 +29,16 @@ const ProductCard = ({
                     color="secondary"
                     className="btn-lg col-span-full mt-3"
                     onClick={() => {
-                        dispatch({
-                            type: "ADD_TO_CART",
-                            payload: {
-                                imgFallback,
-                                price,
-                                name,
-                                id,
-                                stock,
-                            },
-                        });
+                        // dispatch({
+                        //     type: "ADD_TO_CART",
+                        //     payload: {
+                        //         imgFallback,
+                        //         price,
+                        //         name,
+                        //         id,
+                        //         stock,
+                        //     },
+                        // });
                     }}
                 >
                     加入购物车

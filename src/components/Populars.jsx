@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard";
+import ProductCard from "./foodMenu/MenuCard";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import PopularItem from "./PopularItem";

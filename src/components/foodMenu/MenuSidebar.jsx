@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useProductsCtx } from "../contexts/ProductsCtx";
-import useDebounce from "../hooks/useDebounce";
-import Search from "../components/Search";
-import MenuSelect from "../components/MenuSelect";
+import { useMenuCtx } from "../../contexts/MenuCtx";
+import useDebounce from "../../hooks/useDebounce";
+import Search from "../Search";
+import MenuSelect from "./MenuSelect";
 
-const ProductSidebar = () => {
-    const { dispatch, filtered_products } = useProductsCtx();
+const MenuSidebar = () => {
+    const { dispatch, filtered_menu } = useMenuCtx();
     const [search, setSearch] = useState("");
     const debounceSearch = useDebounce(search, 750);
 
@@ -18,11 +18,11 @@ const ProductSidebar = () => {
         <>
             <Search onSearchChange={setSearch} search={search} />
             {debounceSearch !== "" && (
-                <p>搜寻到 {filtered_products.length} 个菜色</p>
+                <p>搜寻到 {filtered_menu.length} 个菜色</p>
             )}
             {debounceSearch === "" && <MenuSelect />}
         </>
     );
 };
 
-export default ProductSidebar;
+export default MenuSidebar;

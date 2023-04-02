@@ -1,27 +1,31 @@
-import ProductsCtxProvider from "../contexts/ProductsCtx";
+import MenuCtxProvider from "../contexts/MenuCtx";
 import CartCtxProvider from "../contexts/CartCtx";
-import ProductList from "../components/ProductList";
-import ProductSidebar from "../components/ProductSidebar";
+import MenuGrid from "../components/foodMenu/MenuGrid";
+import MenuSidebar from "../components/foodMenu/MenuSidebar";
 
 const Menu = () => {
     return (
         <main className="container my-20">
             <div className="flex gap-8">
-                <ProductsCtxProvider>
+                <MenuCtxProvider>
                     <div className="sticky left-0 top-[160px] h-full w-1/4">
-                        <ProductSidebar />
+                        {/* <MenuSidebar /> */}
                     </div>
                     <div className="w-3/4">
-                        {/* <CartCtxProvider> */}
-                        <ProductList />
-                        {/* </CartCtxProvider> */}
+                        <MenuGrid />
                     </div>
-                </ProductsCtxProvider>
+                </MenuCtxProvider>
             </div>
         </main>
     );
 };
 export default Menu;
+
+// if (isLoading) {
+//     return (
+
+//     );
+// }
 
 // TODO: fall back that provide to productList if search result is 0 | empty
 //

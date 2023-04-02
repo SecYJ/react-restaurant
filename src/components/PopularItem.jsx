@@ -15,7 +15,7 @@ const PopularItem = ({ name, price, img, bigImg, index }) => {
     };
 
     return (
-        <div className="card-bordered card card-compact rounded-md border-gray-300 shadow-lg">
+        <div className="card-compact card-bordered card rounded-md border-gray-300 shadow-lg">
             <figure
                 className="group relative cursor-pointer overflow-hidden"
                 onClick={openModal}
