@@ -1,32 +1,19 @@
-import {
-    createBrowserRouter,
-    createRoutesFromElements,
-    Route,
-    RouterProvider,
-} from "react-router-dom";
-import About from "./pages/About";
-import Appointment from "./pages/Appointment";
-import Checkout from "./pages/Checkout";
-import DeliveryInfo from "./pages/DeliveryInfo";
-import Home from "./pages/Home";
-import Layout from "./pages/Layout";
-import Menu from "./pages/Menu";
-import NotFound from "./pages/NotFound";
+import { RouterProvider } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { useCartCtx } from "./contexts/CartCtx";
+import router from "./router";
+import FloatingCartButton from "./components/cart/FloatingCartButton";
+import Cart from "./components/cart/Cart";
 
 const App = () => {
-    const router = createBrowserRouter(
-        createRoutesFromElements(
-            <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="about" element={<About />} />
-                <Route path="menu" element={<Menu />} />
-                <Route path="appointment" element={<Appointment />} />
-                <Route path="checkout" element={<Checkout />} />
-                <Route path="*" element={<NotFound />} />
-            </Route>
-        )
-    );
+    const { cartVisible: visible } = useCartCtx();
 
-    return <RouterProvider router={router} />;
+    return (
+        <>
+            <RouterProvider router={router} />
+            {!visible && <FloatingCartButton />}
+            <AnimatePresence>{visible && <Cart />}</AnimatePresence>
+        </>
+    );
 };
 export default App;

@@ -1,5 +1,4 @@
 import MenuCtxProvider from "../contexts/MenuCtx";
-import CartCtxProvider from "../contexts/CartCtx";
 import MenuGrid from "../components/foodMenu/MenuGrid";
 import MenuSidebar from "../components/foodMenu/MenuSidebar";
 
@@ -9,7 +8,7 @@ const Menu = () => {
             <div className="flex gap-8">
                 <MenuCtxProvider>
                     <div className="sticky left-0 top-[160px] h-full w-1/4">
-                        {/* <MenuSidebar /> */}
+                        <MenuSidebar />
                     </div>
                     <div className="w-3/4">
                         <MenuGrid />

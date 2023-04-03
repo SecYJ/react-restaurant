@@ -33,7 +33,7 @@ const reducer = (state, action) => {
         }
 
         case "TOGGLE_CART_VISIBILITY": {
-            return { ...state, cartVisible: !state.cartVisible };
+            return { ...state, cartVisible: action.payload };
         }
 
         case "CALCULATE_TOTAL": {

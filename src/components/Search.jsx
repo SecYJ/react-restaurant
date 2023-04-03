@@ -5,10 +5,11 @@ import Skeleton from "./skeleton/Skeleton";
 import useFoodMenu from "../hooks/useFoodMenu";
 
 const Search = ({ search, onSearchChange }) => {
-    const { menu } = useMenuCtx();
+    // const { menu } = useMenuCtx();
     const id = useId();
+    const { isLoading } = useFoodMenu();
 
-    if (menu.data.length === 0) {
+    if (isLoading) {
         return <Skeleton classes="h-12 mb-4" />;
     }
 

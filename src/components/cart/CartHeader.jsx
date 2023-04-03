@@ -2,7 +2,7 @@ import { useCartCtx } from "../../contexts/CartCtx";
 import { AiOutlineClose } from "react-icons/ai";
 
 const CartHeader = () => {
-    // const { dispatch } = useCartCtx();
+    const { dispatch } = useCartCtx();
 
     return (
         <div className="flex items-start justify-between">
@@ -16,8 +16,12 @@ const CartHeader = () => {
                 <button
                     type="button"
                     className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                    // onClick={() => dispatch({ type: "TOGGLE_CART_VISIBILITY" })}
-                    onClick={() => dispatch(toggleVisibility(false))}
+                    onClick={() =>
+                        dispatch({
+                            type: "TOGGLE_CART_VISIBILITY",
+                            payload: false,
+                        })
+                    }
                 >
                     <AiOutlineClose />
                 </button>

@@ -1,16 +1,10 @@
-import { QueryClient } from "@tanstack/react-query";
 import { useMenuCtx } from "../../contexts/MenuCtx";
 import useFoodMenu from "../../hooks/useFoodMenu";
 import Skeleton from "../skeleton/Skeleton";
 
 const MenuSelect = () => {
     const { currentSelect, dispatch } = useMenuCtx();
-
-    const { data: foodMenu, isLoading } = useFoodMenu();
-
-    const queryClient = new QueryClient();
-    const queryCache = queryClient.getQueryData(["foodMenu"]);
-    console.log(queryCache);
+    const { isLoading, data: foodMenu } = useFoodMenu();
 
     if (isLoading) {
         return [...Array(5).keys()].map((i) => (
