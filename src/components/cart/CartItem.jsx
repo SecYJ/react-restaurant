@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useId } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useCartCtx } from "../../contexts/CartCtx";
 
@@ -10,7 +10,6 @@ const CartItem = ({
     id,
     stock,
 }) => {
-    // const [amount, setAmount] = useState(initialAmount);
     const amount = initialAmount;
     const { dispatch } = useCartCtx();
     const inputId = useId();
@@ -19,35 +18,17 @@ const CartItem = ({
     const totalPrice = (amount * price).toFixed(2);
     // TODO: error msg for exceeded stock
 
-    // const onAmountChange = (e) => {
-    //     const { value: val } = e.target;
-
-    //     const invalidNum = /\D/g.test(val);
-    //     if (invalidNum) return setAmount(val.replace(/\D/g, ""));
-    //     if (val > stock) return setAmount(stock);
-    //     setAmount(Number(val) === 0 ? "" : Number(val));
-    // };
-
     const inputAmountValidation = (val) => {
         let finalValue = 0;
         const invalidNum = /\D/g.test(val);
-        if (invalidNum) {
-            console.log("one");
-            return (finalValue = val.replace(/\D/g, ""));
-        }
-        if (val > stock) {
-            console.log("two");
-            return (finalValue = stock);
-        }
-
-        console.log("final");
+        if (invalidNum) return (finalValue = val.replace(/\D/g, ""));
+        if (val > stock) return (finalValue = stock);
         return Number(val) === 0 ? "" : Number(val);
     };
 
     const toggleCartItemAmount = ({ option, id, event: e }) => {
         let result = null;
         if (option === "input") result = inputAmountValidation(e.target.value);
-        console.log(typeof result);
         dispatch({
             type: "TOGGLE_CART_ITEM_AMOUNT",
             payload: { option, id, inputValue: result },
@@ -63,7 +44,6 @@ const CartItem = ({
                     className="h-full w-full object-cover object-center"
                 />
             </div>
-
             <div className="ml-4 flex grow flex-col justify-between">
                 <div>
                     <div className="flex justify-between text-base font-medium text-gray-900">
@@ -88,9 +68,6 @@ const CartItem = ({
                                 }`}
                             />
                         </button>
-                        {/* <p className="min-w-[45px] text-gray-500">
-                            Qty {orderQty}
-                        </p> */}
                         <p className="flex min-w-[45px] text-gray-500">
                             <label htmlFor={inputId}>Qty</label>
                             <input
@@ -123,19 +100,13 @@ const CartItem = ({
                             type="button"
                             className="rounded-full p-2 text-white enabled:bg-primary/80 disabled:cursor-not-allowed disabled:bg-primary/60"
                             disabled={amount >= stock}
-                            onClick={() => {
-                                console.log("adsf");
-                                // dispatch({
-                                //     type: "TOGGLE_CART_ITEM_AMOUNT",
-                                //     payload: { option: "inc", id },
-                                // });
-                                toggleCartItemAmount({ option: "inc", id });
-                            }}
+                            onClick={() =>
+                                toggleCartItemAmount({ option: "inc", id })
+                            }
                         >
                             <AiOutlinePlus />
                         </button>
                     </div>
-
                     <div className="flex">
                         <button
                             type="button"

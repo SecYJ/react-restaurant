@@ -1,5 +1,3 @@
-import React from "react";
-
 const Overlay = ({ children, onClose }) => {
     return (
         <div className="relative z-10" role="dialog" aria-modal="true">

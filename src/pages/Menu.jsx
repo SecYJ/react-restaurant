@@ -11,6 +11,7 @@ const Menu = () => {
                         <MenuSidebar />
                     </div>
                     <div className="w-3/4">
+                        <h1 className="mb-8 text-3xl">菜单列表</h1>
                         <MenuGrid />
                     </div>
                 </MenuCtxProvider>

@@ -1,10 +1,9 @@
-import ProductCard from "./MenuCard";
-import SkeletonPost from "../skeleton/SkeletonPost";
+import { AnimatePresence } from "framer-motion";
 import { useMenuCtx } from "../../contexts/MenuCtx";
-import Cart from "../cart/Cart";
 import { useCartCtx } from "../../contexts/CartCtx";
 import FloatingCartButton from "../cart/FloatingCartButton";
-import { AnimatePresence } from "framer-motion";
+import MenuCard from "./MenuCard";
+import Cart from "../cart/Cart";
 import useFoodMenu from "../../hooks/useFoodMenu";
 import MenuSkeleton from "./MenuSkeleton";
 
@@ -28,10 +27,11 @@ const MenuGrid = () => {
         <>
             <ul className="grid grid-cols-3 gap-8">
                 {filtered_menu.map((d) => {
-                    return <ProductCard {...d} key={d.id} />;
+                    return <MenuCard {...d} key={d.id} />;
                 })}
             </ul>
-            {/* <AnimatePresence>{visible && <Cart />}</AnimatePresence> */}
+            {!visible && <FloatingCartButton />}
+            <AnimatePresence>{visible && <Cart />}</AnimatePresence>
         </>
     );
 };

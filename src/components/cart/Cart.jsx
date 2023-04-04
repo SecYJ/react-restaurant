@@ -9,7 +9,11 @@ const Cart = () => {
     const { cart, dispatch } = useCartCtx();
 
     return (
-        <Overlay onClose={() => dispatch({ type: "TOGGLE_CART_VISIBILITY" })}>
+        <Overlay
+            onClose={() =>
+                dispatch({ type: "TOGGLE_CART_VISIBILITY", payload: false })
+            }
+        >
             <motion.div
                 key="modal"
                 initial={{ x: "100%" }}

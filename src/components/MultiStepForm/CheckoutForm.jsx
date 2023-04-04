@@ -1,26 +1,40 @@
-import { useId } from "react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
-// import Input from "../Input";
+import { POSTCODE_LISTS } from "../../constants/postcodeStateList";
+import { error, inputStyles } from "./formStyles";
 
 const CheckoutForm = () => {
     const {
         register,
         formState: { errors },
         handleSubmit,
+        watch,
     } = useForm();
-    const nameId = useId();
-    const emailId = useId();
-    const phoneId = useId();
 
-    const inputStyles =
-        "transition-color w-full rounded-lg border border-gray-500 py-2 px-4 text-base outline-none focus:border-primary";
+    // TODO: fix the select bugs
+
+    const watchArea = watch("area");
+    console.log(watchArea);
+
+    const areaAvailability = watchArea
+        ? POSTCODE_LISTS.find((a) => a.name === watchArea)
+        : null;
+
+    const numberValidation = useCallback((val) => {
+        const transformedValue = val.toString();
+        if (transformedValue.length > 11) return "手机号码不可超过 11 个数字!";
+
+        const regexPattern = /\D/g;
+        return regexPattern.test(transformedValue)
+            ? "手机号码只限数字!"
+            : Number(val);
+    }, []);
 
     const submit = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         console.log(e);
+        console.log(errors);
     };
-
-    console.log(errors);
 
     return (
         <div>
@@ -29,52 +43,111 @@ const CheckoutForm = () => {
                 className="mt-8 grid grid-cols-2 gap-10"
                 onSubmit={handleSubmit(submit)}
             >
-                <div className="relative">
-                    <div className="mt-8" />
-                    {/* <Input label="名称" register={register} errors={errors} /> */}
-                    <label htmlFor={nameId} className="text-lg">
+                <div className="">
+                    <label htmlFor="username" className="text-lg">
                         名称
                     </label>
                     <input
                         type="text"
-                        {...register("名称", { required: true, maxLength: 20 })}
+                        {...register("username", {
+                            required: "名称为必填栏位!",
+                            maxLength: {
+                                value: 20,
+                                message: "名称长度不可超过 20 个文字!",
+                            },
+                        })}
                         className={inputStyles}
-                        id={nameId}
-                        placeholder="hello"
+                        id="username"
                     />
+                    {errors?.username?.message && (
+                        <p className={error}>{errors?.username.message}</p>
+                    )}
                 </div>
-                {/* <div className="relative">
-                    <div className="mt-8" />
-                    <label htmlFor={phoneId} className="text-lg">
-                        联络号码
+                <div className="">
+                    <label htmlFor="phoneNumber" className="text-lg">
+                        手机号码
                     </label>
                     <input
-                        type="number"
-                        {...register("联络号码", {
-                            required: true,
+                        type="tel"
+                        {...register("phoneNumber", {
+                            required: "手机号码为必填栏位!",
                             valueAsNumber: true,
-                           
+                            validate: numberValidation,
                         })}
-                        className={inputStyles}
-                        id={phoneId}
+                        className={`${inputStyles} [appearance:textfield]`}
+                        id="phoneNumber"
                         placeholder="hello"
                     />
+                    {errors?.phoneNumber?.message && (
+                        <p className={error}>{errors?.phoneNumber?.message}</p>
+                    )}
                 </div>
-                <div className="relative">
-                    <div className="mt-8" />
-                    <label htmlFor={emailId} className="text-lg">
-                        Email
-                    </label>
+
+                <div className="col-span-full">
+                    <label className="text-lg">地址</label>
                     <input
-                        type="email"
-                        {...register("email", {
+                        type="text"
+                        {...register("address", {
+                            required: {
+                                value: true,
+                                message: "地址栏位不得为空",
+                            },
+                        })}
+                        className={inputStyles}
+                    />
+                    {errors?.address?.message && (
+                        <p className={error}>{errors.address.message}</p>
+                    )}
+                </div>
+                <div className="">
+                    <label htmlFor="area" className="text-lg">
+                        地区
+                    </label>
+                    <select
+                        {...register("area")}
+                        id="area"
+                        className={`${inputStyles} bg-transparent`}
+                        defaultValue="请选择地区"
+                    >
+                        <option disabled>请选择地区</option>
+                        {POSTCODE_LISTS.map((c) => (
+                            <option key={c.name} value={c.name}>
+                                {c.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="">
+                    <label htmlFor="area" className="text-lg">
+                        邮政编码
+                    </label>
+                    <select
+                        disabled={!watchArea}
+                        {...register("postcode", {
                             required: true,
                         })}
-                        className={inputStyles}
-                        id={emailId}
-                        placeholder="hello"
-                    />
-                </div> */}
+                        id="postcode"
+                        className={`${inputStyles} ${
+                            watchArea
+                                ? "enabled:bg-transparent"
+                                : "cursor-not-allowed disabled:bg-gray-200"
+                        }`}
+                        defaultValue="请选择邮政编码"
+                    >
+                        <option disabled>请选择邮政编码</option>
+                        {areaAvailability?.postcodes.map((c) => (
+                            <option value={c} key={c}>
+                                {c}
+                            </option>
+                        ))}
+                    </select>
+                    {errors?.postcode?.message && (
+                        <p className={error}>{errors?.postcode?.message}</p>
+                    )}
+                </div>
+                <button type="submit" className="border border-gray-300">
+                    submit
+                </button>
             </form>
         </div>
     );
