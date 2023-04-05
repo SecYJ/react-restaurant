@@ -1,9 +1,10 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
+import Button from "../Button";
 import { POSTCODE_LISTS } from "../../constants/postcodeStateList";
 import { error, inputStyles } from "./formStyles";
 
-const CheckoutForm = () => {
+const DetailsForm = ({ onNextClick }) => {
     const {
         register,
         formState: { errors },
@@ -11,10 +12,7 @@ const CheckoutForm = () => {
         watch,
     } = useForm();
 
-    // TODO: fix the select bugs
-
     const watchArea = watch("area");
-    console.log(watchArea);
 
     const areaAvailability = watchArea
         ? POSTCODE_LISTS.find((a) => a.name === watchArea)
@@ -31,16 +29,16 @@ const CheckoutForm = () => {
     }, []);
 
     const submit = (e) => {
+        onNextClick(2);
         // e.preventDefault();
-        console.log(e);
-        console.log(errors);
     };
 
     return (
         <div>
             <h1>客户资料</h1>
             <form
-                className="mt-8 grid grid-cols-2 gap-10"
+                // className="mt-8 grid grid-cols-2 gap-10"
+                className="space-y-8"
                 onSubmit={handleSubmit(submit)}
             >
                 <div className="">
@@ -59,7 +57,7 @@ const CheckoutForm = () => {
                         className={inputStyles}
                         id="username"
                     />
-                    {errors?.username?.message && (
+                    {errors.username && (
                         <p className={error}>{errors?.username.message}</p>
                     )}
                 </div>
@@ -78,8 +76,8 @@ const CheckoutForm = () => {
                         id="phoneNumber"
                         placeholder="hello"
                     />
-                    {errors?.phoneNumber?.message && (
-                        <p className={error}>{errors?.phoneNumber?.message}</p>
+                    {errors.phoneNumber && (
+                        <p className={error}>{errors.phoneNumber.message}</p>
                     )}
                 </div>
 
@@ -95,7 +93,7 @@ const CheckoutForm = () => {
                         })}
                         className={inputStyles}
                     />
-                    {errors?.address?.message && (
+                    {errors.address && (
                         <p className={error}>{errors.address.message}</p>
                     )}
                 </div>
@@ -104,18 +102,26 @@ const CheckoutForm = () => {
                         地区
                     </label>
                     <select
-                        {...register("area")}
+                        {...register("area", {
+                            required: {
+                                value: true,
+                                message: "地区不得为空",
+                            },
+                        })}
                         id="area"
                         className={`${inputStyles} bg-transparent`}
                         defaultValue="请选择地区"
                     >
-                        <option disabled>请选择地区</option>
+                        <option value="">请选择地区</option>
                         {POSTCODE_LISTS.map((c) => (
                             <option key={c.name} value={c.name}>
                                 {c.name}
                             </option>
                         ))}
                     </select>
+                    {errors.area && (
+                        <p className={error}>{errors.area.message}</p>
+                    )}
                 </div>
                 <div className="">
                     <label htmlFor="area" className="text-lg">
@@ -124,7 +130,10 @@ const CheckoutForm = () => {
                     <select
                         disabled={!watchArea}
                         {...register("postcode", {
-                            required: true,
+                            required: {
+                                value: true,
+                                message: "邮政编码不得为空!",
+                            },
                         })}
                         id="postcode"
                         className={`${inputStyles} ${
@@ -141,16 +150,17 @@ const CheckoutForm = () => {
                             </option>
                         ))}
                     </select>
-                    {errors?.postcode?.message && (
-                        <p className={error}>{errors?.postcode?.message}</p>
+                    {errors.postcode && (
+                        <p className={error}>{errors.postcode.message}</p>
                     )}
                 </div>
-                <button type="submit" className="border border-gray-300">
-                    submit
-                </button>
+
+                <Button outline className="w-full">
+                    下一步
+                </Button>
             </form>
         </div>
     );
 };
 
-export default CheckoutForm;
+export default DetailsForm;
