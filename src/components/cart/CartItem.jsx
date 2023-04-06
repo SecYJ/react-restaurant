@@ -1,39 +1,22 @@
 import { useId } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useCartCtx } from "../../contexts/CartCtx";
+import CartButton from "./CartButton";
 
 const CartItem = ({
     imgFallback,
     name,
     price,
-    orderQty: initialAmount,
+    orderQty: amount,
     id,
     stock,
 }) => {
-    const amount = initialAmount;
-    const { dispatch } = useCartCtx();
+    const { dispatch, toggleItemAmount } = useCartCtx();
     const inputId = useId();
     const [cName, ...eName] = name.split(" ");
     const englishName = eName.join(" ");
     const totalPrice = (amount * price).toFixed(2);
     // TODO: error msg for exceeded stock
-
-    const inputAmountValidation = (val) => {
-        let finalValue = 0;
-        const invalidNum = /\D/g.test(val);
-        if (invalidNum) return (finalValue = val.replace(/\D/g, ""));
-        if (val > stock) return (finalValue = stock);
-        return Number(val) === 0 ? "" : Number(val);
-    };
-
-    const toggleCartItemAmount = ({ option, id, event: e }) => {
-        let result = null;
-        if (option === "input") result = inputAmountValidation(e.target.value);
-        dispatch({
-            type: "TOGGLE_CART_ITEM_AMOUNT",
-            payload: { option, id, inputValue: result },
-        });
-    };
 
     return (
         <li className="flex py-6" key={id}>
@@ -54,23 +37,19 @@ const CartItem = ({
                 </div>
                 <div className="grid grid-cols-[1fr_auto] items-center text-sm">
                     <div className="flex items-center gap-2">
-                        <button
-                            type="button"
-                            className="rounded-full border p-2 enabled:border-gray-700 disabled:cursor-not-allowed disabled:border-gray-400"
+                        <CartButton
+                            variant="minus"
+                            onClick={toggleItemAmount({
+                                option: "dec",
+                                id,
+                                stock,
+                            })}
                             disabled={amount === 1}
-                            onClick={() =>
-                                toggleCartItemAmount({ option: "dec", id })
-                            }
-                        >
-                            <AiOutlineMinus
-                                className={`${
-                                    amount === 1 ? "text-gray-400" : ""
-                                }`}
-                            />
-                        </button>
+                        />
                         <p className="flex min-w-[45px] text-gray-500">
                             <label htmlFor={inputId}>Qty</label>
-                            <input
+                            {/* TODO: fix input bugs */}
+                            {/* <input
                                 type="text"
                                 id={inputId}
                                 value={amount}
@@ -79,7 +58,7 @@ const CartItem = ({
                                         dispatch({
                                             type: "TOGGLE_CART_ITEM_AMOUNT",
                                             payload: {
-                                                option: "blue",
+                                                // option: "blur",
                                                 inputValue: 1,
                                                 id,
                                             },
@@ -87,25 +66,25 @@ const CartItem = ({
                                     }
                                 }}
                                 onChange={(event) =>
-                                    toggleCartItemAmount({
+                                    toggleItemAmount({
                                         option: "input",
                                         event,
                                         id,
+                                        stock,
                                     })
                                 }
                                 className="ml-2 w-[50px] border border-gray-300 text-center outline-none focus:border-primary"
-                            />
+                            /> */}
                         </p>
-                        <button
-                            type="button"
-                            className="rounded-full p-2 text-white enabled:bg-primary/80 disabled:cursor-not-allowed disabled:bg-primary/60"
+                        <CartButton
+                            variant="add"
+                            onClick={toggleItemAmount({
+                                option: "inc",
+                                id,
+                                stock,
+                            })}
                             disabled={amount >= stock}
-                            onClick={() =>
-                                toggleCartItemAmount({ option: "inc", id })
-                            }
-                        >
-                            <AiOutlinePlus />
-                        </button>
+                        />
                     </div>
                     <div className="flex">
                         <button
