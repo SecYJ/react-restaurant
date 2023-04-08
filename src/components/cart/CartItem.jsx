@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { useForm } from "react-hook-form";
 import { useCartCtx } from "../../contexts/CartCtx";
 import CartButton from "./CartButton";
 
@@ -11,15 +11,68 @@ const CartItem = ({
     id,
     stock,
 }) => {
-    const { dispatch, toggleItemAmount } = useCartCtx();
+    const { dispatch } = useCartCtx();
+    const { register, getValues, setValue } = useForm();
     const inputId = useId();
     const [cName, ...eName] = name.split(" ");
     const englishName = eName.join(" ");
     const totalPrice = (amount * price).toFixed(2);
-    // TODO: error msg for exceeded stock
+
+    const setState = (amount, method) => {
+        dispatch({
+            type: `ITEM_AMOUNT_${method.toUpperCase()}`,
+            payload: {
+                id,
+                amount,
+            },
+        });
+    };
+
+    const getCartInputValue = () => getValues("cart-input");
+    const setCartInputValue = (val) => setValue("cart-input", val);
+
+    const increment = () => {
+        const value = getCartInputValue("cart-input");
+        const result = value + 1 > stock ? stock : value + 1;
+        setCartInputValue(result);
+        setState(result, "increment");
+    };
+
+    const decrement = () => {
+        const value = getCartInputValue("cart-input");
+        const result = value - 1 < 1 ? 1 : value - 1;
+        setCartInputValue(result);
+        setState(result, "decrement");
+    };
+
+    const handleInputBlur = () => {
+        const value = getCartInputValue("cart-input");
+        if (!value) setCartInputValue(1);
+    };
+
+    const inputChange = (e) => {
+        const { value } = e.target;
+        const pattern = /[^0-9]/g;
+        const containsString = pattern.test(value);
+
+        if (value === "") return;
+
+        if (containsString) {
+            e.target.value = e.target.value.replace(pattern, "");
+            return;
+        }
+
+        if (Number(value) > stock) {
+            e.target.value = stock;
+            setState(stock, "input");
+            return;
+        }
+
+        setState(Number(value), "input");
+    };
 
     return (
-        <li className="flex py-6" key={id}>
+        <li className="flex py-6">
             <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                 <img
                     src={imgFallback}
@@ -39,50 +92,26 @@ const CartItem = ({
                     <div className="flex items-center gap-2">
                         <CartButton
                             variant="minus"
-                            onClick={toggleItemAmount({
-                                option: "dec",
-                                id,
-                                stock,
-                            })}
+                            onClick={() => decrement()}
                             disabled={amount === 1}
                         />
                         <p className="flex min-w-[45px] text-gray-500">
                             <label htmlFor={inputId}>Qty</label>
-                            {/* TODO: fix input bugs */}
-                            {/* <input
+                            <input
                                 type="text"
                                 id={inputId}
-                                value={amount}
-                                onBlur={() => {
-                                    if (amount === "") {
-                                        dispatch({
-                                            type: "TOGGLE_CART_ITEM_AMOUNT",
-                                            payload: {
-                                                // option: "blur",
-                                                inputValue: 1,
-                                                id,
-                                            },
-                                        });
-                                    }
-                                }}
-                                onChange={(event) =>
-                                    toggleItemAmount({
-                                        option: "input",
-                                        event,
-                                        id,
-                                        stock,
-                                    })
-                                }
+                                {...register("cart-input", {
+                                    onChange: inputChange,
+                                    valueAsNumber: true,
+                                    onBlur: handleInputBlur,
+                                    value: amount,
+                                })}
                                 className="ml-2 w-[50px] border border-gray-300 text-center outline-none focus:border-primary"
-                            /> */}
+                            />
                         </p>
                         <CartButton
                             variant="add"
-                            onClick={toggleItemAmount({
-                                option: "inc",
-                                id,
-                                stock,
-                            })}
+                            onClick={() => increment()}
                             disabled={amount >= stock}
                         />
                     </div>

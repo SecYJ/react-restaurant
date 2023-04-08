@@ -164,3 +164,17 @@ const DetailsForm = ({ onNextClick }) => {
 };
 
 export default DetailsForm;
+
+/*
+    Use a variable to control the transition of horizontal angle.
+    const [step, setStep] = useState(0)
+
+    My idea be like = 
+    AnimatePrecense start
+        component 1
+        component 2
+        component 3
+    AnimatePrecense end
+
+
+*/

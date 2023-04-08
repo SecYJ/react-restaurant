@@ -4,7 +4,8 @@ import Button from "../Button";
 import CartButton from "../cart/CartButton";
 
 const OrderOverviewTable = () => {
-    const { cart, totalUnits, totalAmount, toggleItemAmount } = useCartCtx();
+    const { dispatch, cart, totalUnits, totalAmount, toggleItemAmount } =
+        useCartCtx();
 
     const styles = "bg-transparent text-2xl";
 
@@ -40,7 +41,13 @@ const OrderOverviewTable = () => {
                                 <td>{name}</td>
                                 <td>
                                     <div className="flex items-center gap-8">
-                                        <CartButton variant="minus" />
+                                        <CartButton
+                                            variant="minus"
+                                            onClick={toggleItemAmount({
+                                                id,
+                                                stock,
+                                            })}
+                                        />
                                         {orderQty}
                                         <CartButton variant="add" />
                                     </div>

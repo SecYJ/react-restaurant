@@ -36,11 +36,6 @@ const reducer = (state, action) => {
             return { ...state, cartVisible: action.payload };
         }
 
-        case "CALCULATE_TOTAL": {
-            // There are 2 types of total, which are total quantity to display on the floating  button
-            // and total amount that should be display on the floating btn and checkout}
-        }
-
         case "REMOVE_CART_ITEM": {
             const newCart = state.cart.filter(
                 (item) => item.id !== action.payload
@@ -51,6 +46,7 @@ const reducer = (state, action) => {
             return { ...state, cart: newCart, totalAmount, totalUnits };
         }
 
+        // NOTE: This might delete soon
         case "TOGGLE_CART_ITEM_AMOUNT": {
             const { option, id, inputValue } = action.payload;
             const newCart = state.cart.map((c) => {
@@ -73,6 +69,45 @@ const reducer = (state, action) => {
             const { totalAmount, totalUnits } = calculateTotals(newCart);
 
             return { ...state, cart: newCart, totalAmount, totalUnits };
+        }
+
+        case "ITEM_AMOUNT_INCREMENT": {
+            const { amount, id } = action.payload;
+
+            const cart = state.cart.map((c) => {
+                if (c.id !== id) return;
+                return { ...c, orderQty: amount };
+            });
+
+            const { totalAmount, totalUnits } = calculateTotals(cart);
+
+            return { ...state, cart, totalAmount, totalUnits };
+        }
+
+        case "ITEM_AMOUNT_DECREMENT": {
+            const { amount, id } = action.payload;
+
+            const cart = state.cart.map((c) => {
+                if (c.id !== id) return;
+                return { ...c, orderQty: amount };
+            });
+
+            const { totalAmount, totalUnits } = calculateTotals(cart);
+
+            return { ...state, cart, totalAmount, totalUnits };
+        }
+
+        case "ITEM_AMOUNT_INPUT": {
+            const { amount, id } = action.payload;
+
+            const cart = state.cart.map((c) => {
+                if (c.id !== id) return c;
+                return { ...c, orderQty: amount };
+            });
+
+            const { totalAmount, totalUnits } = calculateTotals(cart);
+
+            return { ...state, cart, totalAmount, totalUnits };
         }
 
         default:
