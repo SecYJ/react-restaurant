@@ -24,7 +24,8 @@ const MultiStepForm = () => {
                 className="mx-auto mt-20"
                 // <div className="mt-20 grid grid-cols-[1fr_25%] gap-8"
             >
-                <OrderOverviewTable />
+                {/* <OrderOverviewTable /> */}
+                <DetailsForm />
                 {/* <div className="relative max-h-[700px] overflow-auto pr-3 [scrollbar-width:thin]">
 
                     {cart.length > 0 && <FormCartTotal />}

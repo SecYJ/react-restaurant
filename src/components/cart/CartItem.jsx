@@ -11,20 +11,18 @@ const CartItem = ({
     id,
     stock,
 }) => {
-    const { dispatch } = useCartCtx();
+    const { dispatch, deleteCartItem } = useCartCtx();
     const { register, getValues, setValue } = useForm();
     const inputId = useId();
     const [cName, ...eName] = name.split(" ");
     const englishName = eName.join(" ");
     const totalPrice = (amount * price).toFixed(2);
 
-    const setState = (amount, method) => {
+    const setReducerAction = ({ value, direction }) => {
+        const payload = { id, direction };
         dispatch({
-            type: `ITEM_AMOUNT_${method.toUpperCase()}`,
-            payload: {
-                id,
-                amount,
-            },
+            type: "UPDATE_CART_ITEM",
+            payload: direction === "input" ? { ...payload, value } : payload,
         });
     };
 
@@ -33,21 +31,24 @@ const CartItem = ({
 
     const increment = () => {
         const value = getCartInputValue("cart-input");
-        const result = value + 1 > stock ? stock : value + 1;
-        setCartInputValue(result);
-        setState(result, "increment");
+        if (value + 1 > stock) return;
+        setCartInputValue(value + 1);
+        setReducerAction({ direction: "increment" });
     };
 
     const decrement = () => {
         const value = getCartInputValue("cart-input");
-        const result = value - 1 < 1 ? 1 : value - 1;
-        setCartInputValue(result);
-        setState(result, "decrement");
+        if (value - 1 < 1) return;
+        setCartInputValue(value - 1);
+        setReducerAction({ direction: "decrement" });
     };
 
     const handleInputBlur = () => {
         const value = getCartInputValue("cart-input");
-        if (!value) setCartInputValue(1);
+        if (!value) {
+            setCartInputValue(1);
+            setReducerAction({ direction: "input", value: 1 });
+        }
     };
 
     const inputChange = (e) => {
@@ -64,11 +65,11 @@ const CartItem = ({
 
         if (Number(value) > stock) {
             e.target.value = stock;
-            setState(stock, "input");
+            setReducerAction({ direction: "input", value: stock });
             return;
         }
 
-        setState(Number(value), "input");
+        setReducerAction({ direction: "input", value: Number(value) });
     };
 
     return (
@@ -93,7 +94,7 @@ const CartItem = ({
                         <CartButton
                             variant="minus"
                             onClick={() => decrement()}
-                            disabled={amount === 1}
+                            disabled={amount <= 1}
                         />
                         <p className="flex min-w-[45px] text-gray-500">
                             <label htmlFor={inputId}>Qty</label>
@@ -119,12 +120,7 @@ const CartItem = ({
                         <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() =>
-                                dispatch({
-                                    type: "REMOVE_CART_ITEM",
-                                    payload: id,
-                                })
-                            }
+                            onClick={() => deleteCartItem(id)}
                         >
                             Remove
                         </button>

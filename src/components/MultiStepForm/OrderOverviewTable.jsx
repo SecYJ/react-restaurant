@@ -1,17 +1,16 @@
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useCartCtx } from "../../contexts/CartCtx";
 import Button from "../Button";
 import CartButton from "../cart/CartButton";
 
 const OrderOverviewTable = () => {
-    const { dispatch, cart, totalUnits, totalAmount, toggleItemAmount } =
+    const { cart, totalUnits, totalAmount, updateCartItem, deleteCartItem } =
         useCartCtx();
 
     const styles = "bg-transparent text-2xl";
 
     return (
         <div className="overflow-x-auto">
-            <table className="table w-full">
+            <table className="table w-full text-center">
                 <thead>
                     <tr>
                         <th className={styles}></th>
@@ -24,7 +23,14 @@ const OrderOverviewTable = () => {
                 </thead>
                 <tbody>
                     {cart.map((c, index) => {
-                        const { id, imgFallback, name, orderQty, price } = c;
+                        const {
+                            id,
+                            imgFallback,
+                            name,
+                            orderQty,
+                            price,
+                            stock,
+                        } = c;
 
                         return (
                             <tr key={id}>
@@ -34,27 +40,48 @@ const OrderOverviewTable = () => {
                                 <td>
                                     <img
                                         src={imgFallback}
-                                        className="h-24 w-24 object-cover"
-                                        alt=""
+                                        className="mx-auto h-24 w-24 object-cover"
                                     />
                                 </td>
                                 <td>{name}</td>
                                 <td>
-                                    <div className="flex items-center gap-8">
+                                    <div className="flex items-center justify-center gap-8">
                                         <CartButton
                                             variant="minus"
-                                            onClick={toggleItemAmount({
-                                                id,
-                                                stock,
-                                            })}
+                                            disabled={orderQty - 1 < 1}
+                                            onClick={() => {
+                                                if (orderQty - 1 < 1) return;
+                                                updateCartItem({
+                                                    direction: "decrement",
+                                                    id,
+                                                });
+                                            }}
                                         />
-                                        {orderQty}
-                                        <CartButton variant="add" />
+                                        <p className="min-w-[50px]">
+                                            {orderQty}
+                                        </p>
+                                        <CartButton
+                                            variant="add"
+                                            disabled={orderQty + 1 > stock}
+                                            onClick={() => {
+                                                if (orderQty + 1 > stock)
+                                                    return;
+                                                updateCartItem({
+                                                    id,
+                                                    direction: "increment",
+                                                });
+                                            }}
+                                        />
                                     </div>
                                 </td>
                                 <td>{orderQty * price}</td>
                                 <td>
-                                    <Button outline>移除</Button>
+                                    <Button
+                                        outline
+                                        onClick={() => deleteCartItem(id)}
+                                    >
+                                        移除
+                                    </Button>
                                 </td>
                             </tr>
                         );
@@ -64,7 +91,7 @@ const OrderOverviewTable = () => {
             <div className="mr-6 mt-20 flex items-center justify-between">
                 <div>
                     <p>餐点份量: {totalUnits}</p>
-                    <p>总额: {totalAmount}</p>
+                    <p>总额: RM {totalAmount}</p>
                 </div>
                 <Button outline className="px-10">
                     下一步
@@ -75,8 +102,3 @@ const OrderOverviewTable = () => {
 };
 
 export default OrderOverviewTable;
-{
-    /* <th className="font-semibold">餐点名称</th>
-<th className="font-semibold">数量</th>
-<th className="font-semibold">3</th> */
-}
