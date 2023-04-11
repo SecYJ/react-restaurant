@@ -28,10 +28,7 @@ const Cart = () => {
                             <CartHeader />
                             <div className="mt-8">
                                 {cart.length > 0 ? (
-                                    <ul
-                                        role="list"
-                                        className="-my-6 divide-y divide-gray-200"
-                                    >
+                                    <ul className="-my-6 divide-y divide-gray-200">
                                         {cart.map((c) => (
                                             <CartItem key={c.id} {...c} />
                                         ))}

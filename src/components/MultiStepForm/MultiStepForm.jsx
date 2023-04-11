@@ -15,22 +15,24 @@ import OrderOverviewTable from "./OrderOverviewTable";
 
 const MultiStepForm = () => {
     const { cart } = useCartCtx();
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(0);
 
     return (
         <div className="container my-20">
-            <MultiStepNav />
-            <div
-                className="mx-auto mt-20"
-                // <div className="mt-20 grid grid-cols-[1fr_25%] gap-8"
-            >
-                {/* <OrderOverviewTable /> */}
-                <DetailsForm />
+            <MultiStepNav step={step} />
+            <motion.div className="mx-auto mt-20">
+                {step === 0 ? (
+                    <OrderOverviewTable onStepChange={setStep} />
+                ) : step === 1 ? (
+                    <DetailsForm onStepChange={setStep} />
+                ) : (
+                    <Success />
+                )}
                 {/* <div className="relative max-h-[700px] overflow-auto pr-3 [scrollbar-width:thin]">
 
                     {cart.length > 0 && <FormCartTotal />}
                 </div> */}
-            </div>
+            </motion.div>
         </div>
     );
 };

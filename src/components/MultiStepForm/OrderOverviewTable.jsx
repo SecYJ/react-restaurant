@@ -2,7 +2,7 @@ import { useCartCtx } from "../../contexts/CartCtx";
 import Button from "../Button";
 import CartButton from "../cart/CartButton";
 
-const OrderOverviewTable = () => {
+const OrderOverviewTable = ({ onStepChange }) => {
     const { cart, totalUnits, totalAmount, updateCartItem, deleteCartItem } =
         useCartCtx();
 
@@ -74,7 +74,7 @@ const OrderOverviewTable = () => {
                                         />
                                     </div>
                                 </td>
-                                <td>{orderQty * price}</td>
+                                <td>{(orderQty * price).toFixed(2)}</td>
                                 <td>
                                     <Button
                                         outline
@@ -88,14 +88,19 @@ const OrderOverviewTable = () => {
                     })}
                 </tbody>
             </table>
-            <div className="mr-6 mt-20 flex items-center justify-between">
-                <div>
-                    <p>餐点份量: {totalUnits}</p>
-                    <p>总额: RM {totalAmount}</p>
+            <div className="mr-6 flex items-center justify-end">
+                <div className="flex flex-col items-end">
+                    <div>
+                        <p>餐点份量: {totalUnits}</p>
+                        <p>总额: RM {totalAmount.toFixed(2)}</p>
+                    </div>
+                    <Button
+                        className="mt-6 px-10"
+                        onClick={() => onStepChange(1)}
+                    >
+                        下一步
+                    </Button>
                 </div>
-                <Button outline className="px-10">
-                    下一步
-                </Button>
             </div>
         </div>
     );

@@ -1,10 +1,13 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { getDay, getHours, getMinutes, setDay, setHours } from "date-fns/esm";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Button from "../Button";
 import { POSTCODE_LISTS } from "../../constants/postcodeStateList";
 import { error, inputStyles } from "./formStyles";
 
-const DetailsForm = ({ onNextClick }) => {
+const DetailsForm = ({ onNextClick, onStepChange }) => {
     const {
         register,
         formState: { errors },
@@ -12,7 +15,12 @@ const DetailsForm = ({ onNextClick }) => {
         watch,
     } = useForm();
 
+    const [startDate, setStartDate] = useState(new Date());
+
     const watchArea = watch("area");
+    const watchDelivery = watch("delivery-select");
+
+    console.log(watchDelivery);
 
     const areaAvailability = watchArea
         ? POSTCODE_LISTS.find((a) => a.name === watchArea)
@@ -33,14 +41,61 @@ const DetailsForm = ({ onNextClick }) => {
         // e.preventDefault();
     };
 
+    const filterOperationHours = (time) => {
+        // console.log(isBefore(new Date(), time));
+        // console.log(getHours(time));
+        const currentDate = new Date();
+        // const hours = getHours(time);
+        // console.log(hours);
+
+        // const year = getYear(time);
+        // const month = getMonth(time)
+
+        // const t = setHours(new Date(format(time, "YYYY,")));
+        // const startHours = setHours(new Date())
+
+        console.log(getHours(time), getMinutes(time));
+        const hours = getHours(time);
+
+        // return (
+        //     hours >= 6 && hours <= 13 && hours > 6 && getMinutes(time) === 30
+        // );
+
+        // TODO: fix later, got bugs here
+        return (
+            (hours === 6 && getMinutes(time) === 30) ||
+            (hours > 6 && hours <= 13) ||
+            currentDate.getTime() > time.getTime()
+        );
+
+        // NOTE: turn below on if later wnat to recover
+        // return time > 6 && hours < 13;
+        // const selectedDate = new Date(time);
+        // const afterFiveMinutes = setMinutes(new Date(), 31);
+        // console.log(afterFiveMinutes);
+        // return currentDate.getTime() < selectedDate.getTime();
+        // return (
+        //     currentDate.getTime() < selectedDate.getTime()
+        // currentDate.getTime() < new Date(afterFiveMinutes).getTime()
+        // );
+    };
+
+    const filterOperationDay = (date) => {
+        const day = getDay(date);
+        const currentTime = new Date().getTime();
+        const weekTime = setDay(new Date(), 7);
+
+        return (
+            day !== 1 &&
+            currentTime < date.getTime() &&
+            date.getTime() < weekTime.getTime()
+        );
+    };
+
     return (
-        <div>
+        <div className="mx-auto max-w-4xl">
             <h1>客户资料</h1>
-            <form
-                // className="mt-8 grid grid-cols-2 gap-10"
-                className="space-y-8"
-                onSubmit={handleSubmit(submit)}
-            >
+            <form className="space-y-8" onSubmit={handleSubmit(submit)}>
                 <div className="">
                     <label htmlFor="username" className="text-lg">
                         名称
@@ -81,100 +136,130 @@ const DetailsForm = ({ onNextClick }) => {
                     )}
                 </div>
 
-                <div className="col-span-full">
-                    <label className="text-lg">地址</label>
-                    <input
-                        type="text"
-                        {...register("address", {
-                            required: {
-                                value: true,
-                                message: "地址栏位不得为空",
-                            },
-                        })}
-                        className={inputStyles}
-                    />
-                    {errors.address && (
-                        <p className={error}>{errors.address.message}</p>
-                    )}
-                </div>
-                <div className="">
-                    <label htmlFor="area" className="text-lg">
-                        地区
+                <div>
+                    <label htmlFor="delivery-select" className="text-lg">
+                        选择配送方式
                     </label>
                     <select
-                        {...register("area", {
-                            required: {
-                                value: true,
-                                message: "地区不得为空",
-                            },
-                        })}
-                        id="area"
+                        {...register("delivery-select")}
+                        id="delivery-select"
                         className={`${inputStyles} bg-transparent`}
-                        defaultValue="请选择地区"
                     >
-                        <option value="">请选择地区</option>
-                        {POSTCODE_LISTS.map((c) => (
-                            <option key={c.name} value={c.name}>
-                                {c.name}
-                            </option>
-                        ))}
+                        <option value="">请选择配送方式</option>
+                        <option value="pickup">自取</option>
+                        <option
+                            value="delivery"
+                            title="(总额超过 RM 15) 免运费"
+                        >
+                            外卖服务
+                        </option>
                     </select>
-                    {errors.area && (
-                        <p className={error}>{errors.area.message}</p>
-                    )}
-                </div>
-                <div className="">
-                    <label htmlFor="area" className="text-lg">
-                        邮政编码
-                    </label>
-                    <select
-                        disabled={!watchArea}
-                        {...register("postcode", {
-                            required: {
-                                value: true,
-                                message: "邮政编码不得为空!",
-                            },
-                        })}
-                        id="postcode"
-                        className={`${inputStyles} ${
-                            watchArea
-                                ? "enabled:bg-transparent"
-                                : "cursor-not-allowed disabled:bg-gray-200"
-                        }`}
-                        defaultValue="请选择邮政编码"
-                    >
-                        <option disabled>请选择邮政编码</option>
-                        {areaAvailability?.postcodes.map((c) => (
-                            <option value={c} key={c}>
-                                {c}
-                            </option>
-                        ))}
-                    </select>
-                    {errors.postcode && (
-                        <p className={error}>{errors.postcode.message}</p>
-                    )}
                 </div>
 
-                <Button outline className="w-full">
-                    下一步
-                </Button>
+                {watchDelivery === "delivery" && (
+                    <div>
+                        <label className="text-lg" htmlFor="address">
+                            地址
+                        </label>
+                        <input
+                            type="text"
+                            id="address"
+                            {...register("address", {
+                                required: {
+                                    value: true,
+                                    message: "地址栏位不得为空",
+                                },
+                            })}
+                            className={inputStyles}
+                        />
+                        {errors.address && (
+                            <p className={error}>{errors.address.message}</p>
+                        )}
+                    </div>
+                )}
+                {watchDelivery === "delivery" && (
+                    <div>
+                        <label htmlFor="area" className="text-lg">
+                            地区
+                        </label>
+                        <select
+                            {...register("area", {
+                                required: {
+                                    value: true,
+                                    message: "地区不得为空",
+                                },
+                            })}
+                            id="area"
+                            className={`${inputStyles} bg-transparent`}
+                            defaultValue="请选择地区"
+                        >
+                            <option value="">请选择地区</option>
+                            {POSTCODE_LISTS.map((c) => (
+                                <option key={c.name} value={c.name}>
+                                    {c.name}
+                                </option>
+                            ))}
+                        </select>
+                        {errors.area && (
+                            <p className={error}>{errors.area.message}</p>
+                        )}
+                    </div>
+                )}
+                {watchDelivery === "delivery" && (
+                    <div>
+                        <label htmlFor="area" className="text-lg">
+                            邮政编码
+                        </label>
+                        <select
+                            disabled={!watchArea}
+                            {...register("postcode", {
+                                required: {
+                                    value: true,
+                                    message: "邮政编码不得为空!",
+                                },
+                            })}
+                            id="postcode"
+                            className={`${inputStyles} ${
+                                watchArea
+                                    ? "enabled:bg-transparent"
+                                    : "cursor-not-allowed disabled:bg-gray-200"
+                            }`}
+                            defaultValue="请选择邮政编码"
+                        >
+                            <option disabled>请选择邮政编码</option>
+                            {areaAvailability?.postcodes.map((c) => (
+                                <option value={c} key={c}>
+                                    {c}
+                                </option>
+                            ))}
+                        </select>
+                        {errors.postcode && (
+                            <p className={error}>{errors.postcode.message}</p>
+                        )}
+                    </div>
+                )}
+                <div>
+                    <DatePicker
+                        className="border border-gray-300"
+                        showTimeSelect
+                        filterTime={filterOperationHours}
+                        filterDate={filterOperationDay}
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        dateFormat="dd/MM/yyyy h:mm aa"
+                        // maxDate={addDays(new Date(), 7)}
+                        // minDate={subDays(new Date(), 0)}
+                    />
+                </div>
+                <div className="flex justify-between">
+                    <Button outline onClick={() => onStepChange(0)}>
+                        返回
+                    </Button>
+                    <Button onClick={() => onStepChange(2)}>下一步</Button>
+                </div>
             </form>
         </div>
     );
 };
 
 export default DetailsForm;
-
-/*
-    Use a variable to control the transition of horizontal angle.
-    const [step, setStep] = useState(0)
-
-    My idea be like = 
-    AnimatePrecense start
-        component 1
-        component 2
-        component 3
-    AnimatePrecense end
-
-
-*/
