@@ -1,10 +1,13 @@
 import { RouterProvider } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import router from "./router";
 
 const App = () => {
     return (
         <>
-            <RouterProvider router={router} />
+            <AnimatePresence>
+                <RouterProvider router={router} />
+            </AnimatePresence>
         </>
     );
 };

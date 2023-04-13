@@ -1,9 +1,21 @@
 import { useCartCtx } from "../../contexts/CartCtx";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Overlay from "../Overlay";
 import CartItem from "./CartItem";
 import CartFooter from "./CartFooter";
 import CartHeader from "./CartHeader";
+
+const variant = {
+    animate: {
+        transition: {
+            staggerChildren: 0.1,
+            delay: 0.3,
+        },
+    },
+    exit: {
+        opacity: 0,
+    },
+};
 
 const Cart = () => {
     const { cart, dispatch } = useCartCtx();
@@ -28,11 +40,21 @@ const Cart = () => {
                             <CartHeader />
                             <div className="mt-8">
                                 {cart.length > 0 ? (
-                                    <ul className="-my-6 divide-y divide-gray-200">
-                                        {cart.map((c) => (
-                                            <CartItem key={c.id} {...c} />
-                                        ))}
-                                    </ul>
+                                    <motion.ul
+                                        variants={variant}
+                                        {...variant}
+                                        className="-my-6 divide-y divide-gray-200"
+                                    >
+                                        <AnimatePresence>
+                                            {cart.map((c, index) => (
+                                                <CartItem
+                                                    key={c.id}
+                                                    {...c}
+                                                    index={index}
+                                                />
+                                            ))}
+                                        </AnimatePresence>
+                                    </motion.ul>
                                 ) : (
                                     <p>目前购物为空</p>
                                 )}

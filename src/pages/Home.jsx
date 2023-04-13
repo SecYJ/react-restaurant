@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+import { animateConfigs } from "../router";
 import Banner from "../components/Banner";
 import Features from "../components/Features";
 import LatestNews from "../components/LatestNews";
@@ -13,7 +15,7 @@ const Home = () => {
     // const { isModalOpen } = useModalContext();
 
     return (
-        <>
+        <motion.div variants={animateConfigs} {...animateConfigs}>
             <Banner />
             <LatestNews />
             <Features />
@@ -24,7 +26,7 @@ const Home = () => {
                 </ModalOverlay>
             </ModalCtxProvider>
             <Faq />
-        </>
+        </motion.div>
     );
 };
 export default Home;

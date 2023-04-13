@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getDay, getHours, getMinutes, setDay, setHours } from "date-fns/esm";
+import { addDays, getDay, getHours, getMinutes, isSameDay } from "date-fns/esm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { motion } from "framer-motion";
 import Button from "../Button";
 import { POSTCODE_LISTS } from "../../constants/postcodeStateList";
 import { error, inputStyles } from "./formStyles";
 
-const DetailsForm = ({ onNextClick, onStepChange }) => {
+const DetailsForm = ({ onNextClick, onStepChange, step }) => {
     const {
         register,
         formState: { errors },
@@ -19,8 +20,6 @@ const DetailsForm = ({ onNextClick, onStepChange }) => {
 
     const watchArea = watch("area");
     const watchDelivery = watch("delivery-select");
-
-    console.log(watchDelivery);
 
     const areaAvailability = watchArea
         ? POSTCODE_LISTS.find((a) => a.name === watchArea)
@@ -36,66 +35,45 @@ const DetailsForm = ({ onNextClick, onStepChange }) => {
             : Number(val);
     }, []);
 
-    const submit = (e) => {
-        onNextClick(2);
-        // e.preventDefault();
-    };
-
     const filterOperationHours = (time) => {
-        // console.log(isBefore(new Date(), time));
-        // console.log(getHours(time));
         const currentDate = new Date();
-        // const hours = getHours(time);
-        // console.log(hours);
+        const currentHours = getHours(currentDate);
+        const sameDay = isSameDay(time, currentDate);
 
-        // const year = getYear(time);
-        // const month = getMonth(time)
-
-        // const t = setHours(new Date(format(time, "YYYY,")));
-        // const startHours = setHours(new Date())
-
-        console.log(getHours(time), getMinutes(time));
-        const hours = getHours(time);
-
-        // return (
-        //     hours >= 6 && hours <= 13 && hours > 6 && getMinutes(time) === 30
-        // );
-
-        // TODO: fix later, got bugs here
         return (
-            (hours === 6 && getMinutes(time) === 30) ||
-            (hours > 6 && hours <= 13) ||
-            currentDate.getTime() > time.getTime()
+            (sameDay && currentHours > getHours(time) && currentHours <= 13) ||
+            (!sameDay && getHours(time) === 6 && getMinutes(time) === 30) ||
+            (!sameDay && getHours(time) >= 7 && getHours(time) <= 13)
         );
-
-        // NOTE: turn below on if later wnat to recover
-        // return time > 6 && hours < 13;
-        // const selectedDate = new Date(time);
-        // const afterFiveMinutes = setMinutes(new Date(), 31);
-        // console.log(afterFiveMinutes);
-        // return currentDate.getTime() < selectedDate.getTime();
-        // return (
-        //     currentDate.getTime() < selectedDate.getTime()
-        // currentDate.getTime() < new Date(afterFiveMinutes).getTime()
-        // );
     };
 
     const filterOperationDay = (date) => {
         const day = getDay(date);
         const currentTime = new Date().getTime();
-        const weekTime = setDay(new Date(), 7);
+        const weekTime = addDays(new Date(), 7);
 
         return (
             day !== 1 &&
-            currentTime < date.getTime() &&
+            date.getTime() > currentTime &&
             date.getTime() < weekTime.getTime()
         );
     };
 
     return (
-        <div className="mx-auto max-w-4xl">
+        <motion.div
+            className="mx-auto max-w-4xl"
+            initial={{
+                opacity: 0,
+            }}
+            animate={{
+                opacity: 1,
+            }}
+            exit={{
+                opacity: 0,
+            }}
+        >
             <h1>客户资料</h1>
-            <form className="space-y-8" onSubmit={handleSubmit(submit)}>
+            <form className="space-y-8">
                 <div className="">
                     <label htmlFor="username" className="text-lg">
                         名称
@@ -258,7 +236,7 @@ const DetailsForm = ({ onNextClick, onStepChange }) => {
                     <Button onClick={() => onStepChange(2)}>下一步</Button>
                 </div>
             </form>
-        </div>
+        </motion.div>
     );
 };
 

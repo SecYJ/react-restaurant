@@ -1,7 +1,44 @@
 import { useId } from "react";
 import { useForm } from "react-hook-form";
+import { motion } from "framer-motion";
 import { useCartCtx } from "../../contexts/CartCtx";
 import CartButton from "./CartButton";
+
+const itemVariant = {
+    exit: {
+        opacity: 0,
+        scale: 0.25,
+        x: "100px",
+        rotate: 30,
+        transition: {
+            delay: 0,
+        },
+    },
+    initial: {
+        x: "-100px",
+        opacity: 0,
+    },
+    animate: (custom) => {
+        return {
+            x: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.3,
+                delay: custom * 0.2,
+            },
+        };
+    },
+    // animate: {
+    //     x: 0,
+    //     opacity: 1,
+    //     transition: (custom) => {
+    //         return {
+    //             duration: 0.3,
+    //             delay: custom * 0.2,
+    //         };
+    //     },
+    // },
+};
 
 const CartItem = ({
     imgFallback,
@@ -10,6 +47,7 @@ const CartItem = ({
     orderQty: amount,
     id,
     stock,
+    index,
 }) => {
     const { dispatch, deleteCartItem } = useCartCtx();
     const { register, getValues, setValue } = useForm();
@@ -73,7 +111,13 @@ const CartItem = ({
     };
 
     return (
-        <li className="flex py-6">
+        <motion.li
+            variants={itemVariant}
+            {...itemVariant}
+            custom={index}
+            className="flex py-6"
+            layoutId={id}
+        >
             <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                 <img
                     src={imgFallback}
@@ -127,7 +171,7 @@ const CartItem = ({
                     </div>
                 </div>
             </div>
-        </li>
+        </motion.li>
     );
 };
 

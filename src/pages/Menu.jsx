@@ -1,10 +1,16 @@
+import { motion } from "framer-motion";
 import MenuCtxProvider from "../contexts/MenuCtx";
 import MenuGrid from "../components/foodMenu/MenuGrid";
 import MenuSidebar from "../components/foodMenu/MenuSidebar";
+import { animateConfigs } from "../router";
 
 const Menu = () => {
     return (
-        <main className="container my-20">
+        <motion.main
+            variants={animateConfigs}
+            {...animateConfigs}
+            className="container my-20"
+        >
             <div className="flex gap-8">
                 <MenuCtxProvider>
                     <div className="sticky left-0 top-[160px] h-full w-1/4">
@@ -16,7 +22,7 @@ const Menu = () => {
                     </div>
                 </MenuCtxProvider>
             </div>
-        </main>
+        </motion.main>
     );
 };
 export default Menu;

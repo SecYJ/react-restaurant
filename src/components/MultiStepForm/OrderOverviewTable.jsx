@@ -1,15 +1,44 @@
+import { motion } from "framer-motion";
 import { useCartCtx } from "../../contexts/CartCtx";
 import Button from "../Button";
 import CartButton from "../cart/CartButton";
 
-const OrderOverviewTable = ({ onStepChange }) => {
+const variant = {
+    initial: {
+        opacity: 0,
+    },
+    animate: (custom) => {
+        return {
+            opacity: 1,
+            transition: {
+                duration: 0.3,
+                delay: custom * 0.1,
+            },
+        };
+    },
+};
+
+// initial={{
+//     opacity: 0,
+//     x: `${step + 1 * 100}%`,
+// }}
+// animate={{
+//     opacity: 1,
+//     x: `${step * 100}%`,
+// }}
+// exit={{
+//     opacity: 0,
+//     x: `-${step + 1 * 100}%`,
+// }}
+
+const OrderOverviewTable = ({ onStepChange, step }) => {
     const { cart, totalUnits, totalAmount, updateCartItem, deleteCartItem } =
         useCartCtx();
 
     const styles = "bg-transparent text-2xl";
 
     return (
-        <div className="overflow-x-auto">
+        <motion.div className="overflow-x-auto">
             <table className="table w-full text-center">
                 <thead>
                     <tr>
@@ -33,7 +62,12 @@ const OrderOverviewTable = ({ onStepChange }) => {
                         } = c;
 
                         return (
-                            <tr key={id}>
+                            <motion.tr
+                                variants={variant}
+                                {...variant}
+                                key={id}
+                                custom={index}
+                            >
                                 <th style={{ position: "static" }}>
                                     {index + 1}
                                 </th>
@@ -83,7 +117,7 @@ const OrderOverviewTable = ({ onStepChange }) => {
                                         移除
                                     </Button>
                                 </td>
-                            </tr>
+                            </motion.tr>
                         );
                     })}
                 </tbody>
@@ -102,7 +136,7 @@ const OrderOverviewTable = ({ onStepChange }) => {
                     </Button>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

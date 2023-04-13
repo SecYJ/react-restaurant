@@ -1,10 +1,17 @@
+import { motion } from "framer-motion";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useCartCtx } from "../../contexts/CartCtx";
 
 const FoodCartButton = () => {
     const { dispatch } = useCartCtx();
     return (
-        <button
+        <motion.button
+            animate={{
+                rotate: 360,
+            }}
+            transition={{
+                duration: 10,
+            }}
             className="fixed bottom-12 right-12 z-50 flex items-center gap-3 rounded-full border border-gray-300 bg-gray-300 p-2"
             onClick={() =>
                 dispatch({ type: "TOGGLE_CART_VISIBILITY", payload: true })
@@ -17,7 +24,7 @@ const FoodCartButton = () => {
             <span className="absolute top-0 right-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-secondary p-1 text-base text-white">
                 6
             </span>
-        </button>
+        </motion.button>
     );
 };
 
