@@ -3,7 +3,6 @@ import { useMenuCtx } from "../../contexts/MenuCtx";
 import { useCartCtx } from "../../contexts/CartCtx";
 import FloatingCartButton from "../cart/FloatingCartButton";
 import MenuCard from "./MenuCard";
-import Cart from "../cart/Cart";
 import useFoodMenu from "../../hooks/useFoodMenu";
 import MenuSkeleton from "./MenuSkeleton";
 
@@ -30,8 +29,7 @@ const MenuGrid = () => {
                     return <MenuCard {...d} key={d.id} />;
                 })}
             </ul>
-            {!visible && <FloatingCartButton />}
-            <AnimatePresence>{visible && <Cart />}</AnimatePresence>
+            {/* {!visible && <FloatingCartButton />} */}
         </>
     );
 };

@@ -30,3 +30,7 @@
 .table tr.hover:nth-child(2n):hover td {
     @apply bg-transparent;
 }
+
+.react-datepicker__day--selected {
+    @apply bg-primary text-white;
+}

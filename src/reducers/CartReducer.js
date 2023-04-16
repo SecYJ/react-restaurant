@@ -28,6 +28,8 @@ const reducer = (state, action) => {
                 item.id === id ? { ...item, orderQty: item.orderQty + 1 } : item
             );
 
+            localStorage.setItem("cart", JSON.stringify(cart));
+
             return { ...state, cart, ...calculateTotals(cart) };
         }
 

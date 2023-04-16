@@ -2,12 +2,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { NavLink } from "react-router-dom";
 import { menu } from "../constants/headerNavList.js";
 import logo from "../assets/dimsum.png";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useCartCtx } from "../contexts/CartCtx.jsx";
 
 const Header = () => {
-    const { loginWithRedirect, logout, user, isAuthenticated, isLoading } =
-        useAuth0();
-    const t = useAuth0();
-    // const activeLink =
+    const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+    const { toggleCart, totalUnits } = useCartCtx();
 
     return (
         <div className="sticky top-0 left-0 z-[2] bg-primary text-white">
@@ -19,12 +19,13 @@ const Header = () => {
                 <div>
                     <ul className="flex gap-8 ">
                         {menu.map((m) => (
-                            <li className="" key={m.text}>
+                            <li
+                                className="grid place-items-center"
+                                key={m.text}
+                            >
                                 <NavLink
                                     className={({ isActive }) =>
-                                        isActive
-                                            ? "border-b-2 border-white pb-2"
-                                            : "pb-2"
+                                        isActive ? "p-2" : "p-2"
                                     }
                                     to={m.link}
                                 >
@@ -32,7 +33,21 @@ const Header = () => {
                                 </NavLink>
                             </li>
                         ))}
-                        <li>
+                        <li className="relative">
+                            <button
+                                className="rounded-full p-2 hover:bg-white/30 "
+                                onClick={() => toggleCart(true)}
+                            >
+                                <div className="absolute -right-2.5 top-0 grid h-6 w-6 place-items-center rounded-full bg-secondary text-sm text-white">
+                                    {totalUnits}
+                                </div>
+                                <AiOutlineShoppingCart
+                                    size="1.5rem"
+                                    color="white"
+                                />
+                            </button>
+                        </li>
+                        <li className="grid place-items-center p-2">
                             {isAuthenticated && user ? (
                                 <button
                                     type="button"

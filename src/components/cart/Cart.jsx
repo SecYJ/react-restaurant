@@ -4,6 +4,7 @@ import Overlay from "../Overlay";
 import CartItem from "./CartItem";
 import CartFooter from "./CartFooter";
 import CartHeader from "./CartHeader";
+import { Link } from "react-router-dom";
 
 const variant = {
     animate: {
@@ -18,12 +19,13 @@ const variant = {
 };
 
 const Cart = () => {
-    const { cart, dispatch } = useCartCtx();
+    const { cart, toggleCart } = useCartCtx();
 
     return (
         <Overlay
             onClose={() =>
-                dispatch({ type: "TOGGLE_CART_VISIBILITY", payload: false })
+                // dispatch({ type: "TOGGLE_CART_VISIBILITY", payload: false })
+                toggleCart(false)
             }
         >
             <motion.div
@@ -56,7 +58,15 @@ const Cart = () => {
                                         </AnimatePresence>
                                     </motion.ul>
                                 ) : (
-                                    <p>目前购物为空</p>
+                                    <>
+                                        <p className="text-2xl">目前购物为空</p>
+                                        <Link
+                                            to="/menu"
+                                            className="text-primary"
+                                        >
+                                            点餐去
+                                        </Link>
+                                    </>
                                 )}
                             </div>
                         </div>

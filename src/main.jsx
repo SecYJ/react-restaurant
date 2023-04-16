@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Auth0Provider
             // domain="http://localhost:5173"
             domain="dev-vgu1f13o.us.auth0.com"
-            clientId="jPFmkUWMLWy96VcLQVVzpzlm053MqXTb"
+            clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
             authorizationParams={{
                 redirect_uri: window.location.origin,
             }}

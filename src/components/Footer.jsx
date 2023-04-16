@@ -7,7 +7,7 @@ const Footer = () => {
                 {/* <h3 className="mb-8 text-center">第一时间获取最新资讯</h3> */}
                 <div>
                     <p className="mb-8">本网页为练习使用, 并无商业用途</p>
-                    <p>好正點港式點心專賣</p>
+                    <p>满味芳點心專賣</p>
                     <p>
                         {" "}
                         版權所有 © Copyright{new Date().getFullYear()} . All

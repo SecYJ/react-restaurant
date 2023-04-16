@@ -1,6 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { addDays, getDay, getHours, getMinutes, isSameDay } from "date-fns/esm";
+import {
+    addDays,
+    format,
+    getDay,
+    getHours,
+    getMinutes,
+    isSameDay,
+    setHours,
+    setMinutes,
+} from "date-fns/esm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { motion } from "framer-motion";
@@ -56,26 +65,40 @@ const DetailsForm = ({ onStepChange, step }) => {
         );
     };
 
-    const filterOperationDay = (date) => {
-        const day = getDay(date);
-        const currentTime = new Date().getTime();
-        const weekTime = addDays(new Date(), 7);
+    const filterTime = (date) => {
+        const currentHour = getHours(new Date()); // current hour
 
-        return (
-            day !== 1 &&
-            date.getTime() > currentTime &&
-            date.getTime() < weekTime.getTime()
-        );
+        console.log("args", getHours(date));
+        console.log("current", getHours(new Date()));
+
+        return getHours(date) > currentHour && currentHour < 13;
+    };
+
+    useEffect(() => {
+        console.log(startDate);
+    }, []);
+
+    // const filterOperationDay = (date) => {
+    //     const day = getDay(date);
+    //     const currentTime = new Date().getTime();
+    //     const weekTime = addDays(new Date(), 7);
+
+    //     return (
+    //         day !== 1 &&
+    //         date.getTime() > currentTime &&
+    //         date.getTime() < weekTime.getTime()
+    //     );
+    // };
+
+    const filterOperationDay = (date) => {
+        return getDay(date) !== 1;
     };
 
     return (
-        <motion.div className="mx-auto w-full shrink-0 transition-all">
-            <h1>客户资料</h1>
+        <motion.div className="mx-auto w-full max-w-5xl shrink-0 transition-all">
             <form className="space-y-8">
-                <div className="">
-                    <label htmlFor="username" className="text-lg">
-                        名称
-                    </label>
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="username">名称</label>
                     <input
                         type="text"
                         {...register("username", {
@@ -87,15 +110,14 @@ const DetailsForm = ({ onStepChange, step }) => {
                         })}
                         className={inputStyles}
                         id="username"
+                        placeholder="Sharon"
                     />
                     {errors.username && (
                         <p className={error}>{errors?.username.message}</p>
                     )}
                 </div>
-                <div className="">
-                    <label htmlFor="phoneNumber" className="text-lg">
-                        手机号码
-                    </label>
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="phoneNumber">手机号码</label>
                     <input
                         type="tel"
                         {...register("phoneNumber", {
@@ -105,38 +127,28 @@ const DetailsForm = ({ onStepChange, step }) => {
                         })}
                         className={`${inputStyles} [appearance:textfield]`}
                         id="phoneNumber"
-                        placeholder="hello"
+                        placeholder="01234567899"
                     />
                     {errors.phoneNumber && (
                         <p className={error}>{errors.phoneNumber.message}</p>
                     )}
                 </div>
 
-                <div>
-                    <label htmlFor="delivery-select" className="text-lg">
-                        选择配送方式
-                    </label>
-                    <select
-                        {...register("delivery-select")}
-                        id="delivery-select"
-                        className={`${inputStyles} select-primary select bg-transparent`}
-                    >
-                        <option value="">请选择配送方式</option>
-                        <option value="pickup">自取</option>
-                        <option
-                            value="delivery"
-                            title="(总额超过 RM 15) 免运费"
-                        >
-                            外卖服务
-                        </option>
-                    </select>
-                </div>
+                <select
+                    {...register("delivery-select")}
+                    id="delivery-select"
+                    className={`${inputStyles} select-primary select bg-transparent`}
+                >
+                    <option value="">请选择配送方式</option>
+                    <option value="pickup">自取</option>
+                    <option value="delivery" title="(总额超过 RM 15) 免运费">
+                        外卖服务
+                    </option>
+                </select>
 
                 {watchDelivery === "delivery" && (
-                    <div>
-                        <label className="text-lg" htmlFor="address">
-                            地址
-                        </label>
+                    <div className="flex flex-col gap-1">
+                        <label htmlFor="address">地址</label>
                         <input
                             type="text"
                             id="address"
@@ -147,6 +159,7 @@ const DetailsForm = ({ onStepChange, step }) => {
                                 },
                             })}
                             className={inputStyles}
+                            placeholder="420 LORONG KANGSAR 1/7 TAMAN KANGSAR, 大小写均可"
                         />
                         {errors.address && (
                             <p className={error}>{errors.address.message}</p>
@@ -154,10 +167,7 @@ const DetailsForm = ({ onStepChange, step }) => {
                     </div>
                 )}
                 {watchDelivery === "delivery" && (
-                    <div>
-                        <label htmlFor="area" className="text-lg">
-                            地区
-                        </label>
+                    <>
                         <select
                             {...register("area", {
                                 required: {
@@ -179,13 +189,10 @@ const DetailsForm = ({ onStepChange, step }) => {
                         {errors.area && (
                             <p className={error}>{errors.area.message}</p>
                         )}
-                    </div>
+                    </>
                 )}
                 {watchDelivery === "delivery" && (
-                    <div>
-                        <label htmlFor="area" className="text-lg">
-                            邮政编码
-                        </label>
+                    <>
                         <select
                             disabled={!watchArea}
                             {...register("postcode", {
@@ -212,19 +219,30 @@ const DetailsForm = ({ onStepChange, step }) => {
                         {errors.postcode && (
                             <p className={error}>{errors.postcode.message}</p>
                         )}
-                    </div>
+                    </>
                 )}
-                <div>
+                <div className="space-y-4">
                     <DatePicker
-                        className="border border-gray-300"
-                        showTimeSelect
-                        filterTime={filterOperationHours}
+                        className="rounded-sm border border-gray-300"
+                        // filterTime={filterOperationHours}
+                        // filterDate={filterOperationDay}
                         filterDate={filterOperationDay}
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}
-                        dateFormat="dd/MM/yyyy h:mm aa"
-                        // maxDate={addDays(new Date(), 7)}
-                        // minDate={subDays(new Date(), 0)}
+                        dateFormat="dd/MM/yyyy"
+                        minDate={new Date()}
+                        maxDate={addDays(new Date(), 7)}
+                        placeholderText="请选择日期"
+                        shouldCloseOnSelect={false}
+                    />
+                    <DatePicker
+                        showTimeSelect
+                        showTimeSelectOnly
+                        filterTime={filterTime}
+                        className="rounded-sm border border-gray-300"
+                        timeFormat="h:mm aa"
+                        placeholderText="请选择时间"
+                        shouldCloseOnSelect={false}
                     />
                 </div>
                 <div className="flex justify-between">

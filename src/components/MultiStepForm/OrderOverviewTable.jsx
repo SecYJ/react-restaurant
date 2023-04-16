@@ -4,24 +4,30 @@ import Button from "../Button";
 import CartButton from "../cart/CartButton";
 import OrderOverviewTotal from "./OrderOverviewTotal";
 
-const variant = {
+const variantItem = {
     initial: {
         opacity: 0,
+        x: "-200px",
     },
     animate: (custom) => {
         return {
+            x: 0,
             opacity: 1,
             transition: {
                 duration: 0.3,
                 delay: custom * 0.1,
+                // staggerChildren: 0.1,
             },
         };
+    },
+    exit: {
+        x: "200px",
+        opacity: 0,
     },
 };
 
 const OrderOverviewTable = ({ onStepChange, step }) => {
-    const { cart, totalUnits, totalAmount, updateCartItem, deleteCartItem } =
-        useCartCtx();
+    const { cart, updateCartItem, deleteCartItem } = useCartCtx();
 
     const xVariant = {
         initial: {
@@ -32,7 +38,7 @@ const OrderOverviewTable = ({ onStepChange, step }) => {
     const styles = "bg-transparent text-2xl";
 
     return (
-        <motion.div className="relative flex w-full shrink-0 gap-4 overflow-hidden overflow-x-auto transition-all">
+        <div className="relative flex w-full shrink-0 gap-4 overflow-hidden overflow-x-auto transition-all">
             <table className="table w-full text-center">
                 <thead>
                     <tr>
@@ -57,8 +63,8 @@ const OrderOverviewTable = ({ onStepChange, step }) => {
 
                         return (
                             <motion.tr
-                                variants={variant}
-                                {...variant}
+                                variants={variantItem}
+                                {...variantItem}
                                 key={id}
                                 custom={index}
                                 className="hover hover:bg-[rgb(229,230,230)]"
@@ -119,7 +125,7 @@ const OrderOverviewTable = ({ onStepChange, step }) => {
                 </tbody>
             </table>
             <OrderOverviewTotal onStepChange={onStepChange} />
-        </motion.div>
+        </div>
     );
 };
 
