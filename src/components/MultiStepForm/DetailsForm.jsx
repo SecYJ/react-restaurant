@@ -8,10 +8,19 @@ import Button from "../Button";
 import { POSTCODE_LISTS } from "../../constants/postcodeStateList";
 import { error, inputStyles } from "./formStyles";
 
-const DetailsForm = ({ onNextClick, onStepChange, step }) => {
+const DetailsForm = ({ onStepChange, step }) => {
+    const xVariant = {
+        initial: {
+            x: step === 0 ? `200%` : "-100%",
+        },
+        animate: {
+            x: 0,
+        },
+    };
     const {
         register,
         formState: { errors },
+        // TODO: handleSubmit do later
         handleSubmit,
         watch,
     } = useForm();
@@ -60,18 +69,7 @@ const DetailsForm = ({ onNextClick, onStepChange, step }) => {
     };
 
     return (
-        <motion.div
-            className="mx-auto max-w-4xl"
-            initial={{
-                opacity: 0,
-            }}
-            animate={{
-                opacity: 1,
-            }}
-            exit={{
-                opacity: 0,
-            }}
-        >
+        <motion.div className="mx-auto w-full shrink-0 transition-all">
             <h1>客户资料</h1>
             <form className="space-y-8">
                 <div className="">
@@ -121,7 +119,7 @@ const DetailsForm = ({ onNextClick, onStepChange, step }) => {
                     <select
                         {...register("delivery-select")}
                         id="delivery-select"
-                        className={`${inputStyles} bg-transparent`}
+                        className={`${inputStyles} select-primary select bg-transparent`}
                     >
                         <option value="">请选择配送方式</option>
                         <option value="pickup">自取</option>

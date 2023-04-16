@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useCartCtx } from "../../contexts/CartCtx";
 import Button from "../Button";
 import CartButton from "../cart/CartButton";
+import OrderOverviewTotal from "./OrderOverviewTotal";
 
 const variant = {
     initial: {
@@ -18,27 +19,20 @@ const variant = {
     },
 };
 
-// initial={{
-//     opacity: 0,
-//     x: `${step + 1 * 100}%`,
-// }}
-// animate={{
-//     opacity: 1,
-//     x: `${step * 100}%`,
-// }}
-// exit={{
-//     opacity: 0,
-//     x: `-${step + 1 * 100}%`,
-// }}
-
 const OrderOverviewTable = ({ onStepChange, step }) => {
     const { cart, totalUnits, totalAmount, updateCartItem, deleteCartItem } =
         useCartCtx();
 
+    const xVariant = {
+        initial: {
+            x: step === 0 ? "100%" : `-${step * 100}%`,
+        },
+        animate: 0,
+    };
     const styles = "bg-transparent text-2xl";
 
     return (
-        <motion.div className="overflow-x-auto">
+        <motion.div className="relative flex w-full shrink-0 gap-4 overflow-hidden overflow-x-auto transition-all">
             <table className="table w-full text-center">
                 <thead>
                     <tr>
@@ -67,6 +61,8 @@ const OrderOverviewTable = ({ onStepChange, step }) => {
                                 {...variant}
                                 key={id}
                                 custom={index}
+                                className="hover hover:bg-[rgb(229,230,230)]"
+                                layoutId={id}
                             >
                                 <th style={{ position: "static" }}>
                                     {index + 1}
@@ -122,20 +118,7 @@ const OrderOverviewTable = ({ onStepChange, step }) => {
                     })}
                 </tbody>
             </table>
-            <div className="mr-6 flex items-center justify-end">
-                <div className="flex flex-col items-end">
-                    <div>
-                        <p>餐点份量: {totalUnits}</p>
-                        <p>总额: RM {totalAmount.toFixed(2)}</p>
-                    </div>
-                    <Button
-                        className="mt-6 px-10"
-                        onClick={() => onStepChange(1)}
-                    >
-                        下一步
-                    </Button>
-                </div>
-            </div>
+            <OrderOverviewTotal onStepChange={onStepChange} />
         </motion.div>
     );
 };

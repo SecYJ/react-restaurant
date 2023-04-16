@@ -20,24 +20,22 @@ const MultiStepForm = () => {
     return (
         <div className="container my-20">
             <MultiStepNav step={step} />
-            <AnimatePresence className="mx-auto mt-20">
-                <div className="my-10">
-                    {step === 0 ? (
-                        <OrderOverviewTable
-                            onStepChange={setStep}
-                            step={step}
-                        />
-                    ) : step === 1 ? (
-                        <DetailsForm onStepChange={setStep} step={step} />
-                    ) : (
-                        <Success />
-                    )}
-                    {/* <div className="relative max-h-[700px] overflow-auto pr-3 [scrollbar-width:thin]">
+            <div className="my-20 flex overflow-hidden">
+                {/* <OrderOverviewTable onStepChange={setStep} step={step} />
+                <DetailsForm onStepChange={setStep} step={step} /> */}
+                {/* <Success /> */}
+                {step === 0 ? (
+                    <OrderOverviewTable onStepChange={setStep} step={step} />
+                ) : step === 1 ? (
+                    <DetailsForm onStepChange={setStep} step={step} />
+                ) : (
+                    <Success />
+                )}
+                {/* <div className="relative max-h-[700px] overflow-auto pr-3 [scrollbar-width:thin]">
                 
                         {cart.length > 0 && <FormCartTotal />}
                     </div> */}
-                </div>
-            </AnimatePresence>
+            </div>
         </div>
     );
 };

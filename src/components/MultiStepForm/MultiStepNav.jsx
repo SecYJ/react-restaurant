@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { stepOneSvg, stepThreeSvg, stepTwoSvg } from "./formStyles";
 
 const MultipleStepNav = ({ step }) => {
@@ -8,9 +7,9 @@ const MultipleStepNav = ({ step }) => {
                 className="absolute top-0 left-0 h-1 bg-primary transition-all"
                 style={{
                     width: Math.floor((100 / 2) * step) + "%",
-                    // width: 100,
                 }}
             />
+
             <ul className="flex -translate-y-1/4 justify-between">
                 <li className="grid -translate-x-1/2 justify-items-center">
                     <div className="grid h-10 w-10 place-items-center rounded-full bg-primary text-white">

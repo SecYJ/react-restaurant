@@ -1,15 +1,13 @@
-import ProductCard from "./foodMenu/MenuCard";
-import { HiArrowLongRight } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import useFoodMenu from "../hooks/useFoodMenu.js";
 import PopularItem from "./PopularItem";
-import { heading } from "../helpers/ui";
 import Line from "./Line";
 
-import { useModalCtx } from "../contexts/ModalCtx";
-
 const Populars = () => {
-    const { data } = useModalCtx();
+    const { data, isLoading } = useFoodMenu();
 
+    if (isLoading) {
+        return <p>Loading ...</p>;
+    }
     return (
         <section className="py-20 px-4">
             <div className="mb-6">
@@ -24,9 +22,13 @@ const Populars = () => {
                 <Line />
             </div>
             <ul className="grid grid-cols-4 gap-8">
-                {data.map((item, index) => {
-                    return <PopularItem key={index} {...item} index={index} />;
-                })}
+                {data.data
+                    .map((item, index) => {
+                        return (
+                            <PopularItem key={index} {...item} index={index} />
+                        );
+                    })
+                    .slice(0, 8)}
             </ul>
         </section>
     );

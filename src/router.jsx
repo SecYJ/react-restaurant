@@ -1,14 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import {
     About,
-    Appointment,
     Checkout,
-    DeliveryInfo,
     Home,
     Layout,
     Menu,
     NotFound,
 } from "./pages/index.js";
+import PrivateRoute from "./pages/PrivateRoute.jsx";
 
 const routes = [
     {
@@ -28,12 +27,12 @@ const routes = [
                 element: <Menu />,
             },
             {
-                path: "appointment",
-                element: <Appointment />,
-            },
-            {
                 path: "checkout",
-                element: <Checkout />,
+                element: (
+                    <PrivateRoute>
+                        <Checkout />
+                    </PrivateRoute>
+                ),
             },
         ],
     },

@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply text-[1.5rem] text-black/70;
+        @apply text-black/70;
     }
 }
 
@@ -16,4 +16,17 @@
 
 .triangle-top {
     @apply border-[3px] border-primary border-l-primary border-r-transparent;
+}
+
+.table:where(:not(.table-zebra))
+    :where(thead, tbody, tfoot)
+    :where(tr:not(:last-child) :where(th, td)) {
+    @apply border-0;
+}
+
+.table tr.hover:hover th,
+.table tr.hover:hover td,
+.table tr.hover:nth-child(2n):hover th,
+.table tr.hover:nth-child(2n):hover td {
+    @apply bg-transparent;
 }

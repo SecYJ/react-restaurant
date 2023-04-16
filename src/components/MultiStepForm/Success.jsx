@@ -1,5 +1,5 @@
 const Success = () => {
-    return <div>Success</div>;
+    return <div className="shrink-0">Success</div>;
 };
 
 export default Success;

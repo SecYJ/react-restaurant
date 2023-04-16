@@ -1,7 +1,7 @@
 import { ImSearch } from "react-icons/im";
 import { useModalCtx } from "../contexts/ModalCtx";
 
-const PopularItem = ({ name, price, img, bigImg, index }) => {
+const PopularItem = ({ name, price, imgFallback, index }) => {
     const { dispatch } = useModalCtx();
 
     const openModal = () => {
@@ -22,13 +22,13 @@ const PopularItem = ({ name, price, img, bigImg, index }) => {
             >
                 <div className="absolute inset-0 z-[1] grid place-items-center opacity-0 duration-300 group-hover:bg-black/40 group-hover:opacity-100">
                     <div className="grid justify-items-center">
-                        <ImSearch className="" color="#fff" />
+                        <ImSearch color="#fff" />
                         <p className="text-white">MORE</p>
                     </div>
                 </div>
 
                 <img
-                    src={img}
+                    src={imgFallback}
                     alt={name}
                     className="h-full w-full duration-300 group-hover:scale-[1.2]"
                 />

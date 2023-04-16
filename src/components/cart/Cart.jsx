@@ -50,7 +50,7 @@ const Cart = () => {
                                                 <CartItem
                                                     key={c.id}
                                                     {...c}
-                                                    index={index}
+                                                    index={index + 1}
                                                 />
                                             ))}
                                         </AnimatePresence>

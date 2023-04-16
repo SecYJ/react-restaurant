@@ -24,7 +24,7 @@ const itemVariant = {
             opacity: 1,
             transition: {
                 duration: 0.3,
-                delay: custom * 0.2,
+                delay: custom * 0.1,
             },
         };
     },
