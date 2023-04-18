@@ -1,14 +1,10 @@
-import { AnimatePresence } from "framer-motion";
 import { useMenuCtx } from "../../contexts/MenuCtx";
-import { useCartCtx } from "../../contexts/CartCtx";
-import FloatingCartButton from "../cart/FloatingCartButton";
 import MenuCard from "./MenuCard";
 import useFoodMenu from "../../hooks/useFoodMenu";
 import MenuSkeleton from "./MenuSkeleton";
 
 const MenuGrid = () => {
     const { dispatch, filtered_menu, search } = useMenuCtx();
-    const { cartVisible: visible } = useCartCtx();
     const onSuccess = (data) => {
         dispatch({ type: "SET_MENU", payload: data.data });
     };
@@ -23,14 +19,11 @@ const MenuGrid = () => {
     }
 
     return (
-        <>
-            <ul className="grid grid-cols-3 gap-8">
-                {filtered_menu.map((d) => {
-                    return <MenuCard {...d} key={d.id} />;
-                })}
-            </ul>
-            {/* {!visible && <FloatingCartButton />} */}
-        </>
+        <ul className="grid grid-cols-3 gap-8">
+            {filtered_menu.map((d) => {
+                return <MenuCard {...d} key={d.id} />;
+            })}
+        </ul>
     );
 };
 

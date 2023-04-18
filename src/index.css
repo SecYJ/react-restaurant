@@ -34,3 +34,7 @@
 .react-datepicker__day--selected {
     @apply bg-primary text-white;
 }
+
+.react-datepicker__input-container input {
+    @apply w-full p-2;
+}

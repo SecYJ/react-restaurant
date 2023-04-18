@@ -1,9 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { NavLink } from "react-router-dom";
 import { menu } from "../constants/headerNavList.js";
-import logo from "../assets/dimsum.png";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useCartCtx } from "../contexts/CartCtx.jsx";
+import logo from "../assets/dimsum.png";
 
 const Header = () => {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();

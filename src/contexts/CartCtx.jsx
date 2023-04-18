@@ -1,9 +1,22 @@
-import { createContext, useCallback, useContext, useReducer } from "react";
+import {
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useReducer,
+} from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 import reducer from "../reducers/CartReducer";
 
 const CartCtx = createContext();
 
+// const getStorageCart = () => {
+//     const cart = localStorage.getItem("cart");
+//     return cart ? JSON.parse(cart) : [];
+// };
+
 const initialStates = {
+    // cart: getStorageCart(),
     cart: [],
     cartVisible: false,
     totalAmount: 0,
@@ -12,6 +25,15 @@ const initialStates = {
 
 const CartCtxProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialStates);
+    const [cart, setCart] = useLocalStorage("cart", []);
+
+    useEffect(() => {
+        setCart(state.cart, []);
+    }, [state.cart, state.totalAmount, state.totalUnits]);
+
+    useEffect(() => {
+        dispatch({ type: "SET_CART", payload: cart });
+    }, []);
 
     const updateCartItem = useCallback(({ direction, value, id }) => {
         dispatch({

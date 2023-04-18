@@ -12,6 +12,15 @@ const reducer = (state, action) => {
     };
 
     switch (action.type) {
+        case "SET_CART": {
+            const { payload } = action;
+            return {
+                ...state,
+                cart: payload,
+                ...calculateTotals(payload),
+            };
+        }
+
         case "ADD_TO_CART": {
             const { id } = action.payload;
             const isSavedItem = state.cart.find((item) => item.id === id);
@@ -27,8 +36,6 @@ const reducer = (state, action) => {
             const cart = state.cart.map((item) =>
                 item.id === id ? { ...item, orderQty: item.orderQty + 1 } : item
             );
-
-            localStorage.setItem("cart", JSON.stringify(cart));
 
             return { ...state, cart, ...calculateTotals(cart) };
         }

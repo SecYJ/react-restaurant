@@ -17,7 +17,7 @@ import Button from "../Button";
 import { POSTCODE_LISTS } from "../../constants/postcodeStateList";
 import { error, inputStyles } from "./formStyles";
 
-const DetailsForm = ({ onStepChange, step }) => {
+const DetailsForm = ({ onStepChange, step, goPrev, goNext }) => {
     const xVariant = {
         initial: {
             x: step === 0 ? `200%` : "-100%",
@@ -67,16 +67,16 @@ const DetailsForm = ({ onStepChange, step }) => {
 
     const filterTime = (date) => {
         const currentHour = getHours(new Date()); // current hour
+        const hour = getHours(date);
 
         console.log("args", getHours(date));
         console.log("current", getHours(new Date()));
 
-        return getHours(date) > currentHour && currentHour < 13;
+        return (
+            (hour >= 6 && hour <= 13) ||
+            (hour === 13 && getMinutes(date) !== 30)
+        );
     };
-
-    useEffect(() => {
-        console.log(startDate);
-    }, []);
 
     // const filterOperationDay = (date) => {
     //     const day = getDay(date);
@@ -221,9 +221,9 @@ const DetailsForm = ({ onStepChange, step }) => {
                         )}
                     </>
                 )}
-                <div className="space-y-4">
+                <div className="flex gap-2">
                     <DatePicker
-                        className="rounded-sm border border-gray-300"
+                        className="rounded-sm border border-gray-300 outline-none focus:border-primary"
                         // filterTime={filterOperationHours}
                         // filterDate={filterOperationDay}
                         filterDate={filterOperationDay}
@@ -239,17 +239,21 @@ const DetailsForm = ({ onStepChange, step }) => {
                         showTimeSelect
                         showTimeSelectOnly
                         filterTime={filterTime}
-                        className="rounded-sm border border-gray-300"
+                        className="rounded-sm border border-gray-300 outline-none focus:border-primary"
                         timeFormat="h:mm aa"
                         placeholderText="请选择时间"
                         shouldCloseOnSelect={false}
                     />
                 </div>
                 <div className="flex justify-between">
-                    <Button outline onClick={() => onStepChange(0)}>
+                    {/* <Button outline onClick={() => onStepChange(0)}>
+                        返回
+                    </Button> */}
+                    <Button outline onClick={() => goPrev()}>
                         返回
                     </Button>
-                    <Button onClick={() => onStepChange(2)}>下一步</Button>
+                    {/* <Button onClick={() => onStepChange(2)}>下一步</Button> */}
+                    <Button onClick={() => goNext()}>下一步</Button>
                 </div>
             </form>
         </motion.div>

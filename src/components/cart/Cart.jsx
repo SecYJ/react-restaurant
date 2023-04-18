@@ -22,12 +22,7 @@ const Cart = () => {
     const { cart, toggleCart } = useCartCtx();
 
     return (
-        <Overlay
-            onClose={() =>
-                // dispatch({ type: "TOGGLE_CART_VISIBILITY", payload: false })
-                toggleCart(false)
-            }
-        >
+        <Overlay onClose={() => toggleCart(false)}>
             <motion.div
                 key="modal"
                 initial={{ x: "100%" }}
@@ -79,11 +74,3 @@ const Cart = () => {
 };
 
 export default Cart;
-/*
-const [step, setStep] = useState(1)
-1. A step variable to control step
-
-Page 1 of form
-- Data of 
-
-*/

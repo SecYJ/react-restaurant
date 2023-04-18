@@ -14,8 +14,8 @@ const variantItem = {
             x: 0,
             opacity: 1,
             transition: {
-                duration: 0.3,
-                delay: custom * 0.1,
+                // duration: 0.3,
+                // delay: custom * 0.1,
                 // staggerChildren: 0.1,
             },
         };
@@ -26,7 +26,7 @@ const variantItem = {
     },
 };
 
-const OrderOverviewTable = ({ onStepChange, step }) => {
+const OrderOverviewTable = ({ onStepChange, step, goNext, goPrev }) => {
     const { cart, updateCartItem, deleteCartItem } = useCartCtx();
 
     const xVariant = {
@@ -38,7 +38,12 @@ const OrderOverviewTable = ({ onStepChange, step }) => {
     const styles = "bg-transparent text-2xl";
 
     return (
-        <div className="relative flex w-full shrink-0 gap-4 overflow-hidden overflow-x-auto transition-all">
+        <motion.div
+            transition={{
+                delay: 0.4,
+            }}
+            className="relative flex w-full shrink-0 gap-4 overflow-hidden overflow-x-auto transition-all"
+        >
             <table className="table w-full text-center">
                 <thead>
                     <tr>
@@ -69,6 +74,9 @@ const OrderOverviewTable = ({ onStepChange, step }) => {
                                 custom={index}
                                 className="hover hover:bg-[rgb(229,230,230)]"
                                 layoutId={id}
+                                transition={{
+                                    delay: 0.4,
+                                }}
                             >
                                 <th style={{ position: "static" }}>
                                     {index + 1}
@@ -124,8 +132,8 @@ const OrderOverviewTable = ({ onStepChange, step }) => {
                     })}
                 </tbody>
             </table>
-            <OrderOverviewTotal onStepChange={onStepChange} />
-        </div>
+            <OrderOverviewTotal goNext={goNext} goPrev={goPrev} />
+        </motion.div>
     );
 };
 
