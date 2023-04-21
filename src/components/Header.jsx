@@ -7,7 +7,7 @@ import logo from "../assets/dimsum.png";
 import AvatarDropdown from "./AvatarDropdown.jsx";
 
 const Header = () => {
-    const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+    const { loginWithRedirect, user, isAuthenticated } = useAuth0();
     const { toggleCart, totalUnits } = useCartCtx();
 
     return (
@@ -48,37 +48,30 @@ const Header = () => {
                                 />
                             </button>
                         </div>
-                        {/* <li className="grid place-items-center p-2">
-                            {isAuthenticated && user ? (
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        logout({
-                                            logoutParams: {
-                                                returnTo:
-                                                    window.location.origin,
-                                            },
-                                        })
-                                    }
-                                >
-                                    登出
-                                </button>
-                            ) : (
-                                <button
-                                    type="button"
-                                    onClick={() => loginWithRedirect()}
-                                >
-                                    登入
-                                </button>
-                            )}
-                        </li> */}
+
                         {isAuthenticated ? (
                             <AvatarDropdown avatar={user} />
                         ) : (
                             <li className="grid place-items-center p-2">
                                 <button
                                     type="button"
-                                    onClick={() => loginWithRedirect()}
+                                    onClick={async () => {
+                                        await loginWithRedirect({
+                                            appState: {
+                                                // returnTo: `${window.location.hostname}${window.location.pathname}`,
+                                                // returnTo: "/menu",
+                                                returnTo:
+                                                    window.location.pathname,
+                                            },
+                                            // authorizationParams: {
+                                            //     screen_hint: "signup",
+                                            // },
+                                        });
+                                        console.log(
+                                            "2",
+                                            window.location.pathname
+                                        );
+                                    }}
                                 >
                                     登入
                                 </button>
