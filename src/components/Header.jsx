@@ -4,6 +4,7 @@ import { menu } from "../constants/headerNavList.js";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useCartCtx } from "../contexts/CartCtx.jsx";
 import logo from "../assets/dimsum.png";
+import AvatarDropdown from "./AvatarDropdown.jsx";
 
 const Header = () => {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
@@ -17,9 +18,9 @@ const Header = () => {
                     <img src={logo} className="h-9 w-9 object-cover" />
                 </div>
                 <div>
-                    <ul className="flex gap-8 ">
+                    <div className="flex gap-8 ">
                         {menu.map((m) => (
-                            <li
+                            <div
                                 className="grid place-items-center"
                                 key={m.text}
                             >
@@ -31,9 +32,9 @@ const Header = () => {
                                 >
                                     {m.text}
                                 </NavLink>
-                            </li>
+                            </div>
                         ))}
-                        <li className="relative">
+                        <div className="relative">
                             <button
                                 className="rounded-full p-2 hover:bg-white/30 "
                                 onClick={() => toggleCart(true)}
@@ -42,12 +43,12 @@ const Header = () => {
                                     {totalUnits}
                                 </div>
                                 <AiOutlineShoppingCart
-                                    size="1.5rem"
+                                    size="24px"
                                     color="white"
                                 />
                             </button>
-                        </li>
-                        <li className="grid place-items-center p-2">
+                        </div>
+                        {/* <li className="grid place-items-center p-2">
                             {isAuthenticated && user ? (
                                 <button
                                     type="button"
@@ -70,15 +71,20 @@ const Header = () => {
                                     登入
                                 </button>
                             )}
-                        </li>
-                    </ul>
-                    {isAuthenticated && (
-                        <img
-                            className="ml-8 h-8 w-8 rounded-full"
-                            title={user.name}
-                            src={user.picture}
-                        />
-                    )}
+                        </li> */}
+                        {isAuthenticated ? (
+                            <AvatarDropdown avatar={user} />
+                        ) : (
+                            <li className="grid place-items-center p-2">
+                                <button
+                                    type="button"
+                                    onClick={() => loginWithRedirect()}
+                                >
+                                    登入
+                                </button>
+                            </li>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

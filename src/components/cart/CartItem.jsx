@@ -49,20 +49,12 @@ const CartItem = ({
     stock,
     index,
 }) => {
-    const { dispatch, deleteCartItem, updateCartItem } = useCartCtx();
+    const { deleteCartItem, updateCartItem } = useCartCtx();
     const { register, getValues, setValue } = useForm();
     const inputId = useId();
     const [cName, ...eName] = name.split(" ");
     const englishName = eName.join(" ");
     const totalPrice = (amount * price).toFixed(2);
-
-    // const setReducerAction = ({ value, direction }) => {
-    //     const payload = { id, direction };
-    //     dispatch({
-    //         type: "UPDATE_CART_ITEM",
-    //         payload: direction === "input" ? { ...payload, value } : payload,
-    //     });
-    // };
 
     const getCartInputValue = () => getValues("cart-input");
     const setCartInputValue = (val) => setValue("cart-input", val);
@@ -71,7 +63,6 @@ const CartItem = ({
         const value = getCartInputValue("cart-input");
         if (value + 1 > stock) return;
         setCartInputValue(value + 1);
-        // setReducerAction({ direction: "increment" });
         updateCartItem({ direction: "increment", id, value });
     };
 
@@ -79,7 +70,6 @@ const CartItem = ({
         const value = getCartInputValue("cart-input");
         if (value - 1 < 1) return;
         setCartInputValue(value - 1);
-        // setReducerAction({ direction: "decrement" });
         updateCartItem({ direction: "decrement", id, value });
     };
 
@@ -87,7 +77,6 @@ const CartItem = ({
         const value = getCartInputValue("cart-input");
         if (!value) {
             setCartInputValue(1);
-            // setReducerAction({ direction: "input", value: 1 });
             updateCartItem({ direction: "input", value: 1, id });
         }
     };
@@ -106,12 +95,10 @@ const CartItem = ({
 
         if (Number(value) > stock) {
             e.target.value = stock;
-            // setReducerAction({ direction: "input", value: stock });
             updateCartItem({ direction: "input", value: stock, id });
             return;
         }
 
-        // setReducerAction({ direction: "input", value: Number(value) });
         updateCartItem({ direction: "input", value: Number(value), id });
     };
 
@@ -134,7 +121,7 @@ const CartItem = ({
                 <div>
                     <div className="flex justify-between text-base font-medium text-gray-900">
                         <h3>{cName}</h3>
-                        <p className="ml-4">{totalPrice}</p>
+                        <p className="ml-4">RM {totalPrice}</p>
                     </div>
                     <p className="mt-1 text-sm text-gray-500">{englishName}</p>
                 </div>
@@ -169,7 +156,6 @@ const CartItem = ({
                         <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            // className="font-medium text-secondary hover:text-secondary/50"
                             onClick={() => deleteCartItem(id)}
                         >
                             Remove

@@ -1,19 +1,18 @@
 import { Outlet } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import { useCartCtx } from "../contexts/CartCtx";
-import Cart from "../components/cart/Cart";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import CtxWrapper from "../contexts/CtxWrapper";
+import CartWrapper from "../components/cart/CartWrapper";
 
 const Layout = () => {
-    const { cartVisible: visible } = useCartCtx();
     return (
-        <>
-            <Header />
-            <Outlet />
-            <Footer />
-            <AnimatePresence>{visible && <Cart />}</AnimatePresence>
-        </>
+        <CtxWrapper>
+            <CartWrapper>
+                <Header />
+                <Outlet />
+                <Footer />
+            </CartWrapper>
+        </CtxWrapper>
     );
 };
 export default Layout;

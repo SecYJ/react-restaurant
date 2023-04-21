@@ -19,7 +19,7 @@ const variant = {
 };
 
 const Cart = () => {
-    const { cart, toggleCart } = useCartCtx();
+    const { cart, toggleCart, cartVisible: visible } = useCartCtx();
 
     return (
         <Overlay onClose={() => toggleCart(false)}>

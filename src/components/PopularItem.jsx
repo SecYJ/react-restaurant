@@ -15,7 +15,7 @@ const PopularItem = ({ name, price, imgFallback, index }) => {
     };
 
     return (
-        <div className="card-compact card-bordered card rounded-md border-gray-300 shadow-lg">
+        <div className="card-bordered card card-compact max-h-[400px] rounded-md border-gray-300 shadow-lg">
             <figure
                 className="group relative cursor-pointer overflow-hidden"
                 onClick={openModal}
@@ -30,7 +30,7 @@ const PopularItem = ({ name, price, imgFallback, index }) => {
                 <img
                     src={imgFallback}
                     alt={name}
-                    className="h-full w-full duration-300 group-hover:scale-[1.2]"
+                    className="h-full w-full object-cover duration-300 group-hover:scale-[1.2]"
                 />
             </figure>
             <div className="card-body">
