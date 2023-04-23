@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export const AuthCtx = ({ children }) => {
-    const { isLoading, isAuthenticated } = useAuth0();
+    const { isAuthenticated } = useAuth0();
     const navigate = useNavigate();
 
     const domain = import.meta.env.VITE_AUTH0_DOMAIN;
