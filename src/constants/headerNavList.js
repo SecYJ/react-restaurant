@@ -13,6 +13,6 @@ export const menu = [
     },
     {
         link: "/news",
-        text: "最新资讯",
+        text: "资讯",
     },
 ];

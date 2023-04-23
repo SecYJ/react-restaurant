@@ -1,6 +1,7 @@
 import useFoodMenu from "../hooks/useFoodMenu.js";
 import PopularItem from "./PopularItem";
 import Line from "./Line";
+import { GridCol, SectionPy } from "../styles.js";
 
 const Populars = () => {
     const { data, isLoading } = useFoodMenu();
@@ -9,7 +10,7 @@ const Populars = () => {
         return <p>Loading ...</p>;
     }
     return (
-        <section className="container py-20">
+        <section className={`${SectionPy} container`}>
             <div className="mb-6">
                 <div className="flex justify-center">
                     <h2 className="border-r border-gray-200 pr-4 text-4xl font-bold text-primary">
@@ -21,10 +22,7 @@ const Populars = () => {
                 </div>
                 <Line />
             </div>
-            <ul
-                // className="grid grid-cols-4 gap-8"
-                className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-8"
-            >
+            <ul className={`${GridCol}`}>
                 {data.data
                     .map((item, index) => {
                         return (

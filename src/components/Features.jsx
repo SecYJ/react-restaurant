@@ -1,13 +1,14 @@
 import Line from "./Line";
 import { heading } from "../helpers/ui";
 import features from "../constants/features";
+import { GridCol, SectionPy } from "../styles";
 
 const Features = () => {
     return (
-        <section className="container py-20">
+        <section className={`${SectionPy} container`}>
             <h2 className={heading}>我们的特点</h2>
             <Line />
-            <ul className="mx-auto mt-16 grid grid-cols-3 gap-8">
+            <ul className={`${GridCol} mx-auto mt-4 md:mt-6 lg:mt-8`}>
                 {features.map((feature) => {
                     const { icon, title, text } = feature;
 

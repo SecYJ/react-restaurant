@@ -1,6 +1,6 @@
-// import banner from "../assets/faq-banner.png";
 import Accordion from "../components/Accordion";
 import Line from "../components/Line";
+import { SectionPy } from "../styles";
 
 const data = [
     {
@@ -31,7 +31,7 @@ const data = [
 
 const Faq = () => {
     return (
-        <main className="container py-20">
+        <main className={`${SectionPy} container`}>
             <div className="flex justify-center">
                 <h2 className="border-r border-gray-200 pr-4 text-4xl font-bold text-primary/70">
                     常见问题
@@ -41,9 +41,7 @@ const Faq = () => {
                 </h2>
             </div>
             <Line />
-            {/* grid-cols-2 */}
-            <section className="grid  gap-8 p-8">
-                {/* <img src={banner} alt="Faq banner" /> */}
+            <section>
                 <ul className="space-y-4">
                     {data.map((item) => (
                         <Accordion {...item} key={item.title} />

@@ -15,7 +15,11 @@ module.exports = {
         },
         container: {
             center: true,
-            padding: "2rem",
+            padding: {
+                DEFAULT: "0.75rem",
+                md: "1rem",
+                lg: "1.5rem",
+            },
         },
     },
     daisyui: {
