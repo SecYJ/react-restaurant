@@ -14,9 +14,6 @@ const LatestNews = () => {
                 <h2 className="border-r border-gray-200 pr-4 text-4xl font-bold text-primary">
                     最新消息
                 </h2>
-                <h2 className="pl-4 text-4xl font-bold text-secondary">
-                    Latest News
-                </h2>
             </div>
             <Line />
             <ul className="my-4 md:my-6 lg:my-8">

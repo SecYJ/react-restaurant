@@ -1,10 +1,10 @@
 import useFoodMenu from "../hooks/useFoodMenu.js";
-import PopularItem from "./PopularItem";
+import PopularCard from "./PopularCard";
 import Line from "./Line";
 import { GridCol, SectionPy } from "../styles.js";
 
-const Populars = () => {
-    const { data, isLoading } = useFoodMenu();
+const PopularFoods = () => {
+    const { data: menu, isLoading } = useFoodMenu();
 
     if (isLoading) {
         return <p>Loading ...</p>;
@@ -16,22 +16,13 @@ const Populars = () => {
                     <h2 className="border-r border-gray-200 pr-4 text-4xl font-bold text-primary">
                         热门点心
                     </h2>
-                    <h2 className="pl-4 text-4xl font-bold text-secondary/80">
-                        Delicious
-                    </h2>
                 </div>
                 <Line />
             </div>
             <ul className={`${GridCol}`}>
-                {data.data
-                    .map((item, index) => {
-                        return (
-                            <PopularItem key={index} {...item} index={index} />
-                        );
-                    })
-                    .slice(0, 8)}
+                {menu.data.map((m) => <PopularCard {...m} />).slice(0, 8)}
             </ul>
         </section>
     );
 };
-export default Populars;
+export default PopularFoods;

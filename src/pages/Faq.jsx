@@ -32,14 +32,9 @@ const data = [
 const Faq = () => {
     return (
         <main className={`${SectionPy} container`}>
-            <div className="flex justify-center">
-                <h2 className="border-r border-gray-200 pr-4 text-4xl font-bold text-primary/70">
-                    常见问题
-                </h2>
-                <h2 className="pl-4 text-4xl font-bold text-secondary/70">
-                    Faq
-                </h2>
-            </div>
+            <h2 className="border-r border-gray-200 pr-4 text-4xl font-bold text-primary/70">
+                常见问题
+            </h2>
             <Line />
             <section>
                 <ul className="space-y-4">

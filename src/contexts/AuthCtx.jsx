@@ -3,7 +3,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export const AuthCtx = ({ children }) => {
-    const { isAuthenticated } = useAuth0();
     const navigate = useNavigate();
 
     const domain = import.meta.env.VITE_AUTH0_DOMAIN;
@@ -11,10 +10,7 @@ export const AuthCtx = ({ children }) => {
     const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI;
 
     const onRedirectCallback = (appState) => {
-        console.log(appState, isAuthenticated);
-        console.log();
         navigate(appState?.returnTo || window.location.pathname);
-        // navigate(window.location.pathname);
     };
 
     if (!(domain && clientId && redirectUri)) {

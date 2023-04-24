@@ -9,6 +9,12 @@ const About = () => {
             className="container  py-20"
         >
             <h1 className="mb-8 text-center text-5xl">关于我们</h1>
+            <div className="mt-8 flex justify-center">
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQflpsHpAa3v-Q0zRJ3n-0tfHEc1avN3tLo_w&usqp=CAU"
+                    className="opacity-70"
+                />
+            </div>
             <div className="space-y-8">
                 <p>
                     欢迎来到我们的点心餐厅，我们是一家致力于提供优质点心和舒适用餐体验的餐厅。我们的餐厅选址便利，环境优雅，有着温馨舒适的用餐氛围，是与亲朋好友共度美好时光的理想场所。
@@ -22,12 +28,6 @@ const About = () => {
                 <p>
                     感谢您选择我们的点心餐厅，我们将一如既往地为您提供最优质的美食和服务，期待您的光临！
                 </p>
-            </div>
-            <div className="mt-8 flex justify-center">
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQflpsHpAa3v-Q0zRJ3n-0tfHEc1avN3tLo_w&usqp=CAU"
-                    className="opacity-70"
-                />
             </div>
         </motion.div>
     );

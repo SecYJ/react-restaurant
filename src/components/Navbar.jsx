@@ -6,10 +6,12 @@ import { menu } from "../constants/headerNavList";
 import { useCartCtx } from "../contexts/CartCtx";
 import Avatar from "./Avatar";
 import MobileNavMenu from "./MobileNavMenu";
+import useMediaQuery from "../hooks/useMediaQuery";
 
 const Navbar = () => {
     const { toggleCart, totalUnits } = useCartCtx();
     const [menuVisible, setMenuVisible] = useState(false);
+    const matchMedia = useMediaQuery("(min-width:1024px)");
 
     return (
         <>
@@ -32,20 +34,21 @@ const Navbar = () => {
                 <AiOutlineMenu size="24px" />
             </button>
 
-            <button
-                type="button"
-                onClick={() => toggleCart(true)}
-                className="btn-ghost btn-circle btn"
-            >
-                <div className="indicator">
-                    <AiOutlineShoppingCart size="24px" color="white" />
-                    <span className="badge badge-sm indicator-item border-transparent bg-secondary">
-                        {totalUnits}
-                    </span>
-                </div>
-            </button>
-
-            <Avatar />
+            {matchMedia && (
+                <button
+                    type="button"
+                    onClick={() => toggleCart(true)}
+                    className="btn-ghost btn-circle btn justify-self-end"
+                >
+                    <div className="indicator">
+                        <AiOutlineShoppingCart size="24px" color="white" />
+                        <span className="badge badge-sm indicator-item border-transparent bg-secondary">
+                            {totalUnits}
+                        </span>
+                    </div>
+                </button>
+            )}
+            {matchMedia && <Avatar />}
 
             <AnimatePresence>
                 {menuVisible && (
