@@ -20,7 +20,9 @@ const PopularFoods = () => {
                 <Line />
             </div>
             <ul className={`${GridCol}`}>
-                {menu.data.map((m) => <PopularCard {...m} />).slice(0, 8)}
+                {menu.data
+                    .map((m) => <PopularCard key={m.id} {...m} />)
+                    .slice(0, 8)}
             </ul>
         </section>
     );

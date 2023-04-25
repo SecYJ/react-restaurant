@@ -8,7 +8,7 @@ import Avatar from "./Avatar";
 
 const MobileNavMenu = ({ visible, onLinkClick }) => {
     const menuRef = useRef();
-    const { totalUnits } = useCartCtx();
+    const { totalUnits, toggleCart } = useCartCtx();
     const [height, setHeight] = useState(0);
 
     useEffect(() => {
