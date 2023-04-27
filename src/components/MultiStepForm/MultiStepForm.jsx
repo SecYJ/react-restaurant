@@ -56,10 +56,11 @@ const MultiStepForm = () => {
                         opacity: { duration: 0.2 },
                     }}
                 >
+                    <DetailsForm />
                     {/* <OrderOverviewTable onStepChange={setStep} step={step} />
                     <DetailsForm onStepChange={setStep} step={step} />
                     <Success /> */}
-                    {step === 0 ? (
+                    {/* {step === 0 ? (
                         <OrderOverviewTable
                             onStepChange={setStep}
                             goNext={goToNextStep}
@@ -75,7 +76,7 @@ const MultiStepForm = () => {
                         />
                     ) : (
                         <Success />
-                    )}
+                    )} */}
                 </motion.div>
             </div>
         </div>

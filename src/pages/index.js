@@ -6,6 +6,9 @@ import Home from "./Home";
 import Layout from "./Layout";
 import Menu from "./Menu";
 import NotFound from "./NotFound";
+import News from "./News";
+import NewsPost from "./NewsPost";
+import PrivateRoute from "./PrivateRoute";
 
 export {
     About,
@@ -16,4 +19,7 @@ export {
     Layout,
     Menu,
     NotFound,
+    News,
+    NewsPost,
+    PrivateRoute,
 };

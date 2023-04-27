@@ -1,4 +1,3 @@
-import { createBrowserRouter } from "react-router-dom";
 import {
     About,
     Checkout,
@@ -6,8 +5,10 @@ import {
     Layout,
     Menu,
     NotFound,
+    News,
+    NewsPost,
+    PrivateRoute,
 } from "./pages/index.js";
-import PrivateRoute from "./pages/PrivateRoute.jsx";
 
 const routes = [
     {
@@ -27,6 +28,19 @@ const routes = [
                 element: <Menu />,
             },
             {
+                path: "news",
+                children: [
+                    {
+                        index: true,
+                        element: <News />,
+                    },
+                    {
+                        path: ":post",
+                        element: <NewsPost />,
+                    },
+                ],
+            },
+            {
                 path: "checkout",
                 element: (
                     <PrivateRoute>
@@ -42,7 +56,7 @@ const routes = [
     },
 ];
 
-const router = createBrowserRouter(routes);
+export default routes;
 
 export const animateConfigs = {
     initial: {
@@ -58,5 +72,3 @@ export const animateConfigs = {
         duration: 0.4,
     },
 };
-
-export default router;

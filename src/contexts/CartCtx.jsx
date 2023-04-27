@@ -10,13 +10,7 @@ import reducer from "../reducers/CartReducer";
 
 const CartCtx = createContext();
 
-// const getStorageCart = () => {
-//     const cart = localStorage.getItem("cart");
-//     return cart ? JSON.parse(cart) : [];
-// };
-
 const initialStates = {
-    // cart: getStorageCart(),
     cart: [],
     cartVisible: false,
     totalAmount: 0,

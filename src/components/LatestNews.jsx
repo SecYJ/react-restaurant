@@ -1,11 +1,7 @@
 import { SectionPy } from "../styles";
 import Line from "./Line";
-import repair from "../assets/new-repair.jpg";
-import price from "../assets/new-price.jpg";
-import price2 from "../assets/new-price-2.jpg";
-import cny from "../assets/new-new-year.jpg";
 
-const data = [repair, price, price2, cny];
+const data = [1, 2, 3];
 
 const LatestNews = () => {
     return (
