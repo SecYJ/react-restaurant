@@ -1,67 +1,106 @@
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
-import review1 from "../assets/review-1.avif";
+import { AiFillStar } from "react-icons/ai";
+
+const review1 =
+    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngall.com%2Favatar-png%2Fdownload%2F95517&psig=AOvVaw0fsMnHc1zlAck6Y0okhvRr&ust=1684164481530000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKC93t-P9f4CFQAAAAAdAAAAABAJ";
 
 const customerReviews = [
     {
         text: "我们常常在这里用餐，每一次的用餐体验都令人难忘。从环境优美的氛围到热情周到的服务，再到精心烹制的美食，这里没有一样不好的地方。特别要提到的是，餐厅采用新鲜食材，确保每道菜肴的口感和味道都是最佳 的。我们一定会再来的！",
         name: "Sean",
-        img: review1,
+        img: "https://images.unsplash.com/photo-1682686581797-21ec383ead02?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
     },
     {
-        text: "各种马来西亚美食齐聚一堂,  自从第一次吃过这里的美食后就念念不忘, 不用烦恼每次要吃什么, 只要来这里都可以满足你的需求， 而且服务员们都很贴心, 服务态度真的太好啦! 强力推荐给大家。",
+        text: "各种点心齐聚一堂,  自从第一次吃过这里的点心后就念念不忘, 不用烦恼每次要吃什么, 只要来这里都可以满足你的需求， 而且服务员们都很贴心, 服务态度真的太好啦! 强力推荐给大家。",
         name: "Sharon",
-        img: review1,
+        img: "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/rockcms/2022-11/restaurant-racism-blur-mc-2x1-221121-02-cbfa5f.jpg",
     },
     {
-        text: "这里的食物真的很美味，而且价格也很实惠。我们特别喜欢餐厅的传统风味菜肴，每一道菜都是精心烹制的。餐厅的环境也很棒，让人感到非常舒适。我们强烈推荐这里，绝对不会让您失望！",
+        text: "这里的食物真的很美味，而且价格也很实惠。每一道菜都是精心烹制的。餐厅的环境也很棒，让人感到非常舒适。",
         name: "Wisdom",
-        img: review1,
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ3_28LTT9hTIcxcsX1Zm8c9Ad36zKwJAE6A&usqp=CAU",
     },
     {
-        text: "这是一个拥有多元文化风味的餐厅，让您体验到各种不同的味道。我们特别喜欢餐厅的特色菜品，它们不仅美味，而且也充满了历史文化的味道，是一道道美食与艺术的完美结合。",
+        text: "这是一个拥有多元文化风味的餐厅，让您体验到各种不同的味道。它们不仅美味，而且也充满了历史文化的味道，是一道道美食与艺术的完美结合。",
         name: "Anne",
-        img: review1,
+        img: "https://www.aljazeera.com/wp-content/uploads/2021/03/Jan.jpeg?w=522&resize=522%2C485",
+    },
+    {
+        text: "我来这里用餐已经好几次了，每次都非常满意。你们的点心总是新鲜、美味，而且服务员非常热情和专业。我会一直光顾这里的。",
+        name: "Bill",
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU4zcvw7IuDHrelD2Pd9Z9d83nMxM9R1kPyQ&usqp=CAU",
+    },
+    {
+        text: "我来这里用餐已经好几次了，每次都非常满意。你们的点心总是新鲜、美味，而且服务员非常热情和专业。我会一直光顾这里的。",
+        name: "Luis",
+        img: "https://nextluxury.com/wp-content/uploads/Ken-Jeong.jpg",
     },
 ];
 
 const Reviews = () => {
     return (
-        <section className="mt-20">
-            <h2 className="text-primary-dark mb-8 text-center text-[3rem]">
-                看看食客们这么说
-            </h2>
+        <section className="mb-10 bg-secondary py-10 px-3">
+            <div className="mx-auto md:max-w-2xl lg:max-w-4xl">
+                <h2 className="text-primary-dark mb-8 text-center text-[3rem] text-white">
+                    看看食客们怎么说
+                </h2>
 
-            <ul className="gap-8 md:grid md:grid-cols-2 2xl:grid-cols-4">
-                {customerReviews.map((review) => {
-                    const { text, name, img } = review;
-                    // hover:rotate-6
-                    return (
-                        <li
-                            key={text}
-                            className="flex min-h-[400px] flex-col border border-primary p-6 shadow-md shadow-primary transition-transform "
-                        >
-                            <FaQuoteLeft color="#A4CD1D" />
-                            <p className="my-5 grow">
-                                {text.slice(0, 50)}
-                                {text.length > 50 && (
-                                    <span className="cursor-pointer text-gray-600 hover:text-gray-400">
-                                        ...
-                                    </span>
-                                )}
-                            </p>
-                            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4">
+                <ul className="grid gap-8 md:grid-cols-2">
+                    {customerReviews.map((review) => {
+                        const { text, name, img } = review;
+                        return (
+                            <li
+                                key={text}
+                                className="grid grid-cols-[auto_1fr] items-center gap-2 rounded-md border border-white bg-white p-6 transition-transform"
+                            >
                                 <img
                                     src={img}
-                                    alt="Sean"
-                                    className="h-10 w-10 rounded-full object-cover"
+                                    className="h-16 w-16 rounded-full object-cover"
                                 />
-                                <p>{name}</p>
-                                <FaQuoteRight color="#A4CD1D" />
-                            </div>
-                        </li>
-                    );
-                })}
-            </ul>
+
+                                {/* right container */}
+                                <div className="space-y-1">
+                                    <p className="text-lg">{name}</p>
+                                    {/* <p>07 / 11 / 2022</p> */}
+                                    <div className="flex gap-1">
+                                        {[1, 2, 3, 4, 5].map((i) => (
+                                            <AiFillStar
+                                                key={i}
+                                                color="#96262c"
+                                            />
+                                        ))}
+                                    </div>
+                                    <p className="my-1 grow">
+                                        {text.slice(0, 50)}
+                                        {text.length > 50 && (
+                                            <span className="cursor-pointer text-gray-600 hover:text-gray-400">
+                                                ...
+                                            </span>
+                                        )}
+                                    </p>
+                                </div>
+
+                                <div className="flex items-center justify-between"></div>
+
+                                <div className="">
+                                    {/* <p>
+                                        <FaQuoteLeft color="#96262c" />
+                                    </p> */}
+
+                                    {/* <div className="flex justify-end">
+                                        <FaQuoteLeft color="#96262c" />
+                                    </div> */}
+                                </div>
+
+                                {/* <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4"> */}
+                                {/* <FaQuoteRight color="#A4CD1D" /> */}
+                                {/* <FaQuoteRight color="#96262c" /> */}
+                                {/* </div> */}
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
         </section>
     );
 };

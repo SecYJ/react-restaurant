@@ -40,15 +40,7 @@ const itemVariant = {
     // },
 };
 
-const CartItem = ({
-    imgFallback,
-    name,
-    price,
-    orderQty: amount,
-    id,
-    stock,
-    index,
-}) => {
+const CartItem = ({ img, name, price, orderQty: amount, id, stock, index }) => {
     const { deleteCartItem, updateCartItem } = useCartCtx();
     const { register, getValues, setValue } = useForm();
     const inputId = useId();
@@ -112,7 +104,7 @@ const CartItem = ({
         >
             <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                 <img
-                    src={imgFallback}
+                    src={img}
                     alt={name}
                     className="h-full w-full object-cover object-center"
                 />

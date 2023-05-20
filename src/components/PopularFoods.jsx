@@ -9,6 +9,7 @@ const PopularFoods = () => {
     if (isLoading) {
         return <p>Loading ...</p>;
     }
+
     return (
         <section className={`${SectionPy} container`}>
             <div className="mb-6">

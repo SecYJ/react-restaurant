@@ -19,12 +19,12 @@ const Layout = () => {
 const Children = () => {
     const { isLoading } = useAuth0();
 
-    if (isLoading)
-        return (
-            <div className="grid min-h-screen place-items-center">
-                <img src={Loading} alt="Loading" />
-            </div>
-        );
+    // if (isLoading)
+    //     return (
+    //         <div className="grid min-h-screen place-items-center">
+    //             <img src={Loading} alt="Loading" />
+    //         </div>
+    //     );
 
     return (
         <>

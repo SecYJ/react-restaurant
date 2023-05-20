@@ -11,8 +11,8 @@ export const menu = [
         link: "/menu",
         text: "菜单",
     },
-    {
-        link: "/news",
-        text: "资讯",
-    },
 ];
+// {
+//     link: "/news",
+//     text: "资讯",
+// },

@@ -1,6 +1,6 @@
 import { BsCardChecklist } from "react-icons/bs";
 import { FaCarrot, FaHandsWash } from "react-icons/fa";
-import { MdOutlineOutdoorGrill } from "react-icons/md";
+import { MdOutlineOutdoorGrill, MdRestaurantMenu } from "react-icons/md";
 import { SiCodechef } from "react-icons/si";
 
 const features = [
@@ -28,6 +28,11 @@ const features = [
         title: "专业的厨师",
         icon: <SiCodechef />,
         text: "我们的点心厨师都是有经过严格考核的多年的经验以确保为您提供最好的点心。",
+    },
+    {
+        title: "休闲氛围",
+        icon: <MdRestaurantMenu />,
+        text: "点心餐厅通常都营造出轻松、休闲的氛围，让顾客在品尝点心的同时也能享受到放松身心的感觉",
     },
 ];
 

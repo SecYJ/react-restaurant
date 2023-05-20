@@ -4,10 +4,11 @@ import useFoodMenu from "../../hooks/useFoodMenu";
 import MenuSkeleton from "./MenuSkeleton";
 
 const MenuGrid = () => {
-    const { dispatch, filtered_menu, search } = useMenuCtx();
+    const { dispatch, filtered_menu, search, currentSelect } = useMenuCtx();
     const onSuccess = (data) => {
         dispatch({ type: "SET_MENU", payload: data.data });
     };
+
     const { isLoading } = useFoodMenu({ onSuccess });
 
     if (isLoading) {

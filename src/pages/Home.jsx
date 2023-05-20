@@ -8,21 +8,26 @@ import PopularFoods from "../components/PopularFoods";
 import ModalCtxProvider from "../contexts/ModalCtx";
 import Faq from "./Faq";
 import ModalOverlay from "../components/ModalOverlay";
+import Reviews from "../components/Reviews";
+import { request } from "../services/api-client";
 
 const Home = () => {
     return (
         <motion.div variants={animateConfigs} {...animateConfigs}>
             <Banner />
-            <LatestNews />
+            {/* <LatestNews /> */}
             <Features />
-            <ModalCtxProvider>
-                <PopularFoods />
+            {/* <ModalCtxProvider>
                 <ModalOverlay>
-                    <CarouselModal />
+                <CarouselModal />
                 </ModalOverlay>
-            </ModalCtxProvider>
+                </ModalCtxProvider>
+             */}
+            {/* <PopularFoods /> */}
+            <Reviews />
             <Faq />
         </motion.div>
     );
 };
+
 export default Home;

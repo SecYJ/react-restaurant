@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useCartCtx } from "../../contexts/CartCtx";
 
 const CartFooter = () => {
-    const { totalAmount, dispatch } = useCartCtx();
+    const { totalAmount, toggleCart } = useCartCtx();
 
     return (
         <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
@@ -17,12 +17,7 @@ const CartFooter = () => {
                 <Link
                     to="/checkout"
                     className="flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary/80"
-                    onClick={() =>
-                        dispatch({
-                            type: "TOGGLE_CART_VISIBILITY",
-                            payload: false,
-                        })
-                    }
+                    onClick={() => toggleCart(false)}
                 >
                     Checkout
                 </Link>
@@ -32,12 +27,7 @@ const CartFooter = () => {
                     type="button"
                     className="text-base text-primary/80 hover:text-primary/60"
                     to="/menu"
-                    onClick={() =>
-                        dispatch({
-                            type: "TOGGLE_CART_VISIBILITY",
-                            payload: false,
-                        })
-                    }
+                    onClick={() => toggleCart(false)}
                 >
                     继续点餐
                     <span aria-hidden="true"> &rarr;</span>

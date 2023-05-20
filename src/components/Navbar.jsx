@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import {  AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useCartCtx } from "../contexts/CartCtx";
 import { menu } from "../constants/headerNavList";
 import Avatar from "./Avatar";
@@ -21,7 +21,6 @@ const Navbar = () => {
                     <button
                         type="button"
                         className="btn-ghost btn-circle btn font-normal"
-                        // to={m.link}
                         key={m.text}
                         onClick={() => {
                             setMenuVisible(false);
@@ -37,7 +36,7 @@ const Navbar = () => {
                 type="button"
                 className={`${
                     menuVisible ? "swap-active" : ""
-                } swap-rotate swap btn-ghost btn-circle btn justify-self-end border-transparent lg:hidden`}
+                } swap btn-ghost swap-rotate btn-circle btn justify-self-end border-transparent lg:hidden`}
                 onClick={() => setMenuVisible(!menuVisible)}
             >
                 <svg

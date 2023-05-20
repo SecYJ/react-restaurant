@@ -28,26 +28,8 @@ module.exports = {
                 mytheme: {
                     primary: "#96262c",
                     secondary: "#216149",
-
-                    // accent: "#1FB2A5",
-
-                    // neutral: "#191D24",
-
-                    // "base-100": "#2A303C",
-
-                    // info: "#3ABFF8",
-
-                    // success: "#36D399",
-
-                    // secondary: "#FBBD23",
-                    // secondary: "#D8353E",
-                    // secondary: "#FCB244",
-                    // secondary: "#D63A42",
-
-                    // error: "#F87272",
                 },
             },
-            "light",
         ],
     },
     plugins: [require("daisyui")],

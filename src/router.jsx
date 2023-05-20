@@ -1,14 +1,13 @@
-import {
-    About,
-    Checkout,
-    Home,
-    Layout,
-    Menu,
-    NotFound,
-    News,
-    NewsPost,
-    PrivateRoute,
-} from "./pages/index.js";
+import { lazy, Suspense } from "react";
+import Loading from "./components/Loading.jsx";
+
+const Layout = lazy(() => import("./pages/Layout"));
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const Menu = lazy(() => import("./pages/Menu"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const PrivateRoute = lazy(() => import("./pages/PrivateRoute"));
 
 const routes = [
     {
@@ -17,39 +16,41 @@ const routes = [
         children: [
             {
                 index: true,
-                element: <Home />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Home />
+                    </Suspense>
+                ),
             },
             {
                 path: "about",
-                element: <About />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <About />
+                    </Suspense>
+                ),
             },
             {
                 path: "menu",
-                element: <Menu />,
-            },
-            {
-                path: "news",
-                children: [
-                    {
-                        index: true,
-                        element: <News />,
-                    },
-                    {
-                        path: ":post",
-                        element: <NewsPost />,
-                    },
-                ],
+                element: (
+                    <Suspense>
+                        <Menu />
+                    </Suspense>
+                ),
             },
             {
                 path: "checkout",
                 element: (
-                    <PrivateRoute>
-                        <Checkout />
-                    </PrivateRoute>
+                    <Suspense fallback={<Loading />}>
+                        <PrivateRoute>
+                            <Checkout />
+                        </PrivateRoute>
+                    </Suspense>
                 ),
             },
         ],
     },
+
     {
         path: "*",
         element: <NotFound />,

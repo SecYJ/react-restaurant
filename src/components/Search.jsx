@@ -7,11 +7,11 @@ import useFoodMenu from "../hooks/useFoodMenu";
 const Search = ({ search, onSearchChange }) => {
     // const { menu } = useMenuCtx();
     const id = useId();
-    const { isLoading } = useFoodMenu();
+    // const { isLoading } = useFoodMenu();
 
-    if (isLoading) {
-        return <Skeleton classes="h-12 mb-4" />;
-    }
+    // if (isLoading) {
+    //     return <Skeleton classes="h-12 mb-4" />;
+    // }
 
     return (
         <form className="relative mb-4 rounded-md">
