@@ -8,6 +8,7 @@ const Checkout = lazy(() => import("./pages/Checkout"));
 const Menu = lazy(() => import("./pages/Menu"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PrivateRoute = lazy(() => import("./pages/PrivateRoute"));
+const Cart = lazy(() => import("./pages/Cart"));
 
 const routes = [
     {
@@ -33,7 +34,7 @@ const routes = [
             {
                 path: "menu",
                 element: (
-                    <Suspense>
+                    <Suspense fallback={<Loading />}>
                         <Menu />
                     </Suspense>
                 ),
@@ -48,9 +49,16 @@ const routes = [
                     </Suspense>
                 ),
             },
+            {
+                path: "cart",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Cart />
+                    </Suspense>
+                ),
+            },
         ],
     },
-
     {
         path: "*",
         element: <NotFound />,

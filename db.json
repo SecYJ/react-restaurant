@@ -7,7 +7,7 @@
             "stock": 30,
             "category": "蒸点",
             "id": 1,
-            "rating": 100
+            "rating": 3.2
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/967b74b6-c944-483a-bc5d-f3aecae9784c?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -70,7 +70,7 @@
             "stock": 19,
             "category": "蒸点",
             "id": 9,
-            "rating": 4.5
+            "rating": 4.7
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/63ba21ed-23c8-4fe8-8eb8-5e2ae4434553?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -79,7 +79,7 @@
             "stock": 2,
             "category": "蒸点",
             "id": 10,
-            "rating": 4.5
+            "rating": 4.9
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/b12345a6-0df6-4319-aabe-d95bb20cf5f7?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -88,7 +88,7 @@
             "stock": 35,
             "category": "蒸点",
             "id": 11,
-            "rating": 4.5
+            "rating": 4.2
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/12c2e638-d133-416a-bb6e-21f4f1c50e15?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -97,7 +97,7 @@
             "stock": 10,
             "category": "蒸点",
             "id": 12,
-            "rating": 4.5
+            "rating": 4
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/b615e3cc-fea6-4be2-b287-de7adea5967c?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -106,7 +106,7 @@
             "stock": 50,
             "category": "包点",
             "id": 13,
-            "rating": 4.5
+            "rating": 4
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/0a07069a-debf-43eb-a8ec-1131479364db?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -187,7 +187,7 @@
             "stock": 21,
             "category": "炸点",
             "id": 22,
-            "rating": 4.5
+            "rating": 4.8
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/aa7078f4-09a9-4a05-8a19-079b7d472b2a?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -205,7 +205,7 @@
             "stock": 67,
             "category": "炸点",
             "id": 24,
-            "rating": 4.5
+            "rating": 4.8
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/769d3beb-8e29-498c-b9ed-9c4f9e24cd7a?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -214,7 +214,7 @@
             "stock": 31,
             "category": "炸点",
             "id": 25,
-            "rating": 4.5
+            "rating": 4.7
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/85fce8cf-ad46-4d0a-99c9-18be48b67ed8?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -223,7 +223,7 @@
             "stock": 44,
             "category": "甜点",
             "id": 26,
-            "rating": 4.5
+            "rating": 4.2
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/93d95829-c524-41d7-8868-bebcc032625a?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -250,7 +250,7 @@
             "stock": 30,
             "category": "冷藏",
             "id": 29,
-            "rating": 4.5
+            "rating": 5
         },
         {
             "img": "https://asset.alacarte.my/images/1621567067876825474/ea8c843e-0588-47c8-8d3c-ebbfa47e21ab?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -259,7 +259,7 @@
             "stock": 49,
             "category": "冷藏",
             "id": 30,
-            "rating": 4.5
+            "rating": 5
         },
         {
             "img": "https://asset.alacarte.my/assets/img/alacarte-default-4.png?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -268,7 +268,7 @@
             "stock": 100,
             "category": "饮料",
             "id": 31,
-            "rating": 4.5
+            "rating": 3.5
         },
         {
             "img": "https://asset.alacarte.my/assets/img/alacarte-default-4.png?x-oss-process=image/resize,w_450,limit_1/format,webp",
@@ -277,7 +277,7 @@
             "stock": 100,
             "category": "饮料",
             "id": 32,
-            "rating": 4.5
+            "rating": 3.7
         }
     ]
 }

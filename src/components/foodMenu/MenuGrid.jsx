@@ -4,9 +4,9 @@ import useFoodMenu from "../../hooks/useFoodMenu";
 import MenuSkeleton from "./MenuSkeleton";
 
 const MenuGrid = () => {
-    const { dispatch, filtered_menu, search, currentSelect } = useMenuCtx();
+    const { dispatch, filtered_menu, search } = useMenuCtx();
     const onSuccess = (data) => {
-        dispatch({ type: "SET_MENU", payload: data.data });
+        dispatch({ type: "SET_MENU", payload: data });
     };
 
     const { isLoading } = useFoodMenu({ onSuccess });
@@ -20,7 +20,7 @@ const MenuGrid = () => {
     }
 
     return (
-        <ul className="grid grid-cols-3 gap-8">
+        <ul className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
             {filtered_menu.map((d) => {
                 return <MenuCard {...d} key={d.id} />;
             })}

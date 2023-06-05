@@ -9,15 +9,17 @@ const Menu = () => {
         <motion.main
             variants={animateConfigs}
             {...animateConfigs}
-            className="container my-20"
+            className="container my-10 lg:my-20"
         >
             <MenuCtxProvider>
-                <div className="flex gap-8">
-                    <div className="sticky left-0 top-[160px] h-full w-1/4">
-                        <MenuSidebar />j
+                <div className="flex flex-col gap-8 lg:flex-row">
+                    <div className="sticky left-0 top-[104px] bg-white lg:top-[160px] lg:h-full lg:w-1/4">
+                        <MenuSidebar />
                     </div>
-                    <div className="w-3/4">
-                        <h1 className="mb-8 text-5xl">菜单列表</h1>
+                    <div className="lg:w-3/4">
+                        <h1 className="mb-3 text-2xl lg:mb-6 lg:text-4xl">
+                            菜单列表
+                        </h1>
                         <MenuGrid />
                     </div>
                 </div>
@@ -26,36 +28,3 @@ const Menu = () => {
     );
 };
 export default Menu;
-
-/* 
-items to be save into db
-cart: [
-    {
-        id: 1,
-        totalAmount: 134.37,
-        totalUnit: 50,
-        itemsInCart: [
-            A bunch of objects here,
-            {
-                name: "roll",
-                price: 2.5,
-                unit: 5,
-                imgUrl,
-                id: 100,
-                stock: 20
-                category: "xxx"
-            }
-        ]
-    }
-]
-
-cart submit => use uuid to generate unique id and save it in orders array
-
-orders: [
-
-]
-
-
-we need provide id to match the cart id with db
-
-*/

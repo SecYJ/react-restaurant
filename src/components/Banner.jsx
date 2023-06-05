@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import banner from "../assets/banner.jpg";
 
 const Banner = () => {

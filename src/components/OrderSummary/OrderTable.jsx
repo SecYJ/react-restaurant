@@ -1,11 +1,11 @@
 import OrderTableHeader from "./OrderTableHeader";
 import OrderTableRow from "./OrderTableRow";
 
-const OrderTable = ({ startRow, endRow }) => {
+const OrderTable = () => {
     return (
         <table className="table w-full text-center">
             <OrderTableHeader />
-            <OrderTableRow startRow={startRow} endRow={endRow} />
+            <OrderTableRow />
         </table>
     );
 };

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useMenuCtx } from "../../contexts/MenuCtx";
 import useFoodMenu from "../../hooks/useFoodMenu";
 import Skeleton from "../skeleton/Skeleton";
@@ -13,14 +12,11 @@ const MenuSelect = () => {
         ));
     }
 
-    const categories = [
-        "全部",
-        ...new Set(foodMenu.data.map((p) => p.category)),
-    ];
+    const categories = ["全部", ...new Set(foodMenu.map((p) => p.category))];
 
     return (
         <>
-            <ul className="menu">
+            <ul className="menu flex-row lg:flex-col">
                 {categories.map((item) => (
                     <li
                         key={item}
@@ -36,8 +32,8 @@ const MenuSelect = () => {
                             }}
                             className={`${
                                 currentSelect === item
-                                    ? "border-l-4 bg-primary/20 text-black/70 enabled:hover:bg-primary/20"
-                                    : "border-l-4 border-transparent bg-transparent text-black/70 enabled:hover:bg-primary/20"
+                                    ? "border-b-4 border-l-0 bg-primary/20 text-black/70 enabled:hover:bg-primary/20 lg:border-l-4 lg:border-b-0"
+                                    : "border-b-4 border-transparent bg-transparent text-black/70 enabled:hover:bg-primary/20 lg:border-l-4 lg:border-b-0"
                             }`}
                         >
                             {item}

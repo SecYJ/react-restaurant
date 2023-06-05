@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import {
     createContext,
     useCallback,
@@ -8,7 +7,6 @@ import {
 } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import reducer from "../reducers/CartReducer";
-import { request } from "../services/api-client";
 
 const CartCtx = createContext();
 

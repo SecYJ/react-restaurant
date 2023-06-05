@@ -1,17 +1,15 @@
-import { useId } from "react";
-import { useMenuCtx } from "../contexts/MenuCtx";
+import { useId, useRef } from "react";
 import { BsSearch } from "react-icons/bs";
-import Skeleton from "./skeleton/Skeleton";
-import useFoodMenu from "../hooks/useFoodMenu";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Search = ({ search, onSearchChange }) => {
-    // const { menu } = useMenuCtx();
     const id = useId();
-    // const { isLoading } = useFoodMenu();
+    const searchRef = useRef(null);
 
-    // if (isLoading) {
-    //     return <Skeleton classes="h-12 mb-4" />;
-    // }
+    const onSearchClear = () => {
+        onSearchChange("");
+        searchRef.current.focus();
+    };
 
     return (
         <form className="relative mb-4 rounded-md">
@@ -19,17 +17,24 @@ const Search = ({ search, onSearchChange }) => {
                 type="text"
                 className="mx-auto w-full rounded-md border border-gray-300 p-3 text-base outline-none focus:border-primary"
                 placeholder="搜寻"
+                id={id}
                 onChange={(e) => {
                     onSearchChange(e.target.value);
                 }}
                 value={search}
-                id={id}
+                ref={searchRef}
             />
             <label
                 htmlFor={id}
                 className="absolute top-1/2 right-2 -translate-y-1/2 "
             >
-                <BsSearch />
+                {search ? (
+                    <button type="button" onClick={onSearchClear}>
+                        <AiOutlineClose />
+                    </button>
+                ) : (
+                    <BsSearch />
+                )}
             </label>
         </form>
     );

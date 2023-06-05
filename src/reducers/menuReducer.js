@@ -54,14 +54,6 @@ const reducer = (state, action) => {
                     condition: payload,
                 }),
             };
-
-            // if (state.currentSelect === "全部")
-            //     return { ...state, products: state.products };
-
-            // const filtered_products = state.products.filter(
-            //     (product) => product.category === action.payload
-            // );
-            // return { ...state, filtered_products };
         }
 
         case "SET_SEARCH": {
@@ -73,8 +65,3 @@ const reducer = (state, action) => {
 };
 
 export default reducer;
-
-/*
-    MY IDEAS TO fix the problem
-    1. Keep the search state in SEARCH component, when debounce update then using dispatch to update global state;
-*/

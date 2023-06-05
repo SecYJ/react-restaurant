@@ -31,11 +31,11 @@ const LazyImage = ({ src, alt }) => {
                     <img
                         src="https://asset.alacarte.my/assets/img/alacarte-default-4.png?x-oss-process=image/resize,w_300,limit_1/format,webp"
                         alt={alt}
-                        className="h-[300px] w-full object-cover lg:h-[350px]"
+                        className="h-full w-full object-cover lg:h-[300px]"
                     />
                 </picture>
             ) : (
-                <img ref={imgRef} className="h-80 w-full object-cover" />
+                <img ref={imgRef} className="h-full w-full object-cover" />
             )}
         </>
     );
