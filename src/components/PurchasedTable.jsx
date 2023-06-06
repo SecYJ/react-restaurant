@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useCartCtx } from "../contexts/CartCtx";
 
 const PurchasedTable = () => {
@@ -22,26 +23,88 @@ const PurchasedTable = () => {
                     </td>
                 </tr>
             </thead>
-            <tbody>
-                {purchaseList.map((item) => {
-                    const { id, orderQty, price, name } = item;
-                    return (
-                        <tr className="border-b" key={id}>
-                            <td>{name}</td>
-                            <td className="text-center">{orderQty}</td>
-                            <td className="text-center">
-                                RM {price.toFixed(2)}
-                            </td>
-                        </tr>
-                    );
-                })}
-            </tbody>
+            {/* FIXME: TO FIXED LATER: SMOOTH TRANSITION */}
+            <AnimatePresence>
+                {collapsed
+                    ? cart.slice(0, 5).map((item) => {
+                          const { id, orderQty, price, name } = item;
+                          return (
+                              <motion.tr
+                                  className="border-b"
+                                  key={id}
+                                  animate={{
+                                      height: 0,
+                                  }}
+                              >
+                                  <td>{name}</td>
+                                  <td className="text-center">{orderQty}</td>
+                                  <td className="text-center">
+                                      RM {price.toFixed(2)}
+                                  </td>
+                              </motion.tr>
+                          );
+                      })
+                    : cart.map((item) => {
+                          const { id, orderQty, price, name } = item;
+                          return (
+                              <motion.tr
+                                  className="border-b"
+                                  key={id}
+                                  animate={{
+                                      height: "100%",
+                                  }}
+                              >
+                                  <td>{name}</td>
+                                  <td className="text-center">{orderQty}</td>
+                                  <td className="text-center">
+                                      RM {price.toFixed(2)}
+                                  </td>
+                              </motion.tr>
+                          );
+                      })}
+                {/* <motion.tbody
+                    animate={{
+                        y: "100%",
+                        
+                    }}
+                
+                >
+                    {purchaseList.map((item) => {
+                        const { id, orderQty, price, name } = item;
+                        return (
+                            <tr className="border-b" key={id}>
+                                <td>{name}</td>
+                                <td className="text-center">{orderQty}</td>
+                                <td className="text-center">
+                                    RM {price.toFixed(2)}
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </motion.tbody> */}
+            </AnimatePresence>
+
             <tfoot>
                 <tr className="text-center">
                     <td className="bg-white"></td>
                     <td className="bg-white text-lg">总数量: {totalUnits}</td>
                     <td className="bg-white text-lg">
                         总额: RM {totalAmount.toFixed(2)}
+                    </td>
+                </tr>
+                <tr>
+                    <td className="bg-white"></td>
+                    <td className="bg-white"></td>
+                    <td className="bg-white text-center">
+                        <button
+                            type="button"
+                            className="btn-primary btn-md btn text-base"
+                            onClick={() =>
+                                setCollapsed((collapse) => !collapse)
+                            }
+                        >
+                            {collapsed ? "显示更多" : "收起"}
+                        </button>
                     </td>
                 </tr>
             </tfoot>

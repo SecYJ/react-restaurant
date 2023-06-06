@@ -3,6 +3,7 @@ import { Navigation } from "swiper";
 import useFoodMenu from "../hooks/useFoodMenu";
 import Line from "./Line";
 import PopularCard from "./PopularCard";
+import ProductsCarousel from "./CarouselSlider";
 
 const PopularList = () => {
     const { data: foodMenu, isLoading } = useFoodMenu();
@@ -25,7 +26,7 @@ const PopularList = () => {
                 </div>
                 <Line />
             </div>
-            <Swiper
+            {/* <Swiper
                 modules={[Navigation]}
                 navigation
                 spaceBetween={50}
@@ -38,7 +39,8 @@ const PopularList = () => {
                         </SwiperSlide>
                     );
                 })}
-            </Swiper>
+            </Swiper> */}
+            <ProductsCarousel carouselData={popularMenu} />
         </section>
     );
 };

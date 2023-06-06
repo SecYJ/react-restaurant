@@ -27,11 +27,11 @@ const Children = () => {
     //     );
 
     return (
-        <>
+        <div className="flex min-h-screen flex-col justify-between">
             <Header />
             <Outlet />
             <Footer />
-        </>
+        </div>
     );
 };
 export default Layout;

@@ -1,5 +1,4 @@
 import Accordion from "../components/Accordion";
-import Line from "../components/Line";
 import { SectionPy } from "../styles";
 
 const data = [
@@ -31,19 +30,16 @@ const data = [
 
 const Faq = () => {
     return (
-        <main className={`${SectionPy} container`}>
-            <h2 className="border-r border-gray-200 pr-4 text-4xl font-bold text-primary/70">
+        <section className={`${SectionPy} container`}>
+            <h2 className="mb-4 border-r border-gray-200 text-4xl font-bold text-primary/70">
                 常见问题
             </h2>
-            <Line />
-            <section>
-                <ul className="space-y-4">
-                    {data.map((item) => (
-                        <Accordion {...item} key={item.title} />
-                    ))}
-                </ul>
-            </section>
-        </main>
+            <ul className="space-y-4">
+                {data.map((item) => (
+                    <Accordion {...item} key={item.title} />
+                ))}
+            </ul>
+        </section>
     );
 };
 export default Faq;
