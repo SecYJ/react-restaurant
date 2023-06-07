@@ -1,7 +1,7 @@
 const PopularCard = ({ name, price, img }) => {
     return (
         <div
-            className="card-compact card-bordered card max-h-[400px] rounded-md border-gray-300 shadow-lg"
+            className="card-bordered card card-compact max-h-[400px] rounded-md border-gray-300 shadow-lg"
             key={name}
         >
             <figure className="group relative cursor-pointer overflow-hidden">
@@ -13,7 +13,7 @@ const PopularCard = ({ name, price, img }) => {
             </figure>
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
-                <p className="text-lg">RM {price}</p>
+                <p className="text-lg">RM {price.toFixed(2)}</p>
             </div>
         </div>
     );

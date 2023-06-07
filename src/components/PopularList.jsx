@@ -1,8 +1,4 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
 import useFoodMenu from "../hooks/useFoodMenu";
-import Line from "./Line";
-import PopularCard from "./PopularCard";
 import ProductsCarousel from "./CarouselSlider";
 
 const PopularList = () => {
@@ -24,22 +20,7 @@ const PopularList = () => {
                         热门点心
                     </h2>
                 </div>
-                <Line />
             </div>
-            {/* <Swiper
-                modules={[Navigation]}
-                navigation
-                spaceBetween={50}
-                slidesPerView={3}
-            >
-                {popularMenu.map((item) => {
-                    return (
-                        <SwiperSlide key={item.id}>
-                            <PopularCard {...item} />
-                        </SwiperSlide>
-                    );
-                })}
-            </Swiper> */}
             <ProductsCarousel carouselData={popularMenu} />
         </section>
     );

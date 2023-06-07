@@ -1,16 +1,12 @@
-import Line from "./Line";
 import { heading } from "../helpers/ui";
 import features from "../constants/features";
-import { GridCol, SectionPy } from "../styles";
+import { SectionPy } from "../styles";
 
 const Features = () => {
     return (
         <section className={`${SectionPy} container`}>
             <h2 className={heading}>我们的特点</h2>
-            <Line />
-            <ul
-                className={`mx-auto mt-4 grid grid-cols-1 gap-4 md:mt-6 md:grid-cols-2 md:gap-5 lg:mt-8 lg:grid-cols-3 lg:gap-6 `}
-            >
+            <ul className="mx-auto mt-4 grid grid-cols-1 gap-4 md:mt-6 md:grid-cols-2 md:gap-5 lg:mt-8 lg:grid-cols-3 lg:gap-6">
                 {features.map((feature) => {
                     const { icon, title, text } = feature;
 
@@ -35,4 +31,5 @@ const Features = () => {
         </section>
     );
 };
+
 export default Features;

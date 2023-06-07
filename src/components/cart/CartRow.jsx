@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { useCartCtx } from "../../contexts/CartCtx";
 import Button from "../Button";
-import CartButton from "../cart/CartButton";
+import CartButton from "./CartButton";
 
-const OrderTableRow = () => {
+const CartRow = () => {
     const { cart, updateCartItem, deleteCartItem } = useCartCtx();
 
     return (
@@ -65,4 +65,4 @@ const OrderTableRow = () => {
     );
 };
 
-export default OrderTableRow;
+export default CartRow;

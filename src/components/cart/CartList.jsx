@@ -1,7 +1,7 @@
 import OrderTable from "./OrderTable";
 import OrderSummaryFooter from "./OrderSummaryFooter";
 
-const OrderSummary = () => {
+const CartList = () => {
     return (
         <>
             <OrderTable />
@@ -10,4 +10,4 @@ const OrderSummary = () => {
     );
 };
 
-export default OrderSummary;
+export default CartList;

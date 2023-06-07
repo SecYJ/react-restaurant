@@ -1,5 +1,5 @@
 import EmptyCart from "../components/EmptyCart";
-import OrderSummary from "../components/OrderSummary/OrderSummary";
+import CartList from "../components/cart/CartList";
 import { useCartCtx } from "../contexts/CartCtx";
 
 const Cart = () => {
@@ -11,7 +11,7 @@ const Cart = () => {
 
     return (
         <div className="container flex flex-col justify-between py-6 lg:py-10">
-            <OrderSummary />
+            <CartList />
         </div>
     );
 };

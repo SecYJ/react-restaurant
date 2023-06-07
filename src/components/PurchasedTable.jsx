@@ -96,15 +96,17 @@ const PurchasedTable = () => {
                     <td className="bg-white"></td>
                     <td className="bg-white"></td>
                     <td className="bg-white text-center">
-                        <button
-                            type="button"
-                            className="btn-primary btn-md btn text-base"
-                            onClick={() =>
-                                setCollapsed((collapse) => !collapse)
-                            }
-                        >
-                            {collapsed ? "显示更多" : "收起"}
-                        </button>
+                        {cart.length > 5 && (
+                            <button
+                                type="button"
+                                className="btn-primary btn-md btn text-base"
+                                onClick={() =>
+                                    setCollapsed((collapse) => !collapse)
+                                }
+                            >
+                                {collapsed ? "显示更多" : "收起"}
+                            </button>
+                        )}
                     </td>
                 </tr>
             </tfoot>

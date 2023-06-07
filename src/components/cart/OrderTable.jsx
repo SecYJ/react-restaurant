@@ -1,11 +1,11 @@
 import OrderTableHeader from "./OrderTableHeader";
-import OrderTableRow from "./OrderTableRow";
+import CartRow from "./CartRow";
 
 const OrderTable = () => {
     return (
         <table className="table w-full text-center">
             <OrderTableHeader />
-            <OrderTableRow />
+            <CartRow />
         </table>
     );
 };

@@ -3,15 +3,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import CtxWrapper from "../contexts/CtxWrapper";
-import CartWrapper from "../components/cart/CartWrapper";
+// import CartWrapper from "../components/cart/CartWrapper";
 import Loading from "../assets/loading.svg";
 
 const Layout = () => {
     return (
         <CtxWrapper>
-            <CartWrapper>
-                <Children />
-            </CartWrapper>
+            {/* <CartWrapper> */}
+            <Children />
+            {/* </CartWrapper> */}
         </CtxWrapper>
     );
 };
@@ -27,9 +27,11 @@ const Children = () => {
     //     );
 
     return (
-        <div className="flex min-h-screen flex-col justify-between">
+        <div className="flex min-h-screen flex-col">
             <Header />
-            <Outlet />
+            <main className="grow">
+                <Outlet />
+            </main>
             <Footer />
         </div>
     );
