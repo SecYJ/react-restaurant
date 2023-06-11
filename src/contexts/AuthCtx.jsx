@@ -26,11 +26,11 @@ export const AuthCtx = ({ children }) => {
             domain={domain}
             clientId={clientId}
             // onRedirectCallback={onRedirectCallback}
-            authorizationParams={{
-                redirect_uri: window.location.origin,
-            }}
+            // authorizationParams={{
+            //     redirect_uri: window.location.origin,
+            // }}
             cacheLocation="localstorage"
-            // redirectUri={`${window.location.origin}${window.location.pathname}`}
+            redirectUri={window.location.origin}
         >
             {children}
         </Auth0Provider>
