@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const request = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://react-restaurant-json-server.onrender.com",
 });

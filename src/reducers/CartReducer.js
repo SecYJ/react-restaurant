@@ -53,14 +53,13 @@ const reducer = (state, action) => {
         }
 
         case "UPDATE_CART_ITEM": {
-            const { direction, id, value } = action.payload;
+            const { direction, id } = action.payload;
 
             const cart = state.cart.map((c) => {
                 if (c.id !== id) return c;
                 let qty;
                 if (direction === "increment") qty = c.orderQty + 1;
                 if (direction === "decrement") qty = c.orderQty - 1;
-                if (direction === "input") qty = value;
 
                 return { ...c, orderQty: qty };
             });

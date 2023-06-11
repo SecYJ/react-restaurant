@@ -1,24 +1,38 @@
+import { useEffect } from "react";
 import { getHours, getMinutes } from "date-fns/esm";
 import { useFormContext } from "react-hook-form";
-import { AiOutlineCheck } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { useCartCtx } from "../../contexts/CartCtx";
-import { useFormDataContext } from "../../contexts/FormCtx";
-import useTotalAmount from "../../hooks/useTotalAmount";
-import CarouselSlider from "../CarouselSlider";
-import PurchasedTable from "../PurchasedTable";
+import { useCartCtx } from "../contexts/CartCtx";
+import { useFormDataContext } from "../contexts/FormCtx";
+import useTotalAmount from "../hooks/useTotalAmount";
+import CarouselSlider from "./CarouselSlider";
+import PurchasedTable from "./PurchasedTable";
+import { usePaymentCtx } from "../contexts/PaymentCtx";
 
-const Success = () => {
-    const { totalAmount, totalUnits, cart } = useCartCtx();
-    const { getValues } = useFormContext();
-    const { startTime, startDate } = useFormDataContext();
+const PaymentSuccess = () => {
+    // const { totalAmount, totalUnits, cart } = useCartCtx();
+    // const { getValues } = useFormContext();
+    // const { startTime, startDate } = useFormDataContext();
 
-    const username = getValues("username") || "";
-    const phone = Number(getValues("phone")) || "";
-    const deliveryMethod = getValues("deliveryMethod") || "";
-    const address = getValues("address") || "";
+    // const username = getValues("username") || "";
+    // const phone = Number(getValues("phone")) || "";
+    // const deliveryMethod = getValues("deliveryMethod") || "";
+    // const address = getValues("address") || "";
 
-    const { total } = useTotalAmount(totalAmount, deliveryMethod);
+    // const { total } = useTotalAmount(totalAmount, deliveryMethod);
+
+    usePaymentCtx();
+
+    const { paymentData } = usePaymentCtx();
+    const {
+        total,
+        username,
+        phone,
+        deliveryMethod,
+        address,
+        startTime,
+        startDate,
+        cart,
+    } = paymentData;
 
     return (
         <div className="container py-10">
@@ -36,7 +50,7 @@ const Success = () => {
                     </div>
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
                         <div>配送方式 :</div>
-                        <div className="text-gray-500">外送</div>
+                        <div className="text-gray-500">{deliveryMethod}</div>
                     </div>
                     {address && (
                         <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
@@ -46,13 +60,16 @@ const Success = () => {
                     )}
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
                         <div>日期 :</div>
-                        <div>{new Intl.DateTimeFormat().format(startDate)}</div>
+                        <div>
+                            {new Intl.DateTimeFormat().format(startDate)}{" "}
+                        </div>
                     </div>
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
                         <div>时间:</div>
                         <div>
                             {getHours(startTime)}.
-                            {getMinutes(startTime) || "00"}
+                            {getMinutes(startTime) || "00"}{" "}
+                            {getHours(startTime) >= 12 ? "pm" : "am"}
                         </div>
                     </div>
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
@@ -65,11 +82,11 @@ const Success = () => {
                 <h2 className="mb-3 text-2xl">购买内容</h2>
                 <PurchasedTable />
             </section>
-            <section>
+            <section className="mt-4">
                 <CarouselSlider carouselData={cart} />
             </section>
         </div>
     );
 };
 
-export default Success;
+export default PaymentSuccess;

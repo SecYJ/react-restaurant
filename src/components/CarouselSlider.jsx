@@ -1,6 +1,8 @@
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import PopularCard from "./PopularCard";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const CarouselSlider = ({ carouselData }) => {
     return (
@@ -32,11 +34,10 @@ const CarouselSlider = ({ carouselData }) => {
                     },
                 },
             }}
-            observer={true}
         >
             {carouselData.map((item) => {
                 return (
-                    <SwiperSlide key={item.id} className="h-auto">
+                    <SwiperSlide key={item.id}>
                         <PopularCard {...item} />
                     </SwiperSlide>
                 );

@@ -1,4 +1,4 @@
-const OrderTableHeader = () => {
+const CartTop = () => {
     const styles = "bg-transparent text-2xl";
 
     return (
@@ -15,4 +15,4 @@ const OrderTableHeader = () => {
     );
 };
 
-export default OrderTableHeader;
+export default CartTop;

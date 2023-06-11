@@ -32,7 +32,7 @@ const CartCtxProvider = ({ children }) => {
     const updateCartItem = useCallback(({ direction, value, id }) => {
         dispatch({
             type: "UPDATE_CART_ITEM",
-            payload: { direction, value, id },
+            payload: { direction, id },
         });
     }, []);
 

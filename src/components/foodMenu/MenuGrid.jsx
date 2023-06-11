@@ -9,6 +9,14 @@ const MenuGrid = () => {
         dispatch({ type: "SET_MENU", payload: data });
     };
 
+    // console.log();
+   
+
+
+    // for (const [key, value] of urlParams) {
+    //     console.log(`${key}:${value}`);
+    // }
+
     const { isLoading } = useFoodMenu({ onSuccess });
 
     if (isLoading) {
@@ -18,6 +26,10 @@ const MenuGrid = () => {
     if (filtered_menu < 1 && search !== "") {
         return <p>没有符合您寻找的食品，请在查询</p>;
     }
+
+    // useEffect(() => {
+    //     window.scroll({})
+    // }, [])
 
     return (
         <ul className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">

@@ -1,10 +1,12 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import { useCartCtx } from "../contexts/CartCtx";
 import { useFormDataContext } from "../contexts/FormCtx";
+import { usePaymentCtx } from "../contexts/PaymentCtx";
 import useTotalAmount from "../hooks/useTotalAmount";
 
 const Subtotal = ({ onNextStepChange }) => {
-    const { totalAmount } = useCartCtx();
+    const { totalAmount, cart } = useCartCtx();
+    const { setPaymentData } = usePaymentCtx();
     const {
         handleSubmit,
         formState: { isValid },
@@ -22,6 +24,16 @@ const Subtotal = ({ onNextStepChange }) => {
             return;
         }
         if (paymentRadio === "eWallet" && eWallet === "") return;
+
+        setPaymentData({
+            ...data,
+            total,
+            startTime,
+            startDate,
+            cart: [...cart],
+        });
+
+        onNextStepChange();
     };
 
     return (
@@ -54,7 +66,8 @@ const Subtotal = ({ onNextStepChange }) => {
                         : "pointer-events-none bg-gray-400"
                 }`}
                 disabled={!isValid}
-                onClick={handleSubmit(onNextStepChange)}
+                // onClick={handleSubmit(onNextStepChange)}
+                onClick={handleSubmit(onSubmit)}
             >
                 前往付款
             </button>

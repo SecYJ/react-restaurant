@@ -23,7 +23,10 @@ const MenuCard = ({ img, category, price, name, stock, id }) => {
     };
 
     return (
-        <li className="relative grid grid-cols-[auto_1fr] overflow-hidden rounded-lg border border-gray-200 duration-150 hover:-translate-y-1 hover:border-gray-400 hover:shadow-xl lg:grid-cols-1 lg:grid-rows-[auto_1fr]">
+        <li
+            className="relative grid grid-cols-[auto_1fr] overflow-hidden rounded-lg border border-gray-200 duration-150 hover:-translate-y-1 hover:border-gray-400 hover:shadow-xl lg:grid-cols-1 lg:grid-rows-[auto_1fr]"
+            data-id={id}
+        >
             <div className="w-24 overflow-hidden lg:w-auto">
                 <LazyImage src={img} alt={name} />
             </div>
@@ -37,7 +40,7 @@ const MenuCard = ({ img, category, price, name, stock, id }) => {
                             </span>
                         </p>
                         <strong className="text-3xl text-primary">
-                            RM {price}
+                            RM {price.toFixed(2)}
                         </strong>
                         <p className="text-lg font-semibold">
                             {eName.join(" ")}
@@ -49,7 +52,9 @@ const MenuCard = ({ img, category, price, name, stock, id }) => {
                         <span className="badge-secondary badge col-span-full">
                             {category}
                         </span>
-                        <strong className="text-primary">RM {price}</strong>
+                        <strong className="text-primary">
+                            RM {price.toFixed(2)}
+                        </strong>
                     </>
                 )}
                 {matchMedia ? (

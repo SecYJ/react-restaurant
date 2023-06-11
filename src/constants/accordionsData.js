@@ -1,6 +1,3 @@
-import Accordion from "../components/Accordion";
-import { SectionPy } from "../styles";
-
 const data = [
     {
         title: "你们的菜品有哪些特色？",
@@ -28,18 +25,4 @@ const data = [
     },
 ];
 
-const Faq = () => {
-    return (
-        <section className={`${SectionPy} container`}>
-            <h2 className="mb-4 border-r border-gray-200 text-4xl font-bold text-primary/70">
-                常见问题
-            </h2>
-            <ul className="space-y-4">
-                {data.map((item) => (
-                    <Accordion {...item} key={item.title} />
-                ))}
-            </ul>
-        </section>
-    );
-};
-export default Faq;
+export default data;

@@ -15,7 +15,7 @@ const CartRow = () => {
                     <motion.tr
                         key={id}
                         className="hover hover:bg-[rgb(229,230,230)]"
-                        layout
+                        layoutId={id}
                     >
                         <th style={{ position: "static" }}>{index + 1}</th>
                         <td>

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useCartCtx } from "../../contexts/CartCtx";
 import Button from "../Button";
 
-const OrderSummaryFooter = () => {
+const CartBottom = () => {
     const { totalUnits, totalAmount } = useCartCtx();
     const navigate = useNavigate();
 
@@ -19,4 +19,4 @@ const OrderSummaryFooter = () => {
     );
 };
 
-export default OrderSummaryFooter;
+export default CartBottom;

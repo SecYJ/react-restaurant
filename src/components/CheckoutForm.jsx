@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import FormFields from "./FormFields";
 import Subtotal from "./Subtotal";
-import Success from "./MultiStepForm/Success";
+import PaymentCtx from "../contexts/PaymentCtx";
+import PaymentSuccess from "./PaymentSuccess";
 
 const variants = {
     enter: {
@@ -20,12 +21,16 @@ const CheckoutForm = () => {
     const [step, setStep] = useState("checkout");
 
     return (
-        <AnimatePresence
-            variants={variants}
-            initial="enter"
-            animate="animate"
-            exit="exit"
-        >
+        // <AnimatePresence
+        //     variants={variants}
+        //     initial="enter"
+        //     animate="animate"
+        //     exit="exit"
+        // >
+
+        // </AnimatePresence>
+        // MIGHT BE REVERT LATER
+        <PaymentCtx>
             {step === "checkout" && (
                 <div className="mx-auto grid w-full max-w-5xl gap-8 py-20 px-3 lg:grid-cols-[1fr_300px]">
                     <h1 className="col-span-full text-3xl font-bold">
@@ -37,8 +42,8 @@ const CheckoutForm = () => {
                     </div>
                 </div>
             )}
-            {step === "success" && <Success />}
-        </AnimatePresence>
+            {step === "success" && <PaymentSuccess />}
+        </PaymentCtx>
     );
 };
 
