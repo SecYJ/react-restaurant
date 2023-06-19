@@ -1,26 +1,31 @@
 const reducer = (state, action) => {
-    const filterProducts = ({ arrProp, condition = "全部" }) => {
-        if (condition === "全部") return [...state.menu];
-        return state.menu.filter((p) => p[arrProp] === condition);
+    const filterProducts = (productCategory) => {
+        if (productCategory === "全部") return [...state.menu];
+
+        return state.menu.filter((p) => p.category === productCategory);
     };
 
     switch (action.type) {
         case "SET_MENU": {
+            if (state.menu.length === 0) {
+                return {
+                    ...state,
+                    menu: [...action.payload],
+                    filtered_menu: [...action.payload],
+                };
+            }
+
             return {
                 ...state,
-                menu: [...action.payload],
-                filtered_menu: [...action.payload],
+                filtered_menu: filterProducts(state.currentSelect),
             };
         }
 
-        case "FILTER_PRODUCTS": {
+        case "SEARCH_PRODUCTS": {
             if (action.payload === "") {
                 return {
                     ...state,
-                    filtered_menu: filterProducts({
-                        arrProp: "category",
-                        condition: state.currentSelect,
-                    }),
+                    filtered_menu: filterProducts(state.currentSelect),
                 };
             }
 
@@ -41,7 +46,7 @@ const reducer = (state, action) => {
             if (isAllProducts) {
                 return {
                     ...state,
-                    filtered_menu: state.menu,
+                    filtered_menu: [...state.menu],
                     currentSelect: payload,
                 };
             }
@@ -49,10 +54,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 currentSelect: payload,
-                filtered_menu: filterProducts({
-                    arrProp: "category",
-                    condition: payload,
-                }),
+                filtered_menu: filterProducts(payload),
             };
         }
 

@@ -4,11 +4,11 @@ import { request } from "../services/api-client";
 const getMenu = async () =>
     await request.get("/products").then((res) => res.data);
 
-const useFoodMenu = ({ onSuccess } = {}) => {
+const useFoodMenu = (props = {}) => {
     return useQuery({
         queryKey: ["foodMenu"],
         queryFn: getMenu,
-        onSuccess,
+        ...props,
     });
 };
 

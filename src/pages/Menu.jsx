@@ -13,7 +13,7 @@ const Menu = () => {
         >
             <MenuCtxProvider>
                 <div className="flex flex-col gap-8 lg:flex-row">
-                    <div className="sticky left-0 top-[104px] bg-white lg:top-[160px] lg:h-full lg:w-1/4">
+                    <div className="sticky left-0 top-16 z-[1] bg-white pb-4 lg:top-[160px] lg:h-full lg:w-1/4">
                         <MenuSidebar />
                     </div>
                     <div className="lg:w-3/4">

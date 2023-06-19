@@ -10,7 +10,7 @@ const MenuSidebar = () => {
     const debounceSearch = useDebounce(search, 750);
 
     useEffect(() => {
-        dispatch({ type: "FILTER_PRODUCTS", payload: debounceSearch });
+        dispatch({ type: "SEARCH_PRODUCTS", payload: debounceSearch });
         dispatch({ type: "SET_SEARCH", payload: debounceSearch });
     }, [debounceSearch]);
 
