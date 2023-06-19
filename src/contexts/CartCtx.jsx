@@ -44,6 +44,10 @@ const CartCtxProvider = ({ children }) => {
         dispatch({ type: "TOGGLE_CART_VISIBILITY", payload: visibility });
     }, []);
 
+    const clearCart = useCallback(() => {
+        dispatch({ type: "CLEAR_CART" });
+    }, []);
+
     return (
         <CartCtx.Provider
             value={{
@@ -52,6 +56,7 @@ const CartCtxProvider = ({ children }) => {
                 updateCartItem,
                 deleteCartItem,
                 toggleCart,
+                clearCart,
             }}
         >
             {children}

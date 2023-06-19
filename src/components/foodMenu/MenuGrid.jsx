@@ -5,17 +5,8 @@ import MenuSkeleton from "./MenuSkeleton";
 
 const MenuGrid = () => {
     const { dispatch, filtered_menu, search } = useMenuCtx();
-    // const onSuccess = (data) => {
-    //     dispatch({ type: "SET_MENU", payload: data });
-
-    // };
-
-    // const { isLoading, } = useFoodMenu({ onSuccess });
     const { isLoading } = useFoodMenu({
-        onSuccess: (data) => {
-            console.log("asdf");
-            dispatch({ type: "SET_MENU", payload: data });
-        },
+        onSuccess: (data) => dispatch({ type: "SET_MENU", payload: data }),
     });
 
     if (isLoading) {

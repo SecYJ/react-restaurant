@@ -14,6 +14,7 @@ const PaymentCtx = ({ children }) => {
         email: "",
         orderRequest: "",
         total: 0,
+        totalUnits: 0,
         totalAmount: 0,
     });
 

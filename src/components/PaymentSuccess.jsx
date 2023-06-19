@@ -1,28 +1,13 @@
 import { useEffect } from "react";
 import { getHours, getMinutes } from "date-fns/esm";
-import { useFormContext } from "react-hook-form";
-import { useCartCtx } from "../contexts/CartCtx";
-import { useFormDataContext } from "../contexts/FormCtx";
-import useTotalAmount from "../hooks/useTotalAmount";
 import CarouselSlider from "./CarouselSlider";
 import PurchasedTable from "./PurchasedTable";
 import { usePaymentCtx } from "../contexts/PaymentCtx";
+import { useCartCtx } from "../contexts/CartCtx";
 
 const PaymentSuccess = () => {
-    // const { totalAmount, totalUnits, cart } = useCartCtx();
-    // const { getValues } = useFormContext();
-    // const { startTime, startDate } = useFormDataContext();
-
-    // const username = getValues("username") || "";
-    // const phone = Number(getValues("phone")) || "";
-    // const deliveryMethod = getValues("deliveryMethod") || "";
-    // const address = getValues("address") || "";
-
-    // const { total } = useTotalAmount(totalAmount, deliveryMethod);
-
-    usePaymentCtx();
-
     const { paymentData } = usePaymentCtx();
+    const { clearCart } = useCartCtx();
     const {
         total,
         username,
@@ -33,6 +18,10 @@ const PaymentSuccess = () => {
         startDate,
         cart,
     } = paymentData;
+
+    useEffect(() => {
+        clearCart();
+    }, []);
 
     return (
         <div className="container py-10">

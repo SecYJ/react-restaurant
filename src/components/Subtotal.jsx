@@ -5,7 +5,7 @@ import { usePaymentCtx } from "../contexts/PaymentCtx";
 import useTotalAmount from "../hooks/useTotalAmount";
 
 const Subtotal = ({ onNextStepChange }) => {
-    const { totalAmount, cart } = useCartCtx();
+    const { totalAmount, totalUnits, cart } = useCartCtx();
     const { setPaymentData } = usePaymentCtx();
     const {
         handleSubmit,
@@ -28,6 +28,7 @@ const Subtotal = ({ onNextStepChange }) => {
         setPaymentData({
             ...data,
             total,
+            totalUnits,
             startTime,
             startDate,
             cart: [...cart],
@@ -66,7 +67,6 @@ const Subtotal = ({ onNextStepChange }) => {
                         : "pointer-events-none bg-gray-400"
                 }`}
                 disabled={!isValid}
-                // onClick={handleSubmit(onNextStepChange)}
                 onClick={handleSubmit(onSubmit)}
             >
                 前往付款

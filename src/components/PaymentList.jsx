@@ -1,10 +1,7 @@
 import { useFormContext, useWatch } from "react-hook-form";
 
 const PaymentList = () => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext();
+    const { register } = useFormContext();
 
     const [contactLessDelivery, paymentRadio] = useWatch({
         name: ["contactLessDelivery", "paymentRadio"],

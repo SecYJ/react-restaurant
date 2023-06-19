@@ -67,6 +67,15 @@ const reducer = (state, action) => {
             return { ...state, cart, ...calculateTotals(cart) };
         }
 
+        case "CLEAR_CART": {
+            return {
+                ...state,
+                totalAmount: 0,
+                totalUnits: 0,
+                cart: [],
+            };
+        }
+
         default:
             break;
     }

@@ -13,10 +13,6 @@ const Banner = () => {
                 <div className="flex flex-col items-center gap-4 [writing-mode:vertical-rl]">
                     <h1 className="relative text-6xl tracking-widest">
                         精致港式料理{" "}
-                        {/* TODO: maybe add animation later FIXME:  */}
-                        {/* <span className="absolute top-40 -left-32 whitespace-nowrap text-2xl">
-                            一口幸福 一点点心
-                        </span> */}
                         <span className="absolute top-40 -left-16 whitespace-nowrap text-2xl">
                             小巧精致 每一口都是惊喜
                         </span>{" "}

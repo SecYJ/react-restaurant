@@ -41,9 +41,3 @@ const Accordion = ({ title, content }) => {
     );
 };
 export default Accordion;
-
-const testing = () => {
-    return ["hello", "world"];
-};
-
-const [val, val2] = testing();
