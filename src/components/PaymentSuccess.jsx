@@ -4,6 +4,8 @@ import CarouselSlider from "./CarouselSlider";
 import PurchasedTable from "./PurchasedTable";
 import { usePaymentCtx } from "../contexts/PaymentCtx";
 import { useCartCtx } from "../contexts/CartCtx";
+import randomData from "../services/randomData";
+import { useMenuCtx } from "../contexts/MenuCtx";
 
 const PaymentSuccess = () => {
     const { paymentData } = usePaymentCtx();
@@ -18,6 +20,10 @@ const PaymentSuccess = () => {
         startDate,
         cart,
     } = paymentData;
+
+    const { menu } = useMenuCtx();
+    const cartIds = cart.map((item) => item.id);
+    const data = randomData(menu, [...new Set(cartIds)]);
 
     useEffect(() => {
         clearCart();
@@ -72,7 +78,7 @@ const PaymentSuccess = () => {
                 <PurchasedTable />
             </section>
             <section className="mt-4">
-                <CarouselSlider carouselData={cart} />
+                <CarouselSlider carouselData={data} />
             </section>
         </div>
     );

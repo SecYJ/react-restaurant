@@ -25,7 +25,7 @@ const customerReviews = [
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU4zcvw7IuDHrelD2Pd9Z9d83nMxM9R1kPyQ&usqp=CAU",
     },
     {
-        text: "我来这里用餐已经好几次了，每次都非常满意。你们的点心总是新鲜、美味，而且服务员非常热情和专业。我会一直光顾这里的。",
+        text: "每次来你们餐厅都让我感到宾至如归。食物味道一级棒，特别是你们的招牌菜，每一口都让我流连忘返。",
         name: "Luis",
         img: "https://nextluxury.com/wp-content/uploads/Ken-Jeong.jpg",
     },

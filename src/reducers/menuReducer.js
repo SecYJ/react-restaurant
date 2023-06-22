@@ -10,7 +10,7 @@ const reducer = (state, { payload, type }) => {
             if (state.menu.length === 0) {
                 return {
                     ...state,
-                    menu: [...payload],
+                    menu: [...payload].sort(() => Math.random() - 0.5),
                     filtered_menu: [...payload],
                 };
             }

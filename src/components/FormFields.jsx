@@ -1,5 +1,12 @@
 import { useFormContext, useWatch } from "react-hook-form";
-import { addDays, getDay, getHours, getMinutes } from "date-fns/esm";
+import {
+    addDays,
+    addMinutes,
+    differenceInMinutes,
+    getDay,
+    getHours,
+    getMinutes,
+} from "date-fns/esm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import InputGroup from "./InputGroup";
@@ -20,23 +27,44 @@ const FormFields = () => {
         name: "deliveryMethod",
     });
 
-    const filterOperationDay = (date) => {
-        return getDay(date) !== 1;
-    };
-
     const numberValidation = (v) => {
         const pattern = /\d/;
         return pattern.test(v) ? v : "请确保手机号码只包含数字";
     };
 
+    const filterOperationDay = (date) => {
+        return getDay(date) !== 1;
+    };
+
     const filterTime = (date) => {
         const hour = getHours(date);
 
+        // console.log(addMinutes(date, 30).toLocaleString());
+
+        // currentHours converts to milliseconds
+        const currentHour = new Date().getTime();
+        const halfHour = 30 * 60 * 1000;
+        const optionTime = new Date(date).getTime() / 1000;
+
+        console.log(optionTime - currentHour >= halfHour);
+        // console.log(optionTime - currentHour);
+
+        // options date converts to milliseconds
+        // NOTE: TESTING START
         return (
             (hour === 13 && getMinutes(date) !== 30) ||
             (hour >= 6 && hour <= 12)
         );
+        // NOTE: TESTING END
+
+        // NOTE: correct version
+        // return (
+        //     (hour === 13 && getMinutes(date) !== 30) ||
+        //     (hour >= 6 && hour <= 12)
+        // );
     };
+
+    // console.log(addMinutes(new Date(), 30).toLocaleString());
 
     return (
         <form>
@@ -57,7 +85,7 @@ const FormFields = () => {
                     showTimeSelect
                     showTimeSelectOnly
                     onChange={(date) => setStartTime(date)}
-                    filterTime={filterTime}
+                    // filterTime={filterTime}
                     className="rounded-sm border border-gray-300 outline-none focus:border-primary"
                     dateFormat="h:mm aa"
                     placeholderText="请选择时间"
@@ -122,9 +150,9 @@ const FormFields = () => {
                         </p>
                     )}
                 </InputGroup>
-                <InputGroup label="配送方式">
+                <InputGroup label="配送方式" mb="mb-0">
                     <select
-                        className="mt-2 mb-4 border border-gray-300 bg-transparent p-3"
+                        className="my-2 border border-gray-300 bg-transparent p-3"
                         {...register("deliveryMethod")}
                     >
                         <option value="自取">自取</option>
@@ -164,7 +192,7 @@ const FormFields = () => {
             <div className="mt-4">
                 <h2 className="mb-4 font-bold">备注 (可选)</h2>
                 <textarea
-                    className="w-full resize-none rounded-md border border-t p-4 outline-none focus:border-secondary"
+                    className="w-full resize-none rounded-md border border-t p-3 outline-none focus:border-secondary"
                     {...register("orderRequest")}
                 />
                 <p className="mt-1 text-xs italic">

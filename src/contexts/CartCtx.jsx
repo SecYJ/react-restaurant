@@ -12,7 +12,6 @@ const CartCtx = createContext();
 
 const initialStates = {
     cart: [],
-    cartVisible: false,
     totalAmount: 0,
     totalUnits: 0,
 };
@@ -29,7 +28,7 @@ const CartCtxProvider = ({ children }) => {
         dispatch({ type: "SET_CART", payload: cart });
     }, []);
 
-    const updateCartItem = useCallback(({ direction, value, id }) => {
+    const updateCartItem = useCallback(({ direction, id }) => {
         dispatch({
             type: "UPDATE_CART_ITEM",
             payload: { direction, id },

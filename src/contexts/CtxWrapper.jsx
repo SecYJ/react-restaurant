@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AuthCtx from "./AuthCtx";
 import CartCtxProvider from "./CartCtx";
+import MenuCtxProvider from "./MenuCtx";
 
 const CtxWrapper = ({ children }) => {
     const queryClient = new QueryClient({
@@ -15,7 +16,11 @@ const CtxWrapper = ({ children }) => {
     return (
         <AuthCtx>
             <QueryClientProvider client={queryClient}>
-                <CartCtxProvider>{children}</CartCtxProvider>
+                <CartCtxProvider>
+                    <MenuCtxProvider>
+                        {children}
+                    </MenuCtxProvider>
+                </CartCtxProvider>
                 <ReactQueryDevtools />
             </QueryClientProvider>
         </AuthCtx>
