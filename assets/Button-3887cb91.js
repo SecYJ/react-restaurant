@@ -1,0 +1,1 @@
+import{j as e}from"./jsx-runtime-00d1b5d3.js";const s=({children:t,color:i="primary",outline:r=!1,className:o="",onClick:n,type:a="button"})=>e("button",{type:a,className:`btn-primary text-white hover:bg-primary/90 ${r?"btn-outline":""} ${o} btn h-auto min-h-0 py-3`,onClick:n,children:t});export{s as B};

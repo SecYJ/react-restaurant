@@ -1,0 +1,1 @@
+import{j as o}from"./jsx-runtime-00d1b5d3.js";import{u as a}from"./auth0-react.esm-124f799c.js";import{h as s}from"./index-aefd983d.js";const p=({children:t})=>{const{isAuthenticated:e,user:r}=a();return e&&r?t:o(s,{to:"/",replace:!0})};export{p as default};
