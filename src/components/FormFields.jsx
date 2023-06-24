@@ -1,11 +1,11 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import {
     addDays,
-    addMinutes,
     differenceInMinutes,
     getDay,
     getHours,
     getMinutes,
+    isSameDay,
 } from "date-fns/esm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -38,33 +38,32 @@ const FormFields = () => {
 
     const filterTime = (date) => {
         const hour = getHours(date);
+        const minuteDifference = differenceInMinutes(date, new Date()) >= 30; // greater or equal 30m can booking
+        const isToday = isSameDay(startDate, new Date());
+        const morningBookingHour = hour >= 6 && hour <= 12;
+        const afternoonBookingHour = hour === 13 && getMinutes(date) !== 30;
 
-        // console.log(addMinutes(date, 30).toLocaleString());
-
-        // currentHours converts to milliseconds
-        const currentHour = new Date().getTime();
-        const halfHour = 30 * 60 * 1000;
-        const optionTime = new Date(date).getTime() / 1000;
-
-        console.log(optionTime - currentHour >= halfHour);
-        // console.log(optionTime - currentHour);
-
-        // options date converts to milliseconds
-        // NOTE: TESTING START
-        return (
-            (hour === 13 && getMinutes(date) !== 30) ||
-            (hour >= 6 && hour <= 12)
-        );
-        // NOTE: TESTING END
-
-        // NOTE: correct version
-        // return (
-        //     (hour === 13 && getMinutes(date) !== 30) ||
-        //     (hour >= 6 && hour <= 12)
-        // );
+        // NOTE: previous correct version
+        // return isToday
+        //     ? (minuteDifference && hour === 13 && getMinutes(date) !== 30) ||
+        //           (minuteDifference && hour >= 6 && hour <= 12)
+        //     : (hour === 13 && getMinutes(date) !== 30) ||
+        //           (hour >= 6 && hour <= 12);
+        return isToday
+            ? (minuteDifference && morningBookingHour) ||
+                  (minuteDifference && afternoonBookingHour)
+            : startDate === ""
+            ? false
+            : morningBookingHour || afternoonBookingHour;
     };
 
-    // console.log(addMinutes(new Date(), 30).toLocaleString());
+    // TODO: MAYBE
+    const onBlurTimeValidation = () => {};
+
+    const onDateChange = (date) => {
+        setStartDate(date);
+        setStartTime("");
+    };
 
     return (
         <form>
@@ -74,7 +73,7 @@ const FormFields = () => {
                     className="rounded-sm border border-gray-300 outline-none focus:border-primary"
                     filterDate={filterOperationDay}
                     selected={startDate}
-                    onChange={(date) => setStartDate(date)}
+                    onChange={onDateChange}
                     dateFormat="dd/MM/yyyy"
                     minDate={new Date()}
                     maxDate={addDays(new Date(), 7)}
@@ -85,12 +84,13 @@ const FormFields = () => {
                     showTimeSelect
                     showTimeSelectOnly
                     onChange={(date) => setStartTime(date)}
-                    // filterTime={filterTime}
+                    filterTime={filterTime}
                     className="rounded-sm border border-gray-300 outline-none focus:border-primary"
                     dateFormat="h:mm aa"
                     placeholderText="请选择时间"
                     shouldCloseOnSelect={false}
                     selected={startTime}
+                    onBlur={onBlurTimeValidation}
                 />
             </div>
 
