@@ -25,6 +25,8 @@ const PaymentSuccess = () => {
     const cartIds = cart.map((item) => item.id);
     const data = randomData(menu, [...new Set(cartIds)]);
 
+    console.log(data);
+
     useEffect(() => {
         clearCart();
     }, []);

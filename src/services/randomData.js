@@ -1,4 +1,4 @@
-const random = (data) => data.sort(() => Math.random() - 0.5);
+const random = (data) => data.sort(() => Math.random() - 0.5).slice(0, 6);
 
 const randomData = (data, ids) => {
     const dataArr = [];
@@ -9,7 +9,7 @@ const randomData = (data, ids) => {
         dataArr.push(data[i]);
     }
 
-    if (dataArr.length === 0) return random(data).slice(0, 6);
+    if (dataArr.length === 0) return random(data);
 
     if (dataArr.length < 6) {
         for (let i = 0; i < data.length; i++) {
@@ -25,7 +25,7 @@ const randomData = (data, ids) => {
 
         return random(dataArr);
     } else {
-        return random(dataArr).slice(0, 6);
+        return random(dataArr);
     }
 };
 

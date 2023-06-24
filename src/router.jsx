@@ -57,11 +57,11 @@ const routes = [
                     </Suspense>
                 ),
             },
+            {
+                path: "*",
+                element: <NotFound />,
+            },
         ],
-    },
-    {
-        path: "*",
-        element: <NotFound />,
     },
 ];
 
