@@ -10,8 +10,8 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import InputGroup from "./InputGroup";
-import PaymentList from "./PaymentList";
 import { useFormDataContext } from "../contexts/FormCtx";
+import PaymentMethod from "./PaymentMethod";
 
 const FormFields = () => {
     const {
@@ -43,12 +43,6 @@ const FormFields = () => {
         const morningBookingHour = hour >= 6 && hour <= 12;
         const afternoonBookingHour = hour === 13 && getMinutes(date) !== 30;
 
-        // NOTE: previous correct version
-        // return isToday
-        //     ? (minuteDifference && hour === 13 && getMinutes(date) !== 30) ||
-        //           (minuteDifference && hour >= 6 && hour <= 12)
-        //     : (hour === 13 && getMinutes(date) !== 30) ||
-        //           (hour >= 6 && hour <= 12);
         return isToday
             ? (minuteDifference && morningBookingHour) ||
                   (minuteDifference && afternoonBookingHour)
@@ -56,9 +50,6 @@ const FormFields = () => {
             ? false
             : morningBookingHour || afternoonBookingHour;
     };
-
-    // TODO: MAYBE
-    const onBlurTimeValidation = () => {};
 
     const onDateChange = (date) => {
         setStartDate(date);
@@ -199,10 +190,7 @@ const FormFields = () => {
                     *我们将尽力满足您的要求，供应情况需视供应情况而定。
                 </p>
             </div>
-            <div className="mt-4 space-y-4">
-                <h2 className="mb-4 font-bold">付款方式</h2>
-                <PaymentList />
-            </div>
+            <PaymentMethod />
         </form>
     );
 };

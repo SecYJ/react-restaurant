@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import Error from "../assets/404.svg";
+import SectionContainer from "../components/SectionContainer";
 
 const NotFound = () => {
     const navigate = useNavigate();
@@ -23,11 +25,15 @@ const NotFound = () => {
     }, []);
 
     return (
-        <>
-            <p>你将在{countdown}秒后回到首页</p>
-            <h1>404 您所在的页面不存在, </h1>
-            <Button>回到首页</Button>
-        </>
+        <div className="absolute flex h-full w-full">
+            <SectionContainer className="flex flex-col items-center space-y-4">
+                <img src={Error} className="h-[500px]" alt="404 error" />
+                <h1 className="text-6xl">404错误, 你所寻找的页面不存在</h1>
+                <div className="text-center text-2xl">
+                    <p>你将在{countdown}秒后回到首页</p>
+                </div>
+            </SectionContainer>
+        </div>
     );
 };
 export default NotFound;

@@ -1,5 +1,6 @@
 import useFoodMenu from "../hooks/useFoodMenu";
 import CarouselSlider from "./CarouselSlider";
+import SectionContainer from "./SectionContainer";
 
 const PopularList = () => {
     const { data: foodMenu, isLoading } = useFoodMenu();
@@ -13,14 +14,14 @@ const PopularList = () => {
         .slice(0, 8);
 
     return (
-        <section className="container py-6 lg:py-10">
+        <SectionContainer>
             <div className="mb-6 flex justify-center">
                 <h2 className="border-r border-gray-200 pr-4 text-4xl font-bold text-primary">
                     热门点心
                 </h2>
             </div>
             <CarouselSlider carouselData={popularMenu} />
-        </section>
+        </SectionContainer>
     );
 };
 

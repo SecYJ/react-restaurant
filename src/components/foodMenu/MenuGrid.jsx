@@ -20,7 +20,7 @@ const MenuGrid = () => {
     return (
         <ul className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
             {filtered_menu.map((d) => {
-                return <MenuCard {...d} key={d.id} />;
+                return <MenuCard menuData={d} key={d.id} />;
             })}
         </ul>
     );

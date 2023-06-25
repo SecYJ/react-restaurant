@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useCartCtx } from "../contexts/CartCtx";
 import { useFormDataContext } from "../contexts/FormCtx";
@@ -14,6 +15,7 @@ const Subtotal = ({ onNextStepChange }) => {
     const { startTime, startDate } = useFormDataContext();
     const watchDeliveryMethod = useWatch({ name: "deliveryMethod" });
     const { sst, total } = useTotalAmount(totalAmount, watchDeliveryMethod);
+    const t = useAuth0();
 
     const onSubmit = (data) => {
         const { address, deliveryMethod, paymentRadio, eWallet } = data;

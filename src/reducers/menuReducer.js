@@ -1,3 +1,5 @@
+const randomSort = (arr) => arr.sort(() => Math.random() - 0.5);
+
 const reducer = (state, { payload, type }) => {
     const filterMenu = (category) => {
         if (category === "全部") return [...state.menu];
@@ -10,8 +12,8 @@ const reducer = (state, { payload, type }) => {
             if (state.menu.length === 0) {
                 return {
                     ...state,
-                    menu: [...payload].sort(() => Math.random() - 0.5),
-                    filtered_menu: [...payload],
+                    menu: randomSort([...payload]),
+                    filtered_menu: randomSort([...payload]),
                 };
             }
 

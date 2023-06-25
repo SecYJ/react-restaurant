@@ -6,6 +6,7 @@ import { usePaymentCtx } from "../contexts/PaymentCtx";
 import { useCartCtx } from "../contexts/CartCtx";
 import randomData from "../services/randomData";
 import { useMenuCtx } from "../contexts/MenuCtx";
+import SectionContainer from "./SectionContainer";
 
 const PaymentSuccess = () => {
     const { paymentData } = usePaymentCtx();
@@ -25,14 +26,12 @@ const PaymentSuccess = () => {
     const cartIds = cart.map((item) => item.id);
     const data = randomData(menu, [...new Set(cartIds)]);
 
-    console.log(data);
-
     useEffect(() => {
         clearCart();
     }, []);
 
     return (
-        <div className="container py-10">
+        <SectionContainer>
             <section className="mb-10">
                 <h1 className="mb-4 text-center text-3xl">订单内容</h1>
                 <h2 className="mb-3 text-2xl">您的资讯</h2>
@@ -82,7 +81,7 @@ const PaymentSuccess = () => {
             <section className="mt-4">
                 <CarouselSlider carouselData={data} />
             </section>
-        </div>
+        </SectionContainer>
     );
 };
 

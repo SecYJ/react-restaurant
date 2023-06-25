@@ -1,6 +1,7 @@
 import EmptyCart from "../components/EmptyCart";
 import CartList from "../components/cart/CartList";
 import { useCartCtx } from "../contexts/CartCtx";
+import SectionContainer from "../components/SectionContainer";
 
 const Cart = () => {
     const { cart } = useCartCtx();
@@ -10,9 +11,9 @@ const Cart = () => {
     }
 
     return (
-        <div className="container flex flex-col justify-between py-6 lg:py-10">
+        <SectionContainer className="container flex flex-col justify-between py-6 lg:py-10">
             <CartList />
-        </div>
+        </SectionContainer>
     );
 };
 

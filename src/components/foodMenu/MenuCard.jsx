@@ -4,7 +4,8 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import Button from "../Button";
 import LazyImage from "../LazyImage";
 
-const MenuCard = ({ img, category, price, name, stock, id }) => {
+const MenuCard = ({ menuData }) => {
+    const { img, category, price, name, stock, id } = menuData;
     const { dispatch } = useCartCtx();
     const [cName, ...eName] = name.split(" ");
     const matchMedia = useMediaQuery("(min-width: 1024px)");
@@ -23,10 +24,7 @@ const MenuCard = ({ img, category, price, name, stock, id }) => {
     };
 
     return (
-        <li
-            className="relative grid grid-cols-[auto_1fr] overflow-hidden rounded-lg border border-gray-200 duration-150 hover:-translate-y-1 hover:border-gray-400 hover:shadow-xl lg:grid-cols-1 lg:grid-rows-[auto_1fr]"
-            data-id={id}
-        >
+        <li className="relative grid grid-cols-[auto_1fr] overflow-hidden rounded-lg border border-gray-200 duration-150 hover:-translate-y-1 hover:border-gray-400 hover:shadow-xl lg:grid-cols-1 lg:grid-rows-[auto_1fr]">
             <div className="w-24 overflow-hidden lg:w-auto">
                 <LazyImage src={img} alt={name} />
             </div>

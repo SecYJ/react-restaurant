@@ -3,17 +3,17 @@ import { useRef } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import useToggle from "../hooks/useToggle";
 
-const Accordion = ({ title, content }) => {
-    const contentRef = useRef();
+const Accordion = ({ question, answer }) => {
+    const answerRef = useRef();
     const [isOpen, setIsOpen] = useToggle(false);
 
     useEffect(() => {
         if (!isOpen) {
-            contentRef.current.style.maxHeight = "0px";
+            answerRef.current.style.maxHeight = "0px";
             return;
         }
-        const { scrollHeight } = contentRef.current;
-        contentRef.current.style.maxHeight = `${scrollHeight}px`;
+        const { scrollHeight } = answerRef.current;
+        answerRef.current.style.maxHeight = `${scrollHeight}px`;
     }, [isOpen]);
 
     return (
@@ -22,7 +22,7 @@ const Accordion = ({ title, content }) => {
                 className="flex cursor-pointer justify-between bg-primary py-4 px-6"
                 onClick={() => setIsOpen()}
             >
-                <p className="text-lg text-white">{title}</p>
+                <p className="text-lg text-white">{question}</p>
                 <button type="button">
                     {isOpen ? (
                         <AiOutlineMinus color="#fff" />
@@ -33,9 +33,9 @@ const Accordion = ({ title, content }) => {
             </div>
             <div
                 className="overflow-hidden text-base transition-all duration-300"
-                ref={contentRef}
+                ref={answerRef}
             >
-                <div className="p-6">{content}</div>
+                <div className="p-6">{answer}</div>
             </div>
         </li>
     );

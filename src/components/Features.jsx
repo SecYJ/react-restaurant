@@ -1,10 +1,10 @@
 import { heading } from "../helpers/ui";
 import features from "../constants/features";
-import { SectionPy } from "../styles";
+import SectionContainer from "./SectionContainer";
 
 const Features = () => {
     return (
-        <section className={`${SectionPy} container`}>
+        <SectionContainer>
             <h2 className={heading}>我们的特点</h2>
             <ul className="mx-auto mt-4 grid grid-cols-1 gap-4 md:mt-6 md:grid-cols-2 md:gap-5 lg:mt-8 lg:grid-cols-3 lg:gap-6">
                 {features.map((feature) => {
@@ -28,7 +28,7 @@ const Features = () => {
                     );
                 })}
             </ul>
-        </section>
+        </SectionContainer>
     );
 };
 

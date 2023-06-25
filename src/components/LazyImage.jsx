@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { croppedImg } from "../services/croppedImg";
+import imgFailLoadPlaceholder from "../assets/noImage.webp";
 
 const LazyImage = ({ src, alt }) => {
     const imgRef = useRef(null);
@@ -29,9 +30,9 @@ const LazyImage = ({ src, alt }) => {
                         srcSet={croppedImg(src, 300)}
                     />
                     <img
-                        src="https://asset.alacarte.my/assets/img/alacarte-default-4.png?x-oss-process=image/resize,w_300,limit_1/format,webp"
-                        alt={alt}
                         className="h-full w-full object-cover lg:h-[300px]"
+                        src={imgFailLoadPlaceholder}
+                        alt={alt}
                     />
                 </picture>
             ) : (

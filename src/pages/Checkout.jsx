@@ -1,10 +1,13 @@
 import CheckoutForm from "../components/CheckoutForm";
 import FormCtx from "../contexts/FormCtx";
+import PaymentCtx from "../contexts/PaymentCtx";
 
 const Checkout = () => {
     return (
         <FormCtx>
-            <CheckoutForm />
+            <PaymentCtx>
+                <CheckoutForm />
+            </PaymentCtx>
         </FormCtx>
     );
 };

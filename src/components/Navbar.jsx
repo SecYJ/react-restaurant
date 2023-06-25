@@ -10,7 +10,7 @@ import useMediaQuery from "../hooks/useMediaQuery";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const { toggleCart, totalUnits } = useCartCtx();
+    const { totalUnits } = useCartCtx();
     const [menuVisible, setMenuVisible] = useState(false);
     const matchMedia = useMediaQuery("(min-width:1024px)");
 

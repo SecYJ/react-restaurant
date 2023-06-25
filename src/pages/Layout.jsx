@@ -7,12 +7,12 @@ const Layout = () => {
     return (
         <CtxWrapper>
             <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="grow">
-                <Outlet />
-            </main>
-            <Footer />
-        </div>
+                <Header />
+                <main className="relative grow">
+                    <Outlet />
+                </main>
+                <Footer />
+            </div>
         </CtxWrapper>
     );
 };
