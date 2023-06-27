@@ -5,7 +5,7 @@ import { useMenuCtx } from "../contexts/MenuCtx";
 
 const Search = ({ search, onSearchChange }) => {
     const id = useId();
-    const { filtered_menu } = useMenuCtx();
+    const { menu } = useMenuCtx();
     const searchRef = useRef(null);
 
     const onSearchClear = () => {
@@ -19,7 +19,7 @@ const Search = ({ search, onSearchChange }) => {
                 type="text"
                 className="mx-auto w-full rounded-md border border-gray-300 p-3 text-base outline-none focus:border-primary"
                 placeholder="搜寻"
-                disabled={filtered_menu.length < 1}
+                disabled={menu.length < 1}
                 id={id}
                 onChange={(e) => {
                     onSearchChange(e.target.value);

@@ -32,7 +32,7 @@ const reducer = (state, { payload, type }) => {
             }
 
             const filtered_menu = state.menu.filter((p) =>
-                p.name.toLowerCase().includes(payload)
+                p.name.toLowerCase().includes(payload.toLowerCase())
             );
 
             return {

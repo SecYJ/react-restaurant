@@ -81,7 +81,6 @@ const FormFields = () => {
                     placeholderText="请选择时间"
                     shouldCloseOnSelect={false}
                     selected={startTime}
-                    onBlur={onBlurTimeValidation}
                 />
             </div>
 
