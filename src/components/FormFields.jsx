@@ -6,6 +6,7 @@ import {
     getHours,
     getMinutes,
     isSameDay,
+    isToday,
 } from "date-fns/esm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -33,7 +34,12 @@ const FormFields = () => {
     };
 
     const filterOperationDay = (date) => {
-        return getDay(date) !== 1;
+        const today = isToday(date);
+        const currentHour = getHours(new Date());
+
+        return getDay(date) !== 1 && today
+            ? currentHour >= 6 && currentHour <= 13
+            : true;
     };
 
     const filterTime = (date) => {

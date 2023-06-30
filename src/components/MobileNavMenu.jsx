@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { menu } from "../constants/headerNavList";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -8,7 +8,8 @@ import Avatar from "./Avatar";
 
 const MobileNavMenu = ({ visible, onLinkClick }) => {
     const menuRef = useRef();
-    const { totalUnits, toggleCart } = useCartCtx();
+    const navigate = useNavigate();
+    const { totalUnits } = useCartCtx();
     const [height, setHeight] = useState(0);
 
     useEffect(() => {
@@ -42,7 +43,7 @@ const MobileNavMenu = ({ visible, onLinkClick }) => {
             <div className="flex justify-center">
                 <button
                     type="button"
-                    onClick={() => toggleCart(true)}
+                    onClick={() => navigate("/cart")}
                     className="btn-ghost btn-circle btn"
                 >
                     <div className="indicator">

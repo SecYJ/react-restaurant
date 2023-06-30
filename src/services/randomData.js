@@ -1,6 +1,10 @@
 const random = (data) => data.sort(() => Math.random() - 0.5).slice(0, 6);
 
 const randomData = (data, ids) => {
+    if (!ids) {
+        return random(data);
+    }
+
     const dataArr = [];
 
     for (let i = 0; i < data.length; i++) {

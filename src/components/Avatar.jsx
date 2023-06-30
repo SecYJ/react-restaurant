@@ -54,16 +54,7 @@ const Avatar = () => {
         <button
             type="button"
             className="btn-ghost btn-circle btn font-normal"
-            // onClick={async () => {
-            //     await loginWithRedirect({
-            //         appState: {
-            //             returnTo: window.location.pathname,
-            //         },
-            //     });
-            // }}
-            onClick={() => {
-                loginWithRedirect();
-            }}
+            onClick={() => loginWithRedirect()}
         >
             登入
         </button>

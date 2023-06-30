@@ -62,10 +62,7 @@ const Navbar = () => {
             {matchMedia && (
                 <button
                     type="button"
-                    onClick={() => {
-                        // toggleCart(true)
-                        navigate("/cart");
-                    }}
+                    onClick={() => navigate("/cart")}
                     className="btn-ghost btn-circle btn justify-self-end"
                 >
                     <div className="indicator">

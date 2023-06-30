@@ -1,4 +1,5 @@
 import useFoodMenu from "../hooks/useFoodMenu";
+import randomData from "../services/randomData";
 import CarouselSlider from "./CarouselSlider";
 import SectionContainer from "./SectionContainer";
 
@@ -7,11 +8,11 @@ const PopularList = () => {
 
     if (isLoading) return null;
 
-    const popularMenu = foodMenu
-        .filter((menu) => {
-            return menu.rating > 4.7;
-        })
-        .slice(0, 8);
+    const popularMenu = foodMenu.filter((menu) => {
+        return menu.rating >= 4.5;
+    });
+
+    const randomPopularMenu = randomData(popularMenu);
 
     return (
         <SectionContainer>
@@ -20,7 +21,7 @@ const PopularList = () => {
                     热门点心
                 </h2>
             </div>
-            <CarouselSlider carouselData={popularMenu} />
+            <CarouselSlider carouselData={randomPopularMenu} />
         </SectionContainer>
     );
 };

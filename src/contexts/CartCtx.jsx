@@ -39,10 +39,6 @@ const CartCtxProvider = ({ children }) => {
         dispatch({ type: "REMOVE_CART_ITEM", payload: id });
     }, []);
 
-    const toggleCart = useCallback((visibility) => {
-        dispatch({ type: "TOGGLE_CART_VISIBILITY", payload: visibility });
-    }, []);
-
     const clearCart = useCallback(() => {
         dispatch({ type: "CLEAR_CART" });
     }, []);
@@ -54,7 +50,6 @@ const CartCtxProvider = ({ children }) => {
                 dispatch,
                 updateCartItem,
                 deleteCartItem,
-                toggleCart,
                 clearCart,
             }}
         >

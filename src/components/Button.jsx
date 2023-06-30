@@ -1,6 +1,5 @@
 const Button = ({
     children,
-    color = "primary",
     outline = false,
     className = "",
     onClick,
