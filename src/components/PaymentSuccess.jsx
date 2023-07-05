@@ -33,7 +33,7 @@ const PaymentSuccess = () => {
     return (
         <SectionContainer>
             <section className="mb-10">
-                <h1 className="mb-4 text-center text-3xl">订单内容</h1>
+                <h1 className="mb-4 text-center text-3xl">付款成功 !</h1>
                 <h2 className="mb-3 text-2xl">您的资讯</h2>
                 <div className="divide-y divide-gray-300">
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
@@ -42,7 +42,11 @@ const PaymentSuccess = () => {
                     </div>
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
                         <div>手机号码 :</div>
-                        <div className="text-gray-500">{phone}</div>
+                        <div className="text-gray-500">
+                            {phone.startsWith("0")
+                                ? `(+60) ${phone.slice(1)}`
+                                : `(+60) ${phone}`}
+                        </div>
                     </div>
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
                         <div>配送方式 :</div>

@@ -28,14 +28,11 @@ const FormFields = () => {
         name: "deliveryMethod",
     });
 
-    const numberValidation = (v) => {
-        const pattern = /\d/;
-        return pattern.test(v) ? v : "请确保手机号码只包含数字";
-    };
-
     const filterOperationDay = (date) => {
         const today = isToday(date);
         const currentHour = getHours(new Date());
+
+        // console.log(currentHour);
 
         return getDay(date) !== 1 && today
             ? currentHour >= 6 && currentHour <= 13
@@ -116,8 +113,21 @@ const FormFields = () => {
                     <input
                         {...register("phone", {
                             required: "手机号码不得为空",
-                            valueAsNumber: true,
-                            validate: numberValidation,
+                            validate: {
+                                isNumber: (v) => {
+                                    const pattern = /\d/;
+                                    return pattern.test(v)
+                                        ? null
+                                        : "请确保手机号码只包含数字";
+                                },
+                                phoneLength: (v) => {
+                                    const value = v.toString();
+                                    return value.length >= 9 &&
+                                        value.length <= 11
+                                        ? null
+                                        : "手机号码长度必须介于 9 - 11 长度";
+                                },
+                            },
                         })}
                         onBlur={(e) => trigger(e.target.name)}
                         type="tel"
@@ -134,7 +144,12 @@ const FormFields = () => {
                     <input
                         type="email"
                         {...register("email", {
-                            required: "邮件栏位为必填",
+                            required: "Email 栏位为必填",
+                            pattern: {
+                                value: /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,
+                                message:
+                                    "Email 格式错误, 请输入正确的 Email 格式",
+                            },
                         })}
                         placeholder="e.g johndoe@gmail.com"
                         className="border border-transparent border-b-gray-300 py-2 outline-none"

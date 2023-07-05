@@ -22,7 +22,7 @@ const reducer = (state, action) => {
         }
 
         case "ADD_TO_CART": {
-            const { id } = action.payload;
+            const { id, stock } = action.payload;
             const isSavedItem = state.cart.find((item) => item.id === id);
 
             if (!isSavedItem) {
@@ -32,6 +32,8 @@ const reducer = (state, action) => {
                 ];
                 return { ...state, cart, ...calculateTotals(cart) };
             }
+
+            if (isSavedItem.orderQty + 1 > stock) return { ...state };
 
             const cart = state.cart.map((item) =>
                 item.id === id ? { ...item, orderQty: item.orderQty + 1 } : item

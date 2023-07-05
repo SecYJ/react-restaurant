@@ -1,20 +1,23 @@
+import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import useMediaQuery from "../hooks/useMediaQuery";
 
 const Avatar = () => {
     const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
     const matchMedia = useMediaQuery("(min-width:1024px)");
+    const [open, setOpen] = useState(false);
 
     if (isAuthenticated) {
         return (
             <div
-                className={`${
-                    matchMedia ? "dropdown-end" : "dropdown-top"
+                className={`${matchMedia ? "dropdown-end" : "dropdown-top"} ${
+                    open ? "dropdown-open" : ""
                 } dropdown`}
             >
                 <button
                     type="button"
                     className="btn-ghost btn-circle avatar btn"
+                    onClick={() => setOpen(!open)}
                 >
                     <div className="w-8 rounded-full">
                         <img src={user.picture} />

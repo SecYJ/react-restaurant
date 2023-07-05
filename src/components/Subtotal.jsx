@@ -1,9 +1,11 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { useMutation } from "@tanstack/react-query";
+import { request } from "../services/api-client";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useCartCtx } from "../contexts/CartCtx";
 import { useFormDataContext } from "../contexts/FormCtx";
 import { usePaymentCtx } from "../contexts/PaymentCtx";
 import useTotalAmount from "../hooks/useTotalAmount";
+import Loading from "../assets/spinner-loading.svg";
 
 const Subtotal = ({ onNextStepChange }) => {
     const { totalAmount, totalUnits, cart } = useCartCtx();
@@ -15,7 +17,26 @@ const Subtotal = ({ onNextStepChange }) => {
     const { startTime, startDate } = useFormDataContext();
     const watchDeliveryMethod = useWatch({ name: "deliveryMethod" });
     const { sst, total } = useTotalAmount(totalAmount, watchDeliveryMethod);
-    const t = useAuth0();
+
+    const { isLoading, mutate } = useMutation({
+        mutationFn: (d) => {
+            request
+                .post("/orders/asdfasdfasdfasdf", {
+                    name: d.name,
+                    id: crypto.randomUUID(),
+                })
+                .then((res) => {
+                    console.log(res);
+                });
+        },
+        onSuccess: (d) => {
+            console.log(d);
+            onNextStepChange();
+        },
+        onError: () => {
+            console.log("this is error");
+        },
+    });
 
     const onSubmit = (data) => {
         const { address, deliveryMethod, paymentRadio, eWallet } = data;
@@ -27,6 +48,10 @@ const Subtotal = ({ onNextStepChange }) => {
         }
         if (paymentRadio === "eWallet" && eWallet === "") return;
 
+        mutate({
+            name: "Sharon",
+        });
+
         setPaymentData({
             ...data,
             total,
@@ -36,7 +61,7 @@ const Subtotal = ({ onNextStepChange }) => {
             cart: [...cart],
         });
 
-        onNextStepChange();
+        // onNextStepChange();
     };
 
     return (
@@ -72,6 +97,7 @@ const Subtotal = ({ onNextStepChange }) => {
                 onClick={handleSubmit(onSubmit)}
             >
                 前往付款
+                {isLoading && <img src={Loading} />}
             </button>
         </>
     );
