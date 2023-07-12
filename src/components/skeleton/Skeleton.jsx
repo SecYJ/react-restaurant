@@ -9,9 +9,4 @@ const Skeleton = ({ type = "text", classes }) => {
     return <div className={classNames} />;
 };
 
-// my requirement
-// text- profile picture
-// the long text bar
-// title
-
 export default Skeleton;

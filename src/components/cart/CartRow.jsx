@@ -106,7 +106,6 @@ const CartRow = () => {
                         <td className="hidden lg:table-cell">
                             RM {(orderQty * price).toFixed(2)}
                         </td>
-                        {/* <td className="hidden lg:table-cell"> */}
                         <td className="">
                             <Button outline onClick={() => deleteCartItem(id)}>
                                 移除

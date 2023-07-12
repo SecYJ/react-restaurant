@@ -32,8 +32,6 @@ const FormFields = () => {
         const today = isToday(date);
         const currentHour = getHours(new Date());
 
-        // console.log(currentHour);
-
         return getDay(date) !== 1 && today
             ? currentHour >= 6 && currentHour <= 13
             : true;
@@ -166,10 +164,11 @@ const FormFields = () => {
                         className="my-2 border border-gray-300 bg-transparent p-3"
                         {...register("deliveryMethod")}
                     >
-                        <option value="自取">自取</option>
-                        <option value="外送">外送</option>
+                        <option value="selfCollect">自取</option>
+                        <option value="delivery">外送</option>
                     </select>
-                    {deliveryMethod === "外送" && (
+
+                    {deliveryMethod === "delivery" && (
                         <InputGroup label="地址" mb="mb-0">
                             <input
                                 type="text"

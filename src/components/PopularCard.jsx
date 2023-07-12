@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 const PopularCard = ({ name, price, img, id }) => {
     const navigate = useNavigate();
 
-    const changePage = (id) => navigate(`/menu?id=${id}`);
+    // const changePage = (id) => navigate(`/menu?id=${id}`);
 
     return (
         <div
-            className="card-compact card-bordered card max-h-[400px] rounded-md border-gray-300 shadow-lg"
+            className="card-bordered card card-compact max-h-[400px] rounded-md border-gray-300 shadow-lg"
             onClick={() => changePage(id)}
         >
             <figure className="group relative cursor-pointer overflow-hidden">

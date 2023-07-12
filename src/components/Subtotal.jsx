@@ -19,23 +19,10 @@ const Subtotal = ({ onNextStepChange }) => {
     const { sst, total } = useTotalAmount(totalAmount, watchDeliveryMethod);
 
     const { isLoading, mutate } = useMutation({
-        mutationFn: (d) => {
-            request
-                .post("/orders/asdfasdfasdfasdf", {
-                    name: d.name,
-                    id: crypto.randomUUID(),
-                })
-                .then((res) => {
-                    console.log(res);
-                });
+        mutationFn: (data) => {
+            request.post("/orders", data).then((res) => res);
         },
-        onSuccess: (d) => {
-            console.log(d);
-            onNextStepChange();
-        },
-        onError: () => {
-            console.log("this is error");
-        },
+        onSuccess: () => onNextStepChange(),
     });
 
     const onSubmit = (data) => {
@@ -43,25 +30,21 @@ const Subtotal = ({ onNextStepChange }) => {
 
         if (startTime === "" || startDate === "") return;
 
-        if (deliveryMethod === "delivery" && address.trim() === "") {
-            return;
-        }
+        if (deliveryMethod === "delivery" && address.trim() === "") return;
         if (paymentRadio === "eWallet" && eWallet === "") return;
 
-        mutate({
-            name: "Sharon",
-        });
-
-        setPaymentData({
+        const paymentData = {
             ...data,
             total,
             totalUnits,
             startTime,
             startDate,
             cart: [...cart],
-        });
+        };
 
-        // onNextStepChange();
+        mutate({ ...paymentData, id: crypto.randomUUID() });
+        setPaymentData(paymentData);
+        onNextStepChange();
     };
 
     return (

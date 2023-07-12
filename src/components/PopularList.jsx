@@ -2,14 +2,13 @@ import useFoodMenu from "../hooks/useFoodMenu";
 import randomData from "../services/randomData";
 import CarouselSlider from "./CarouselSlider";
 import SectionContainer from "./SectionContainer";
-import SkeletonPost from "./skeleton/SkeletonPost";
+import SkeletonCard from "./skeleton/SkeletonCard";
 
 const PopularList = () => {
     const { data: foodMenu, isLoading } = useFoodMenu();
 
-    if (isLoading) return;
-    {
-        [...Array(3).keys()].map((i) => <SkeletonPost key={i} />);
+    if (isLoading) {
+        return [...Array(3).keys()].map((i) => <SkeletonCard key={i} />);
     }
 
     const popularMenu = foodMenu.filter((menu) => {

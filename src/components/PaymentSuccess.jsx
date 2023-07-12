@@ -8,6 +8,13 @@ import randomData from "../services/randomData";
 import { useMenuCtx } from "../contexts/MenuCtx";
 import SectionContainer from "./SectionContainer";
 
+const paymentMap = {
+    onlineBanking: "网络银行",
+    creditCard: "信用卡",
+    eWallet: "电子钱包",
+    cashOnDelivery: "货到付款",
+};
+
 const PaymentSuccess = () => {
     const { paymentData } = usePaymentCtx();
     const { clearCart } = useCartCtx();
@@ -20,6 +27,8 @@ const PaymentSuccess = () => {
         startTime,
         startDate,
         cart,
+        email,
+        paymentMethod,
     } = paymentData;
 
     const { menu } = useMenuCtx();
@@ -33,7 +42,9 @@ const PaymentSuccess = () => {
     return (
         <SectionContainer>
             <section className="mb-10">
-                <h1 className="mb-4 text-center text-3xl">付款成功 !</h1>
+                <h1 className="mb-4 text-center text-3xl">
+                    付款成功! 马上为您安排 😀
+                </h1>
                 <h2 className="mb-3 text-2xl">您的资讯</h2>
                 <div className="divide-y divide-gray-300">
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
@@ -52,12 +63,20 @@ const PaymentSuccess = () => {
                         <div>配送方式 :</div>
                         <div className="text-gray-500">{deliveryMethod}</div>
                     </div>
+                    <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                        <div>Email :</div>
+                        <div className="text-gray-500">{email}</div>
+                    </div>
                     {address && (
                         <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
                             <div>地址 :</div>
                             <div className="text-gray-500">{address}</div>
                         </div>
                     )}
+                    <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                        <div>付款方式 :</div>
+                        <div>{paymentMap[paymentMethod]}</div>
+                    </div>
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
                         <div>日期 :</div>
                         <div>
@@ -82,7 +101,8 @@ const PaymentSuccess = () => {
                 <h2 className="mb-3 text-2xl">购买内容</h2>
                 <PurchasedTable />
             </section>
-            <section className="mt-4">
+            <section className="mt-8">
+                <h2 className="mb-3 text-2xl">您可能喜欢</h2>
                 <CarouselSlider carouselData={data} />
             </section>
         </SectionContainer>

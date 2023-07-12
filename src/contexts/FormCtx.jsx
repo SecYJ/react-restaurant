@@ -12,7 +12,7 @@ const FormCtx = ({ children }) => {
         defaultValues: {
             username: "",
             phone: "",
-            deliveryMethod: "外送",
+            deliveryMethod: "delivery",
             contactLessDelivery: false,
             paymentRadio: "",
             orderRequest: "",

@@ -11,9 +11,6 @@ const MenuCard = ({ menuData }) => {
     const matchMedia = useMediaQuery("(min-width: 1024px)");
 
     const addToCart = () => {
-        // NOTE:
-        // if ()
-
         dispatch({
             type: "ADD_TO_CART",
             payload: {

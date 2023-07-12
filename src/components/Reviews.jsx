@@ -50,9 +50,6 @@ const Reviews = () => {
                 </div>
             </SectionContainer>
         </div>
-        // <section className="mb-10 bg-secondary py-10 px-3">
-
-        // </section>
     );
 };
 export default Reviews;
