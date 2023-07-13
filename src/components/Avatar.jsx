@@ -25,16 +25,6 @@ const Avatar = () => {
                 </button>
                 <ul className="dropdown-content menu menu-compact mt-3 rounded-lg bg-gray-200 text-black/70 shadow">
                     <li>
-                        <a className="justify-between hover:bg-primary hover:text-white">
-                            Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a className="hover:bg-primary hover:text-white">
-                            Settings
-                        </a>
-                    </li>
-                    <li>
                         <button
                             className="text-black/70 hover:bg-primary hover:text-white"
                             onClick={() =>
