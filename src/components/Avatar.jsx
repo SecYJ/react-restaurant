@@ -26,7 +26,7 @@ const Avatar = () => {
                 <ul className="dropdown-content menu menu-compact mt-3 rounded-lg bg-gray-200 text-black/70 shadow">
                     <li>
                         <button
-                            className="text-black/70 hover:bg-primary hover:text-white"
+                            className="whitespace-nowrap text-black/70 hover:bg-primary hover:text-white"
                             onClick={() =>
                                 logout({
                                     logoutParams: {
