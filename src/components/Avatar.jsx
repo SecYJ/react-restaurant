@@ -10,9 +10,9 @@ const Avatar = () => {
     if (isAuthenticated) {
         return (
             <div
-                className={`${matchMedia ? "dropdown-end" : "dropdown-top"} ${
-                    open ? "dropdown-open" : ""
-                } dropdown`}
+                className={`${
+                    matchMedia ? "dropdown-end" : "dropdown-bottom"
+                } ${open ? "dropdown-open" : ""} dropdown`}
             >
                 <button
                     type="button"
