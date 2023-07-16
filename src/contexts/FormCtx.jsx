@@ -4,15 +4,15 @@ import { FormProvider, useForm } from "react-hook-form";
 const FormDataContext = createContext(null);
 
 const FormCtx = ({ children }) => {
-    const [startDate, setStartDate] = useState("");
-    const [startTime, setStartTime] = useState("");
+    const [deliveryDate, setDeliveryDate] = useState("");
+    const [businessHours, setBusinessHours] = useState("");
 
     const methods = useForm({
         mode: "onChange",
         defaultValues: {
             username: "",
             phone: "",
-            deliveryMethod: "delivery",
+            deliveryMethod: "外卖",
             contactLessDelivery: false,
             paymentRadio: "",
             orderRequest: "",
@@ -25,10 +25,10 @@ const FormCtx = ({ children }) => {
     return (
         <FormDataContext.Provider
             value={{
-                startDate,
-                startTime,
-                setStartDate,
-                setStartTime,
+                deliveryDate,
+                setDeliveryDate,
+                businessHours,
+                setBusinessHours,
             }}
         >
             <FormProvider {...methods}>{children}</FormProvider>

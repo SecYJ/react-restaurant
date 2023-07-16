@@ -7,7 +7,7 @@ import LazyImage from "../LazyImage";
 const MenuCard = ({ menuData }) => {
     const { img, category, price, name, stock, id } = menuData;
     const { dispatch } = useCartCtx();
-    const [cName, ...eName] = name.split(" ");
+    const [chineseName, ...englishName] = name.split(" ");
     const matchMedia = useMediaQuery("(min-width: 1024px)");
 
     const addToCart = () => {
@@ -32,7 +32,7 @@ const MenuCard = ({ menuData }) => {
                 {matchMedia ? (
                     <>
                         <p className="flex items-center font-semibold">
-                            {cName}
+                            {chineseName}
                             <span className="badge-secondary badge ml-2">
                                 {category}
                             </span>
@@ -41,7 +41,7 @@ const MenuCard = ({ menuData }) => {
                             RM {price.toFixed(2)}
                         </strong>
                         <p className="text-lg font-semibold">
-                            {eName.join(" ")}
+                            {englishName.join(" ")}
                         </p>
                     </>
                 ) : (

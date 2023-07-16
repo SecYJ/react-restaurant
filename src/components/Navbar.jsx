@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useCartCtx } from "../contexts/CartCtx";
-import { menu } from "../constants/headerNavList";
+import { menu } from "../constants/nav-links";
 import Avatar from "./Avatar";
 
 const Navbar = () => {

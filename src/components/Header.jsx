@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useCartCtx } from "../contexts/CartCtx";
 import useMediaQuery from "../hooks/useMediaQuery";
@@ -13,6 +13,7 @@ import Navbar from "./Navbar.jsx";
 const Header = () => {
     const { totalUnits } = useCartCtx();
     const [visible, setVisible] = useState(false);
+    const navigate = useNavigate();
     const matchMedia = useMediaQuery("(min-width: 1024px)");
 
     const toggleVisibility = () => setVisible((c) => !c);

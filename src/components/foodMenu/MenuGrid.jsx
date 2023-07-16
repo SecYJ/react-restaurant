@@ -5,9 +5,11 @@ import MenuSkeleton from "./MenuSkeleton";
 
 const MenuGrid = () => {
     const { dispatch, filtered_menu, search } = useMenuCtx();
-    const { isLoading } = useFoodMenu({
-        onSuccess: (data) => dispatch({ type: "SET_MENU", payload: data }),
-    });
+    const { isLoading } = useFoodMenu(setMenu);
+
+    function setMenu(data) {
+        dispatch({ type: "SET_MENU", payload: data });
+    }
 
     if (isLoading) {
         return <MenuSkeleton />;

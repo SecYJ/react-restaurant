@@ -12,7 +12,3 @@ export const menu = [
         text: "菜单",
     },
 ];
-// {
-//     link: "/news",
-//     text: "资讯",
-// },

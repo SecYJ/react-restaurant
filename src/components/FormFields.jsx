@@ -21,7 +21,7 @@ const FormFields = () => {
         trigger,
     } = useFormContext();
 
-    const { startDate, setStartDate, startTime, setStartTime } =
+    const { deliveryDate, setDeliveryDate, businessHours, setBusinessHours } =
         useFormDataContext();
 
     const deliveryMethod = useWatch({
@@ -40,21 +40,21 @@ const FormFields = () => {
     const filterTime = (date) => {
         const hour = getHours(date);
         const minuteDifference = differenceInMinutes(date, new Date()) >= 30; // greater or equal 30m can booking
-        const isToday = isSameDay(startDate, new Date());
+        const isToday = isSameDay(deliveryDate, new Date());
         const morningBookingHour = hour >= 6 && hour <= 12;
         const afternoonBookingHour = hour === 13 && getMinutes(date) !== 30;
 
         return isToday
             ? (minuteDifference && morningBookingHour) ||
                   (minuteDifference && afternoonBookingHour)
-            : startDate === ""
+            : deliveryDate === ""
             ? false
             : morningBookingHour || afternoonBookingHour;
     };
 
     const onDateChange = (date) => {
-        setStartDate(date);
-        setStartTime("");
+        setDeliveryDate(date);
+        setBusinessHours("");
     };
 
     return (
@@ -64,7 +64,7 @@ const FormFields = () => {
                 <DatePicker
                     className="rounded-sm border border-gray-300 outline-none focus:border-primary"
                     filterDate={filterOperationDay}
-                    selected={startDate}
+                    selected={deliveryDate}
                     onChange={onDateChange}
                     dateFormat="dd/MM/yyyy"
                     minDate={new Date()}
@@ -73,15 +73,16 @@ const FormFields = () => {
                     shouldCloseOnSelect={false}
                 />
                 <DatePicker
+                    disabled={!deliveryDate}
                     showTimeSelect
                     showTimeSelectOnly
-                    onChange={(date) => setStartTime(date)}
+                    onChange={(date) => setBusinessHours(date)}
                     filterTime={filterTime}
                     className="rounded-sm border border-gray-300 outline-none focus:border-primary"
                     dateFormat="h:mm aa"
                     placeholderText="请选择时间"
                     shouldCloseOnSelect={false}
-                    selected={startTime}
+                    selected={businessHours}
                 />
             </div>
 
@@ -164,8 +165,8 @@ const FormFields = () => {
                         className="my-2 border border-gray-300 bg-transparent p-3"
                         {...register("deliveryMethod")}
                     >
-                        <option value="selfCollect">自取</option>
-                        <option value="delivery">外送</option>
+                        <option value="自取">自取</option>
+                        <option value="外卖">外卖</option>
                     </select>
 
                     {deliveryMethod === "delivery" && (

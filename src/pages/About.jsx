@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import SectionContainer from "../components/SectionContainer";
-import paragraph from "../constants/aboutParagraph";
+import paragraph from "../constants/about-paragraph";
 import { animateConfigs } from "../router";
 
 const About = () => {

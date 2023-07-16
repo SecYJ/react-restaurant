@@ -24,8 +24,8 @@ const PaymentSuccess = () => {
         phone,
         deliveryMethod,
         address,
-        startTime,
-        startDate,
+        businessHours,
+        deliveryDate,
         cart,
         email,
         paymentMethod,
@@ -80,15 +80,15 @@ const PaymentSuccess = () => {
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
                         <div>日期 :</div>
                         <div>
-                            {new Intl.DateTimeFormat().format(startDate)}{" "}
+                            {new Intl.DateTimeFormat().format(deliveryDate)}
                         </div>
                     </div>
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
                         <div>时间:</div>
                         <div>
-                            {getHours(startTime)}.
-                            {getMinutes(startTime) || "00"}{" "}
-                            {getHours(startTime) >= 12 ? "pm" : "am"}
+                            {getHours(businessHours)}.
+                            {getMinutes(businessHours) || "00"}{" "}
+                            {getHours(businessHours) >= 12 ? "pm" : "am"}
                         </div>
                     </div>
                     <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">

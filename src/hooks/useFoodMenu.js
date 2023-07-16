@@ -1,14 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { request } from "../services/api-client";
+import APIClient from "../services/api-client";
 
-const getMenu = async () =>
-    await request.get("/products").then((res) => res.data);
+const useFoodMenu = (callback) => {
+    const apiClient = new APIClient("/products");
 
-const useFoodMenu = (props = {}) => {
     return useQuery({
         queryKey: ["foodMenu"],
-        queryFn: getMenu,
-        ...props,
+        queryFn: apiClient.getFoodMenu.bind(apiClient),
+        onSuccess: callback,
     });
 };
 

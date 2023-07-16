@@ -1,11 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
-import { request } from "../services/api-client";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useCartCtx } from "../contexts/CartCtx";
 import { useFormDataContext } from "../contexts/FormCtx";
 import { usePaymentCtx } from "../contexts/PaymentCtx";
 import useTotalAmount from "../hooks/useTotalAmount";
 import Loading from "../assets/spinner-loading.svg";
+import useOrder from "../hooks/useOrder";
 
 const Subtotal = ({ onNextStepChange }) => {
     const { totalAmount, totalUnits, cart } = useCartCtx();
@@ -14,22 +13,18 @@ const Subtotal = ({ onNextStepChange }) => {
         handleSubmit,
         formState: { isValid },
     } = useFormContext();
-    const { startTime, startDate } = useFormDataContext();
+    const { businessHours, deliveryDate } = useFormDataContext();
+
     const watchDeliveryMethod = useWatch({ name: "deliveryMethod" });
+
     const { sst, total } = useTotalAmount(totalAmount, watchDeliveryMethod);
 
-    const { isLoading, mutate } = useMutation({
-        mutationFn: (data) => {
-            request.post("/orders", data).then((res) => res);
-        },
-        onSuccess: () => onNextStepChange(),
-    });
+    const { isLoading, mutate } = useOrder(onNextStepChange);
 
     const onSubmit = (data) => {
         const { address, deliveryMethod, paymentRadio, eWallet } = data;
 
-        if (startTime === "" || startDate === "") return;
-
+        if (businessHours === "" || deliveryDate === "") return;
         if (deliveryMethod === "delivery" && address.trim() === "") return;
         if (paymentRadio === "eWallet" && eWallet === "") return;
 
@@ -37,12 +32,16 @@ const Subtotal = ({ onNextStepChange }) => {
             ...data,
             total,
             totalUnits,
-            startTime,
-            startDate,
+            businessHours,
+            deliveryDate,
             cart: [...cart],
         };
 
-        mutate({ ...paymentData, id: crypto.randomUUID() });
+        mutate({
+            ...paymentData,
+            deliveryDate: new Intl.DateTimeFormat().format(new Date()),
+            id: crypto.randomUUID(),
+        });
         setPaymentData(paymentData);
         onNextStepChange();
     };
@@ -72,7 +71,7 @@ const Subtotal = ({ onNextStepChange }) => {
             <button
                 type="button"
                 className={`w-full rounded-full py-2 text-white ${
-                    isValid && startTime && startDate
+                    isValid && businessHours && deliveryDate
                         ? "pointer-events-auto bg-primary"
                         : "pointer-events-none bg-gray-400"
                 }`}

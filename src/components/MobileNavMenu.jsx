@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { menu } from "../constants/headerNavList";
+import { menu } from "../constants/nav-links";
 import useMediaQuery from "../hooks/useMediaQuery";
 
 const MobileNavMenu = ({ toggleVisibility }) => {

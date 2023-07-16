@@ -1,5 +1,5 @@
 import Accordion from "./Accordion";
-import accordionData from "../constants/accordionsData";
+import accordionData from "../constants/accordion-data";
 import SectionContainer from "./SectionContainer";
 
 const Faq = () => {
