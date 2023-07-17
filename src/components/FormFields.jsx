@@ -32,9 +32,7 @@ const FormFields = () => {
         const today = isToday(date);
         const currentHour = getHours(new Date());
 
-        return getDay(date) !== 1 && today
-            ? currentHour >= 6 && currentHour <= 13
-            : true;
+        return (getDay(date) !== 1 && !today) || (today && currentHour <= 13);
     };
 
     const filterTime = (date) => {

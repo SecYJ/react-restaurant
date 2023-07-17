@@ -39,11 +39,12 @@ const Subtotal = ({ onNextStepChange }) => {
 
         mutate({
             ...paymentData,
-            deliveryDate: new Intl.DateTimeFormat().format(new Date()),
+            deliveryDate: new Intl.DateTimeFormat().format(
+                new Date(deliveryDate)
+            ),
             id: crypto.randomUUID(),
         });
         setPaymentData(paymentData);
-        onNextStepChange();
     };
 
     return (
@@ -70,7 +71,7 @@ const Subtotal = ({ onNextStepChange }) => {
             </strong>
             <button
                 type="button"
-                className={`w-full rounded-full py-2 text-white ${
+                className={`flex w-full items-center justify-center rounded-full py-2 text-white ${
                     isValid && businessHours && deliveryDate
                         ? "pointer-events-auto bg-primary"
                         : "pointer-events-none bg-gray-400"

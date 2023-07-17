@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { croppedImg } from "../services/croppedImg";
 import imgFailLoadPlaceholder from "../assets/noImage.webp";
 
-const LazyImage = ({ src, alt }) => {
+const LazyImage = ({ src, alt, id }) => {
     const imgRef = useRef(null);
     const [inView, setInView] = useState(false);
 
@@ -22,12 +21,12 @@ const LazyImage = ({ src, alt }) => {
                     <source
                         type="image/webp"
                         media="(min-width: 1024px)"
-                        srcSet={croppedImg(src, 350)}
+                        srcSet={src}
                     />
                     <source
                         type="image/webp"
                         media="(min-width: 0px)"
-                        srcSet={croppedImg(src, 300)}
+                        srcSet={src}
                     />
                     <img
                         className="h-full w-full object-cover lg:h-[300px]"

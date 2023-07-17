@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 const PopularCard = ({ name, price, img, id }) => {
     const navigate = useNavigate();
 
-    // const changePage = (id) => navigate(`/menu?id=${id}`);
+    const changePage = (id) => navigate(`/menu?id=${id}`);
 
     return (
         <div

@@ -3,12 +3,26 @@ import { AiOutlinePlus } from "react-icons/ai";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import Button from "../Button";
 import LazyImage from "../LazyImage";
+import { useSearchParams } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 const MenuCard = ({ menuData }) => {
     const { img, category, price, name, stock, id } = menuData;
     const { dispatch } = useCartCtx();
     const [chineseName, ...englishName] = name.split(" ");
     const matchMedia = useMediaQuery("(min-width: 1024px)");
+
+    const cardRef = useRef(null);
+
+    const searchParams = useSearchParams();
+    const [queryString] = searchParams[0];
+
+    useEffect(() => {
+        if (!queryString) return;
+        if (queryString[1] === cardRef.current.dataset.id) {
+            window.scrollTo({ top: cardRef.current.offsetTop });
+        }
+    }, [searchParams]);
 
     const addToCart = () => {
         dispatch({
@@ -24,9 +38,13 @@ const MenuCard = ({ menuData }) => {
     };
 
     return (
-        <li className="relative grid grid-cols-[auto_1fr] overflow-hidden rounded-lg border border-gray-200 duration-150 hover:-translate-y-1 hover:border-gray-400 hover:shadow-xl lg:grid-cols-1 lg:grid-rows-[auto_1fr]">
+        <li
+            className="relative grid grid-cols-[auto_1fr] overflow-hidden rounded-lg border border-gray-200 duration-150 hover:-translate-y-1 hover:border-gray-400 hover:shadow-xl lg:grid-cols-1 lg:grid-rows-[auto_1fr]"
+            data-id={id}
+            ref={cardRef}
+        >
             <div className="w-24 overflow-hidden lg:w-auto">
-                <LazyImage src={img} alt={name} />
+                <LazyImage src={img} alt={name} id={id} />
             </div>
             <div className="grid grid-cols-[1fr_auto] content-between p-2">
                 {matchMedia ? (
