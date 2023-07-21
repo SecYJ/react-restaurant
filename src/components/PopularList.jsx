@@ -8,7 +8,15 @@ const PopularList = () => {
     const { data: foodMenu, isLoading } = useFoodMenu();
 
     if (isLoading) {
-        return [...Array(3).keys()].map((i) => <SkeletonCard key={i} />);
+        return (
+            <SectionContainer>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    {[...Array(3)].map((_, i) => (
+                        <SkeletonCard key={i} />
+                    ))}
+                </div>
+            </SectionContainer>
+        );
     }
 
     const popularMenu = foodMenu.filter((menu) => {

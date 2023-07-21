@@ -57,7 +57,7 @@ const FormFields = () => {
 
     return (
         <form>
-            <h2 className="col-span-full mb-4 font-bold">添加您的信息</h2>
+            <h2 className="col-span-full mb-4 font-bold">日期与时间</h2>
             <div className="mb-4 flex gap-4">
                 <DatePicker
                     className="rounded-sm border border-gray-300 outline-none focus:border-primary"
@@ -85,7 +85,7 @@ const FormFields = () => {
             </div>
 
             <div className="border-b border-gray-200 pb-4">
-                <h2 className="col-span-full mb-4 font-bold">添加您的信息</h2>
+                <h2 className="col-span-full mb-4 font-bold">个人信息</h2>
                 <InputGroup label="姓名*">
                     <input
                         {...register("username", {

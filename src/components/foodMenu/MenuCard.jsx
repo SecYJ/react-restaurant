@@ -20,7 +20,10 @@ const MenuCard = ({ menuData }) => {
     useEffect(() => {
         if (!queryString) return;
         if (queryString[1] === cardRef.current.dataset.id) {
-            window.scrollTo({ top: cardRef.current.offsetTop });
+            window.scrollTo({
+                top: cardRef.current.offsetTop,
+                behavior: "smooth",
+            });
         }
     }, [searchParams]);
 
@@ -55,7 +58,7 @@ const MenuCard = ({ menuData }) => {
                                 {category}
                             </span>
                         </p>
-                        <strong className="text-3xl text-primary">
+                        <strong className="text-lg text-primary">
                             RM {price.toFixed(2)}
                         </strong>
                         <p className="text-lg font-semibold">

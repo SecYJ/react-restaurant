@@ -16,7 +16,7 @@ const MenuGrid = () => {
     }
 
     if (filtered_menu.length < 1 && search !== "") {
-        return <p>没有符合您寻找的食品，请在查询</p>;
+        return <p>没有符合您寻找的食品，请再查询</p>;
     }
 
     return (

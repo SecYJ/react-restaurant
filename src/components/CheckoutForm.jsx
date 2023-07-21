@@ -11,7 +11,7 @@ const CheckoutForm = () => {
             {step === "checkout" && (
                 <div className="mx-auto grid w-full max-w-5xl gap-8 py-20 px-3 lg:grid-cols-[1fr_300px]">
                     <h1 className="col-span-full text-3xl font-bold">
-                        Checkout
+                        个人与付款信息
                     </h1>
                     <FormFields />
                     <div className="mt-4 lg:mt-0">

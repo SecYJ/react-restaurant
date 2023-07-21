@@ -1,6 +1,6 @@
 import Skeleton from "./Skeleton";
 
-const SkeletonPost = () => {
+const SkeletonCard = () => {
     return (
         <div className="rounded-md bg-gray-500">
             <Skeleton type="img" />
@@ -12,4 +12,4 @@ const SkeletonPost = () => {
         </div>
     );
 };
-export default SkeletonPost;
+export default SkeletonCard;
