@@ -20,6 +20,8 @@ const reducer = (state, { payload, type }) => {
             return {
                 ...state,
                 filtered_menu: filterMenu(state.currentSelect),
+                currentSelect: "全部",
+                search: "",
             };
         }
 
