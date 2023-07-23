@@ -5,13 +5,13 @@ import MenuSkeleton from "./MenuSkeleton";
 
 const MenuGrid = () => {
     const { dispatch, filtered_menu, search } = useMenuCtx();
-    const { isLoading } = useFoodMenu(setMenu);
+    const { isLoading, isFetching } = useFoodMenu(setMenu);
 
     function setMenu(data) {
         dispatch({ type: "SET_MENU", payload: data });
     }
 
-    if (isLoading) {
+    if (isLoading || isFetching) {
         return <MenuSkeleton />;
     }
 

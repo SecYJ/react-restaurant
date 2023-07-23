@@ -76,7 +76,9 @@ const FormFields = () => {
                     showTimeSelectOnly
                     onChange={(date) => setBusinessHours(date)}
                     filterTime={filterTime}
-                    className="rounded-sm border border-gray-300 outline-none focus:border-primary"
+                    className={`rounded-sm border border-gray-300 outline-none focus:border-primary ${
+                        !deliveryDate ? "cursor-not-allowed" : ""
+                    }`}
                     dateFormat="h:mm aa"
                     placeholderText="请选择时间"
                     shouldCloseOnSelect={false}
@@ -158,43 +160,43 @@ const FormFields = () => {
                         </p>
                     )}
                 </InputGroup>
-                <InputGroup label="配送方式" mb="mb-0">
+                <InputGroup label="配送方式">
                     <select
-                        className="my-2 border border-gray-300 bg-transparent p-3"
+                        className="mt-2 border border-gray-300 bg-transparent p-3"
                         {...register("deliveryMethod")}
                     >
                         <option value="自取">自取</option>
                         <option value="外卖">外卖</option>
                     </select>
 
-                    {deliveryMethod === "delivery" && (
-                        <InputGroup label="地址" mb="mb-0">
-                            <input
-                                type="text"
-                                placeholder="e.g 420 LORONG KANGSAR 1/7 TAMAN KANGSAR, 大小写均可"
-                                className="border border-transparent border-b-gray-300 py-2 outline-none"
-                                {...register("address", {
-                                    required: "地址栏位为必填",
-                                })}
-                            />
-                            {errors.address && (
-                                <p className="mt-1 text-red-500">
-                                    {errors.address.message}
-                                </p>
-                            )}
+                    {deliveryMethod === "外卖" && (
+                        <InputGroup mb="mb-0 mt-1">
+                            <label className="flex items-center gap-1">
+                                <input
+                                    type="checkbox"
+                                    className="h-4 w-4 border border-gray-300 "
+                                    {...register("contactLessDelivery")}
+                                />
+                                无接触外送
+                            </label>
                         </InputGroup>
                     )}
                 </InputGroup>
-                {deliveryMethod === "delivery" && (
-                    <InputGroup mb="mb-0">
-                        <label className="flex items-center gap-1">
-                            <input
-                                type="checkbox"
-                                className="h-4 w-4 border border-gray-300 "
-                                {...register("contactLessDelivery")}
-                            />
-                            无接触外送
-                        </label>
+                {deliveryMethod === "外卖" && (
+                    <InputGroup label="地址" mb="mb-0">
+                        <input
+                            type="text"
+                            placeholder="e.g 420 LORONG KANGSAR 1/7 TAMAN KANGSAR, 大小写均可"
+                            className="border border-transparent border-b-gray-300 py-2 outline-none"
+                            {...register("address", {
+                                required: "地址栏位为必填",
+                            })}
+                        />
+                        {errors.address && (
+                            <p className="mt-1 text-red-500">
+                                {errors.address.message}
+                            </p>
+                        )}
                     </InputGroup>
                 )}
             </div>

@@ -7,6 +7,7 @@ import { useCartCtx } from "../contexts/CartCtx";
 import randomData from "../services/randomData";
 import { useMenuCtx } from "../contexts/MenuCtx";
 import SectionContainer from "./SectionContainer";
+import PaymentSuccessTextRow from "./PaymentSuccessTextRow";
 
 const paymentMap = {
     onlineBanking: "网络银行",
@@ -29,6 +30,7 @@ const PaymentSuccess = () => {
         cart,
         email,
         paymentMethod,
+        contactLessDelivery,
     } = paymentData;
 
     const { menu } = useMenuCtx();
@@ -47,54 +49,58 @@ const PaymentSuccess = () => {
                 </h1>
                 <h2 className="mb-3 text-2xl">您的资讯</h2>
                 <div className="divide-y divide-gray-300">
-                    <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                    <PaymentSuccessTextRow>
                         <div>名称 :</div>
                         <div className="text-gray-500">{username}</div>
-                    </div>
-                    <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                    </PaymentSuccessTextRow>
+                    <PaymentSuccessTextRow>
                         <div>手机号码 :</div>
                         <div className="text-gray-500">
                             {phone.startsWith("0")
                                 ? `(+60) ${phone.slice(1)}`
                                 : `(+60) ${phone}`}
                         </div>
-                    </div>
-                    <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                    </PaymentSuccessTextRow>
+                    <PaymentSuccessTextRow>
                         <div>配送方式 :</div>
-                        <div className="text-gray-500">{deliveryMethod}</div>
-                    </div>
-                    <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                        <div className="text-gray-500">
+                            {`${deliveryMethod} ${
+                                contactLessDelivery ? "(无接触外送)" : ""
+                            }`}
+                        </div>
+                    </PaymentSuccessTextRow>
+                    <PaymentSuccessTextRow>
                         <div>Email :</div>
                         <div className="text-gray-500">{email}</div>
-                    </div>
+                    </PaymentSuccessTextRow>
                     {address && (
-                        <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                        <PaymentSuccessTextRow>
                             <div>地址 :</div>
                             <div className="text-gray-500">{address}</div>
-                        </div>
+                        </PaymentSuccessTextRow>
                     )}
-                    <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                    <PaymentSuccessTextRow>
                         <div>付款方式 :</div>
                         <div>{paymentMap[paymentMethod]}</div>
-                    </div>
-                    <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                    </PaymentSuccessTextRow>
+                    <PaymentSuccessTextRow>
                         <div>日期 :</div>
                         <div>
                             {new Intl.DateTimeFormat().format(deliveryDate)}
                         </div>
-                    </div>
-                    <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                    </PaymentSuccessTextRow>
+                    <PaymentSuccessTextRow>
                         <div>时间:</div>
                         <div>
                             {getHours(businessHours)}.
                             {getMinutes(businessHours) || "00"}{" "}
                             {getHours(businessHours) >= 12 ? "pm" : "am"}
                         </div>
-                    </div>
-                    <div className="grid grid-cols-[100px_1fr] py-4 pl-4 text-lg">
+                    </PaymentSuccessTextRow>
+                    <PaymentSuccessTextRow>
                         <p>总额 :</p>
                         <p>RM {total}</p>
-                    </div>
+                    </PaymentSuccessTextRow>
                 </div>
             </section>
             <section className="overflow-x-auto">

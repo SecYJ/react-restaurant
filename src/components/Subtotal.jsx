@@ -16,8 +16,9 @@ const Subtotal = ({ onNextStepChange }) => {
     const { businessHours, deliveryDate } = useFormDataContext();
 
     const watchDeliveryMethod = useWatch({ name: "deliveryMethod" });
-
     const { sst, total } = useTotalAmount(totalAmount, watchDeliveryMethod);
+    const grossTotal =
+        watchDeliveryMethod === "外卖" ? (Number(total) + 5).toFixed(2) : total;
 
     const { isLoading, mutate } = useOrder(onNextStepChange);
 
@@ -30,11 +31,11 @@ const Subtotal = ({ onNextStepChange }) => {
 
         const paymentData = {
             ...data,
-            total,
             totalUnits,
             businessHours,
             deliveryDate,
             cart: [...cart],
+            total: grossTotal,
         };
 
         mutate({
@@ -57,7 +58,7 @@ const Subtotal = ({ onNextStepChange }) => {
                 <li className="flex justify-between">
                     <p>运输费</p>
                     <p>
-                        {watchDeliveryMethod === "外送" ? "RM 5.00" : "RM 0.00"}
+                        {watchDeliveryMethod === "外卖" ? "RM 5.00" : "RM 0.00"}
                     </p>
                 </li>
                 <li className="flex justify-between">
@@ -67,7 +68,12 @@ const Subtotal = ({ onNextStepChange }) => {
             </ul>
             <strong className="mt-4 mb-8 flex justify-between border-t border-t-gray-300 pt-4 text-base">
                 <span>总额 (包含 SST)</span>
-                <span>RM {total}</span>
+                <span>
+                    RM{" "}
+                    {watchDeliveryMethod === "外卖"
+                        ? (Number(total) + 5).toFixed(2)
+                        : total}
+                </span>
             </strong>
             <button
                 type="button"
