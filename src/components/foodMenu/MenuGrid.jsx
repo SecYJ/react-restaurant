@@ -9,7 +9,6 @@ const MenuGrid = () => {
 
     function setMenu(data) {
         dispatch({ type: "SET_MENU", payload: data });
-        console.log("t");
     }
 
     if (isLoading) {

@@ -34,44 +34,54 @@ const CartRow = () => {
                         <td className="hidden lg:table-cell">
                             <p>{name}</p>
                         </td>
-                        <td className="lg:hidden">
-                            <div className="flex gap-3">
+                        <td className="px-0 lg:hidden">
+                            <div className="grid grid-cols-[auto_1fr] gap-3">
                                 <img
                                     src={img}
                                     className="h-24 w-24 object-cover"
                                 />
-                                <div className="flex flex-col items-start justify-between">
+                                <div className="grid items-start justify-items-start">
                                     <p>{name}</p>
                                     <strong>
                                         RM {(orderQty * price).toFixed(2)}
                                     </strong>
-                                    <div className="flex items-center justify-center gap-3">
-                                        <CartButton
-                                            variant="minus"
-                                            disabled={orderQty - 1 < 1}
-                                            onClick={() => {
-                                                if (orderQty - 1 < 1) return;
-                                                updateCartItem({
-                                                    direction: "decrement",
-                                                    id,
-                                                });
-                                            }}
-                                        />
-                                        <p className="min-w-[50px]">
-                                            {orderQty}
-                                        </p>
-                                        <CartButton
-                                            variant="add"
-                                            disabled={orderQty + 1 > stock}
-                                            onClick={() => {
-                                                if (orderQty + 1 > stock)
-                                                    return;
-                                                updateCartItem({
-                                                    id,
-                                                    direction: "increment",
-                                                });
-                                            }}
-                                        />
+                                    <div className="flex w-full items-center justify-between gap-3">
+                                        <div className="flex items-center justify-between">
+                                            <CartButton
+                                                variant="minus"
+                                                disabled={orderQty - 1 < 1}
+                                                onClick={() => {
+                                                    if (orderQty - 1 < 1)
+                                                        return;
+                                                    updateCartItem({
+                                                        direction: "decrement",
+                                                        id,
+                                                    });
+                                                }}
+                                            />
+                                            <p className="min-w-[30px]">
+                                                {orderQty}
+                                            </p>
+                                            <CartButton
+                                                variant="add"
+                                                disabled={orderQty + 1 > stock}
+                                                onClick={() => {
+                                                    if (orderQty + 1 > stock)
+                                                        return;
+                                                    updateCartItem({
+                                                        id,
+                                                        direction: "increment",
+                                                    });
+                                                }}
+                                            />
+                                        </div>
+                                        <Button
+                                            outline
+                                            onClick={() => deleteCartItem(id)}
+                                            className="self-end"
+                                        >
+                                            移除
+                                        </Button>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +116,7 @@ const CartRow = () => {
                         <td className="hidden lg:table-cell">
                             RM {(orderQty * price).toFixed(2)}
                         </td>
-                        <td className="">
+                        <td className="hidden lg:table-cell">
                             <Button outline onClick={() => deleteCartItem(id)}>
                                 移除
                             </Button>
