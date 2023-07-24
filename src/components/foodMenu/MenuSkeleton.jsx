@@ -1,5 +1,5 @@
 import useMediaQuery from "../../hooks/useMediaQuery";
-import SkeletonPost from "../skeleton/SkeletonCard";
+import SkeletonCard from "../skeleton/SkeletonCard";
 
 const MenuSkeleton = () => {
     const tabletMedia = useMediaQuery("min-width: 768px");
@@ -14,7 +14,7 @@ const MenuSkeleton = () => {
     return (
         <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(skeletonAmount).keys()].map((i) => (
-                <SkeletonPost key={i} />
+                <SkeletonCard key={i} />
             ))}
         </ul>
     );

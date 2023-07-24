@@ -14,7 +14,10 @@ const Search = ({ search, onSearchChange }) => {
     };
 
     return (
-        <form className="relative mb-4 rounded-md">
+        <form
+            className="relative mb-4 rounded-md"
+            onSubmit={(e) => e.preventDefault()}
+        >
             <input
                 type="text"
                 className="mx-auto w-full rounded-md border border-gray-300 p-3 text-base outline-none focus:border-primary"

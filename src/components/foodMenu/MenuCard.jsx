@@ -13,16 +13,15 @@ const MenuCard = ({ menuData }) => {
     const matchMedia = useMediaQuery("(min-width: 1024px)");
 
     const cardRef = useRef(null);
-
     const searchParams = useSearchParams();
     const [queryString] = searchParams[0];
 
     useEffect(() => {
         if (!queryString) return;
         if (queryString[1] === cardRef.current.dataset.id) {
-            window.scrollTo({
-                top: cardRef.current.offsetTop,
+            cardRef.current.scrollIntoView({
                 behavior: "smooth",
+                block: "nearest",
             });
         }
     }, [searchParams]);
