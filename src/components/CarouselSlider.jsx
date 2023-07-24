@@ -6,7 +6,6 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 
 const CarouselSlider = ({ carouselData }) => {
-    // const modules = [Navigation, Autoplay];
     return (
         <Swiper
             slidesPerView={1}
@@ -21,7 +20,6 @@ const CarouselSlider = ({ carouselData }) => {
                 768: {
                     slidesPerView: 2,
                     spaceBetween: 24,
-
                     navigation: {
                         enabled: true,
                     },

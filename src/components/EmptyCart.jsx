@@ -7,9 +7,11 @@ const EmptyCart = () => {
             <img
                 src={EmptyCartImg}
                 alt="Empty cart"
-                className="md:h-w-[400px] h-[200px] w-[200px] md:h-[400px] md:w-[400px] lg:h-auto lg:w-auto"
+                className="h-[200px] md:h-[300px] lg:h-[400px]"
             />
-            <h1 className="text-center text-xl italic">购物车目前还没有餐点</h1>
+            <h1 className="md:3xl lg:4xl text-center text-2xl italic">
+                购物车目前还没有餐点
+            </h1>
             <Link type="button" to="/menu" className="btn-primary btn">
                 前往点心列表
             </Link>
