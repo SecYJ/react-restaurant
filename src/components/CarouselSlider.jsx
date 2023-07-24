@@ -3,15 +3,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import PopularCard from "./PopularCard";
 import "swiper/css";
 import "swiper/css/navigation";
-
-const modules = [Navigation, Autoplay];
+import "swiper/css/autoplay";
 
 const CarouselSlider = ({ carouselData }) => {
+    // const modules = [Navigation, Autoplay];
     return (
         <Swiper
             slidesPerView={1}
             spaceBetween={0}
             loop={true}
+            modules={[Navigation, Autoplay]}
             autoplay={{
                 delay: 3000,
                 disableOnInteraction: false,
@@ -20,7 +21,7 @@ const CarouselSlider = ({ carouselData }) => {
                 768: {
                     slidesPerView: 2,
                     spaceBetween: 24,
-                    modules,
+
                     navigation: {
                         enabled: true,
                     },
@@ -28,7 +29,6 @@ const CarouselSlider = ({ carouselData }) => {
                 1024: {
                     slidesPerView: 3,
                     spaceBetween: 24,
-                    modules,
                     navigation: {
                         enabled: true,
                     },

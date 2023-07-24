@@ -6,7 +6,7 @@ import CtxWrapper from "../contexts/CtxWrapper";
 const Layout = () => {
     return (
         <CtxWrapper>
-            <div className="flex min-h-screen flex-col">
+            <div className="flex h-screen flex-col overflow-y-auto">
                 <Header />
                 <main className="relative grow">
                     <Outlet />
