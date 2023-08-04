@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { paymentSchema } from "../lib/validations/payment";
 
 const FormDataContext = createContext(null);
 
@@ -20,6 +22,7 @@ const FormCtx = ({ children }) => {
             address: "",
             eWallet: "",
         },
+        resolver: yupResolver(paymentSchema),
     });
 
     return (

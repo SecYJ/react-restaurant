@@ -90,13 +90,7 @@ const FormFields = () => {
                 <h2 className="col-span-full mb-4 font-bold">个人信息</h2>
                 <InputGroup label="姓名*">
                     <input
-                        {...register("username", {
-                            required: "姓名栏位为必填",
-                            maxLength: {
-                                value: 20,
-                                message: "姓名长度不可超过 20 个文字",
-                            },
-                        })}
+                        {...register("username")}
                         onBlur={(e) => trigger(e.target.name)}
                         autoComplete="off"
                         placeholder="e.g Sharon"
