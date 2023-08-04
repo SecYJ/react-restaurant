@@ -12,6 +12,7 @@ const Subtotal = ({ onNextStepChange }) => {
     const {
         handleSubmit,
         formState: { isValid },
+        reset,
     } = useFormContext();
     const { businessHours, deliveryDate } = useFormDataContext();
 
@@ -46,6 +47,7 @@ const Subtotal = ({ onNextStepChange }) => {
             id: crypto.randomUUID(),
         });
         setPaymentData(paymentData);
+        reset();
     };
 
     return (

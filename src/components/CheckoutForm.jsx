@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FormFields from "./FormFields";
+import FormFields from "./form/FormFields";
 import Subtotal from "./Subtotal";
 import PaymentSuccess from "./PaymentSuccess";
 import SectionContainer from "./SectionContainer";
