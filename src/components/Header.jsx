@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/dim.png";
 import { useCartCtx } from "../contexts/CartCtx";
 import useMediaQuery from "../hooks/useMediaQuery";
 import Avatar from "./Avatar";
