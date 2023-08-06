@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { animateConfigs } from "../router";
 import Banner from "../components/Banner";
-import Features from "../components/Features";
 import Faq from "../components/Faq";
-import Reviews from "../components/Reviews";
 import PopularList from "../components/PopularList";
+import CustomerReview from "../components/customer-review/CustomerReview";
+import Features from "../components/features/Features";
+import { animateConfigs } from "../router";
 
 const Home = () => {
     return (
@@ -12,7 +12,7 @@ const Home = () => {
             <Banner />
             <Features />
             <PopularList />
-            <Reviews />
+            <CustomerReview />
             <Faq />
         </motion.div>
     );
