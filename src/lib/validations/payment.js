@@ -2,7 +2,10 @@ import * as yup from "yup";
 import "yup-phone-lite";
 
 export const paymentSchema = yup.object({
-    username: yup.string("姓名不可为空").max(20, "姓名长度不可超过 20 个文字"),
+    username: yup
+        .string()
+        .required("姓名不可为空")
+        .max(20, "姓名长度不可超过 20 个文字"),
     phone: yup
         .string()
         .phone("MY", "手机号码不符合")

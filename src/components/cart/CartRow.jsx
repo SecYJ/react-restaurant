@@ -2,9 +2,21 @@ import { motion } from "framer-motion";
 import { useCartCtx } from "../../contexts/CartCtx";
 import Button from "../Button";
 import CartButton from "./CartButton";
+import { toast } from "react-toastify";
 
 const CartRow = () => {
     const { cart, updateCartItem, deleteCartItem } = useCartCtx();
+
+    const handleDeleteItem = (itemName, id) => {
+        const toastMsg = `${itemName} 已从购物车移除`;
+        if (toast.isActive("delete-cart-item")) {
+            toast.update("delete-cart-item", { render: toastMsg });
+        } else {
+            toast.error(toastMsg, { toastId: "delete-cart-item" });
+        }
+
+        deleteCartItem(id);
+    };
 
     return (
         <tbody>
@@ -77,7 +89,9 @@ const CartRow = () => {
                                         </div>
                                         <Button
                                             outline
-                                            onClick={() => deleteCartItem(id)}
+                                            onClick={() =>
+                                                handleDeleteItem(name, id)
+                                            }
                                             className="self-end"
                                         >
                                             移除
@@ -117,7 +131,10 @@ const CartRow = () => {
                             RM {(orderQty * price).toFixed(2)}
                         </td>
                         <td className="hidden lg:table-cell">
-                            <Button outline onClick={() => deleteCartItem(id)}>
+                            <Button
+                                outline
+                                onClick={() => handleDeleteItem(name, id)}
+                            >
                                 移除
                             </Button>
                         </td>

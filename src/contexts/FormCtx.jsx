@@ -11,15 +11,16 @@ const FormCtx = ({ children }) => {
 
     const methods = useForm({
         mode: "onChange",
+        // reValidateMode: "onChange",
         defaultValues: {
             username: "",
             phone: "",
-            deliveryMethod: "外卖",
+            // deliveryMethod: "外卖",
             contactLessDelivery: false,
-            paymentRadio: "",
+            paymentMethod: "",
             orderRequest: "",
             email: "",
-            address: "",
+            // address: "",
             eWallet: "",
         },
         resolver: yupResolver(paymentSchema),

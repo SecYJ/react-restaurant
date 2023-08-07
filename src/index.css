@@ -38,3 +38,13 @@
 .react-datepicker__input-container input {
     @apply w-full p-2;
 }
+
+.Toastify__toast-container--top-right.custom {
+    top: 4rem;
+}
+
+@media (max-width: 480px) {
+    .Toastify__toast-container {
+        width: 100%;
+    }
+}

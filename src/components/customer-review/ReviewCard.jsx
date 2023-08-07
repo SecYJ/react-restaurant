@@ -3,7 +3,6 @@ import { AiFillStar } from "react-icons/ai";
 
 const variants = {
     initial: (custom) => {
-        console.log(custom);
         if (custom === "") return;
         return {
             opacity: 0,
@@ -49,7 +48,6 @@ const ReviewCard = ({ review, index }) => {
                     )}
                 </p>
             </div>
-            {/* <div className="flex items-center justify-between"></div> */}
         </motion.li>
     );
 };

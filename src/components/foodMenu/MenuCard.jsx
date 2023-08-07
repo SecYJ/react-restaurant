@@ -1,12 +1,13 @@
+import { useEffect, useRef } from "react";
+import { toast } from "react-toastify";
+import { useSearchParams } from "react-router-dom";
 import { useCartCtx } from "../../contexts/CartCtx";
 import { AiOutlinePlus } from "react-icons/ai";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import Button from "../Button";
 import LazyImage from "../LazyImage";
-import { useSearchParams } from "react-router-dom";
-import { useEffect, useRef } from "react";
 
-const MenuCard = ({ menuData }) => {
+const MenuCard = ({ menuData, testRef }) => {
     const { img, category, price, name, stock, id } = menuData;
     const { dispatch } = useCartCtx();
     const [chineseName, ...englishName] = name.split(" ");
@@ -27,6 +28,14 @@ const MenuCard = ({ menuData }) => {
     }, [searchParams]);
 
     const addToCart = () => {
+        const toastMsg = `${name} 已加入购物车`;
+
+        if (toast.isActive("card-item")) {
+            toast.update("card-item", { render: toastMsg });
+        } else {
+            toast.success(toastMsg, { toastId: "card-item" });
+        }
+
         dispatch({
             type: "ADD_TO_CART",
             payload: {

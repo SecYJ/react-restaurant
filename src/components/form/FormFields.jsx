@@ -19,6 +19,8 @@ const FormFields = () => {
         name: "deliveryMethod",
     });
 
+    console.log(errors);
+
     return (
         <form>
             <h2 className="col-span-full mb-4 font-bold">日期与时间</h2>
@@ -31,17 +33,16 @@ const FormFields = () => {
                 <InputGroup label="姓名*">
                     <input
                         {...register("username")}
-                        onBlur={(e) => trigger(e.target.name)}
                         autoComplete="off"
                         placeholder="e.g Sharon"
                         className={defaultInputClassNames}
+                        onBlur={(e) => trigger(e.target.value)}
                     />
                     <ErrorMessage>{errors.username?.message}</ErrorMessage>
                 </InputGroup>
                 <InputGroup label="手机号码">
                     <input
                         {...register("phone", { valueAsNumber: true })}
-                        onBlur={(e) => trigger(e.target.name)}
                         type="tel"
                         placeholder="e.g 123456789"
                         className={defaultInputClassNames}
@@ -54,7 +55,7 @@ const FormFields = () => {
                         {...register("email")}
                         placeholder="e.g johndoe@gmail.com"
                         className={defaultInputClassNames}
-                        onBlur={(e) => trigger(e.target.name)}
+                        onBlur={(e) => trigger(e.target.value)}
                     />
                     <ErrorMessage>{errors.email?.message}</ErrorMessage>
                 </InputGroup>
@@ -87,6 +88,7 @@ const FormFields = () => {
                             type="text"
                             placeholder="e.g 420 LORONG KANGSAR 1/7 TAMAN KANGSAR, 大小写均可"
                             className={defaultInputClassNames}
+                            onBlur={(e) => trigger(e.target.value)}
                         />
                         <ErrorMessage>{errors.address?.message}</ErrorMessage>
                     </InputGroup>

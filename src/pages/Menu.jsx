@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
+import SectionContainer from "../components/SectionContainer";
 import MenuGrid from "../components/foodMenu/MenuGrid";
 import MenuSidebar from "../components/foodMenu/MenuSidebar";
-import SectionContainer from "../components/SectionContainer";
 import { animateConfigs } from "../router";
 
 const Menu = () => {
