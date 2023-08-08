@@ -3,7 +3,6 @@ import { useCartCtx } from "../contexts/CartCtx";
 import { useFormDataContext } from "../contexts/FormCtx";
 import { usePaymentCtx } from "../contexts/PaymentCtx";
 import useTotalAmount from "../hooks/useTotalAmount";
-import Loading from "../assets/spinner-loading.svg";
 import useOrder from "../hooks/useOrder";
 import { toast } from "react-toastify";
 
@@ -17,7 +16,7 @@ const Subtotal = ({ onNextStepChange }) => {
     const { setPaymentData } = usePaymentCtx();
     const {
         handleSubmit,
-        formState: { isValid },
+        formState: { isValid, isSubmitting, isSubmitSuccessful },
         reset,
     } = useFormContext();
     const { businessHours, deliveryDate } = useFormDataContext();
@@ -28,11 +27,11 @@ const Subtotal = ({ onNextStepChange }) => {
     const grossTotal =
         watchDeliveryMethod === "外卖" ? (Number(total) + 5).toFixed(2) : total;
 
-    const { isLoading, mutate } = useOrder();
-
-    console.log("isValid", isValid);
+    const { mutate } = useOrder(simulateAsync);
 
     const onSubmit = async (data) => {
+        // To prevent user continuously pressing
+        if (isSubmitting || isSubmitSuccessful) return;
         const { address, deliveryMethod, paymentMethod, eWallet } = data;
 
         if (businessHours === "" || deliveryDate === "") return;
@@ -48,28 +47,13 @@ const Subtotal = ({ onNextStepChange }) => {
             total: grossTotal,
         };
 
-        // await new Promise((resolve) => {
-        // toast.promise(simulateAsync, {
-        //     pending: "正在处理您的订单, 请别关闭网页",
-        //     success: "付款成功",
-        //     error: "付款失败, 系统问题请稍后重试",
-        // });
+        setPaymentData(paymentData);
 
-        // mutate({
-        //     ...paymentData,
-        //     deliveryDate: new Intl.DateTimeFormat().format(
-        //         new Date(deliveryDate)
-        //     ),
-        //     id: crypto.randomUUID(),
-        // });
-
-        //     setTimeout(() => {
-        //         setPaymentData(paymentData);
-        //         onNextStepChange();
-        //         reset();
-        //         resolve();
-        //     }, 3000);
-        // });
+        await toast.promise(simulateAsync, {
+            pending: "正在处理您的订单, 请别关闭网页",
+            success: "付款成功",
+            error: "付款失败, 系统问题请稍后重试",
+        });
 
         mutate({
             ...paymentData,
@@ -79,16 +63,8 @@ const Subtotal = ({ onNextStepChange }) => {
             id: crypto.randomUUID(),
         });
 
-        await toast.promise(simulateAsync, {
-            pending: "正在处理您的订单, 请别关闭网页",
-            success: "付款成功",
-            error: "付款失败, 系统问题请稍后重试",
-        });
-
-        setPaymentData(paymentData);
         onNextStepChange();
         reset();
-        await simulateAsync();
     };
 
     return (
@@ -120,22 +96,19 @@ const Subtotal = ({ onNextStepChange }) => {
             </strong>
             <button
                 type="button"
-                className={`flex w-full items-center justify-center rounded-full py-2 text-white
+                className="flex w-full items-center justify-center rounded-full py-2 text-white
                 enabled:pointer-events-auto enabled:bg-primary 
                 disabled:pointer-events-none
-                disabled:bg-gray-400`}
+                disabled:bg-gray-400"
                 disabled={
-                    watchDeliveryMethod === "外卖"
-                        ? !isValid ||
-                          !businessHours ||
-                          !deliveryDate ||
-                          !watchPaymentMethod
-                        : !isValid || !businessHours || !deliveryDate
+                    !isValid ||
+                    !watchPaymentMethod ||
+                    !businessHours ||
+                    !deliveryDate
                 }
                 onClick={handleSubmit(onSubmit)}
             >
                 前往付款
-                {isLoading && <img src={Loading} />}
             </button>
         </>
     );

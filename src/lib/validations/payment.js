@@ -11,5 +11,10 @@ export const paymentSchema = yup.object({
         .phone("MY", "手机号码不符合")
         .required("手机号码不可为空"),
     email: yup.string().email("Email 格式不正确").required("Email 不可为空"),
-    address: yup.string().required("地址为必填"),
+    deliveryMethod: yup.string().oneOf(["外卖", "自取"]),
+    address: yup.string().when("deliveryMethod", {
+        is: "外卖",
+        then: () => yup.string().required("地址为必填"),
+        otherwise: () => yup.string(),
+    }),
 });

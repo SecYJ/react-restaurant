@@ -1,5 +1,4 @@
 import { useFormContext, useWatch } from "react-hook-form";
-import "react-datepicker/dist/react-datepicker.css";
 import InputGroup from "../InputGroup";
 import PaymentMethod from "../PaymentMethod";
 import ErrorMessage from "./ErrorMessage";
@@ -15,11 +14,9 @@ const FormFields = () => {
         trigger,
     } = useFormContext();
 
-    const deliveryMethod = useWatch({
+    const watchDeliveryMethod = useWatch({
         name: "deliveryMethod",
     });
-
-    console.log(errors);
 
     return (
         <form>
@@ -27,7 +24,6 @@ const FormFields = () => {
             <div className="mb-4 flex gap-4">
                 <SelectTime />
             </div>
-
             <div className="border-b border-gray-200 pb-4">
                 <h2 className="col-span-full mb-4 font-bold">个人信息</h2>
                 <InputGroup label="姓名*">
@@ -68,7 +64,7 @@ const FormFields = () => {
                         <option value="外卖">外卖</option>
                     </select>
 
-                    {deliveryMethod === "外卖" && (
+                    {watchDeliveryMethod === "外卖" && (
                         <InputGroup mb="mb-0 mt-1">
                             <label className="flex items-center gap-1">
                                 <input
@@ -81,7 +77,7 @@ const FormFields = () => {
                         </InputGroup>
                     )}
                 </InputGroup>
-                {deliveryMethod === "外卖" && (
+                {watchDeliveryMethod === "外卖" && (
                     <InputGroup label="地址" mb="mb-0">
                         <input
                             {...register("address")}
