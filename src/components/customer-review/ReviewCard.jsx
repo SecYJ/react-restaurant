@@ -6,7 +6,7 @@ const variants = {
         if (custom === "") return;
         return {
             opacity: 0,
-            x: custom % 2 === 0 ? "-100vw" : "100vw",
+            x: custom % 2 === 0 ? "-400" : "400",
         };
     },
     animate: {
@@ -14,7 +14,7 @@ const variants = {
         x: 0,
     },
     transition: {
-        duration: 5,
+        duration: 1.5,
     },
 };
 

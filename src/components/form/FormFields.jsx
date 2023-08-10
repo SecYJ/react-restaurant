@@ -31,7 +31,7 @@ const FormFields = () => {
                         {...register("username")}
                         autoComplete="off"
                         placeholder="e.g Sharon"
-                        className={defaultInputClassNames}
+                        className={`${defaultInputClassNames} placeholder-gray-300`}
                         onBlur={(e) => trigger(e.target.value)}
                     />
                     <ErrorMessage>{errors.username?.message}</ErrorMessage>

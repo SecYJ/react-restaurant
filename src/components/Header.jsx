@@ -1,5 +1,5 @@
-import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/dim.png";
@@ -9,6 +9,15 @@ import Avatar from "./Avatar";
 import MobileNavButton from "./MobileNavButton";
 import MobileNavMenu from "./MobileNavMenu";
 import Navbar from "./Navbar.jsx";
+
+const Component = forwardRef((_, ref) => (
+    <Link ref={ref} to="/" className="flex items-center gap-2">
+        <img src={logo} className="h-9 w-9 object-cover" />
+        <p className="mr-4">满味芳</p>
+    </Link>
+));
+
+const MotionComponent = motion(Component);
 
 const Header = () => {
     const { totalUnits } = useCartCtx();
@@ -21,11 +30,35 @@ const Header = () => {
     return (
         <header className="navbar sticky top-0 left-0 z-[2] bg-primary text-white">
             <div className="container flex justify-between">
-                <Link to="/" className="flex items-center gap-2">
-                    <img src={logo} className="h-9 w-9 object-cover" />
-                    <p className="mr-4">满味芳</p>
-                </Link>
-                <div className="flex items-center">
+                <MotionComponent
+                    initial={{
+                        opacity: 0,
+                        x: -100,
+                    }}
+                    animate={{
+                        opacity: 1,
+                        x: 0,
+                    }}
+                    transition={{
+                        duration: 1.5,
+                        delay: 3,
+                    }}
+                />
+                <motion.div
+                    className="flex items-center"
+                    initial={{
+                        opacity: 0,
+                        x: 100,
+                    }}
+                    animate={{
+                        opacity: 1,
+                        x: 0,
+                    }}
+                    transition={{
+                        duration: 1.5,
+                        delay: 1.5,
+                    }}
+                >
                     <button
                         type="button"
                         onClick={() => navigate("/cart")}
@@ -52,7 +85,7 @@ const Header = () => {
                         )}
                     </AnimatePresence>
                     <Navbar />
-                </div>
+                </motion.div>
             </div>
         </header>
     );
