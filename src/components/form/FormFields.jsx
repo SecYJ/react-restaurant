@@ -5,7 +5,7 @@ import ErrorMessage from "./ErrorMessage";
 import SelectTime from "./SelectTime";
 
 const defaultInputClassNames =
-    "border border-transparent border-b-gray-300 py-2 outline-none";
+    "border border-transparent border-b-gray-300 py-2 outline-none placeholder-gray-300";
 
 const FormFields = () => {
     const {
@@ -20,23 +20,20 @@ const FormFields = () => {
 
     return (
         <form>
-            <h2 className="col-span-full mb-4 font-bold">日期与时间</h2>
-            <div className="mb-4 flex gap-4">
-                <SelectTime />
-            </div>
+            <SelectTime />
             <div className="border-b border-gray-200 pb-4">
                 <h2 className="col-span-full mb-4 font-bold">个人信息</h2>
-                <InputGroup label="姓名*">
+                <InputGroup label="姓名" required>
                     <input
                         {...register("username")}
                         autoComplete="off"
                         placeholder="e.g Sharon"
-                        className={`${defaultInputClassNames} placeholder-gray-300`}
+                        className={`${defaultInputClassNames} `}
                         onBlur={(e) => trigger(e.target.value)}
                     />
                     <ErrorMessage>{errors.username?.message}</ErrorMessage>
                 </InputGroup>
-                <InputGroup label="手机号码">
+                <InputGroup label="手机号码" required>
                     <input
                         {...register("phone", { valueAsNumber: true })}
                         type="tel"
@@ -45,7 +42,7 @@ const FormFields = () => {
                     />
                     <ErrorMessage>{errors.phone?.message}</ErrorMessage>
                 </InputGroup>
-                <InputGroup label="电子邮件">
+                <InputGroup label="电子邮件" required>
                     <input
                         type="email"
                         {...register("email")}
@@ -55,7 +52,7 @@ const FormFields = () => {
                     />
                     <ErrorMessage>{errors.email?.message}</ErrorMessage>
                 </InputGroup>
-                <InputGroup label="配送方式">
+                <InputGroup label="配送方式" required>
                     <select
                         className="mt-2 border border-gray-300 bg-transparent p-3"
                         {...register("deliveryMethod")}
@@ -78,7 +75,7 @@ const FormFields = () => {
                     )}
                 </InputGroup>
                 {watchDeliveryMethod === "外卖" && (
-                    <InputGroup label="地址" mb="mb-0">
+                    <InputGroup label="地址" mb="mb-0" required>
                         <input
                             {...register("address")}
                             type="text"

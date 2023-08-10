@@ -52,8 +52,8 @@ const PaymentList = () => {
                     <select
                         className="mt-4 block w-max min-w-[300px] border border-gray-300 bg-transparent p-3"
                         {...register("eWallet", { required: true })}
+                        value={register.eWallet}
                     >
-                        <option value="">选择电子钱包</option>
                         <option value="GrabPay">GrabPay</option>
                         <option value="Boost">Boost</option>
                         <option value="TouchNGo">Touch 'n Go eWallet</option>

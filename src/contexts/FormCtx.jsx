@@ -20,7 +20,7 @@ const FormCtx = ({ children }) => {
             orderRequest: "",
             email: "",
             address: "",
-            eWallet: "",
+            eWallet: "GrabPay",
         },
         resolver: yupResolver(paymentSchema),
     });

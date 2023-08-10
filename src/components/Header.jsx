@@ -28,7 +28,7 @@ const Header = () => {
     const toggleVisibility = () => setVisible((c) => !c);
 
     return (
-        <header className="navbar sticky top-0 left-0 z-[2] bg-primary text-white">
+        <header className="navbar sticky top-0 left-0 z-[2] overflow-hidden bg-primary text-white">
             <div className="container flex justify-between">
                 <MotionComponent
                     initial={{

@@ -10,6 +10,7 @@ import {
 } from "date-fns/esm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import RequiredInput from "./RequiredInput";
 
 const SelectTime = () => {
     const { deliveryDate, setDeliveryDate, businessHours, setBusinessHours } =
@@ -44,31 +45,37 @@ const SelectTime = () => {
 
     return (
         <>
-            <DatePicker
-                className="rounded-sm border border-gray-300 outline-none focus:border-primary"
-                filterDate={filterOperationDay}
-                selected={deliveryDate}
-                onChange={onDateChange}
-                dateFormat="dd/MM/yyyy"
-                minDate={new Date()}
-                maxDate={addDays(new Date(), 7)}
-                placeholderText="请选择日期"
-                shouldCloseOnSelect={false}
-            />
-            <DatePicker
-                disabled={!deliveryDate}
-                showTimeSelect
-                showTimeSelectOnly
-                onChange={(date) => setBusinessHours(date)}
-                filterTime={filterTime}
-                className={`rounded-sm border border-gray-300 outline-none focus:border-primary ${
-                    !deliveryDate ? "cursor-not-allowed" : ""
-                }`}
-                dateFormat="h:mm aa"
-                placeholderText="请选择时间"
-                shouldCloseOnSelect={false}
-                selected={businessHours}
-            />
+            <div className="flex">
+                <h2 className="col-span-full mb-4 font-bold">日期与时间</h2>
+                <RequiredInput />
+            </div>
+            <div className="mb-4 flex gap-4">
+                <DatePicker
+                    className="rounded-sm border border-gray-300 outline-none focus:border-primary"
+                    filterDate={filterOperationDay}
+                    selected={deliveryDate}
+                    onChange={onDateChange}
+                    dateFormat="dd/MM/yyyy"
+                    minDate={new Date()}
+                    maxDate={addDays(new Date(), 7)}
+                    placeholderText="请选择日期"
+                    shouldCloseOnSelect={false}
+                />
+                <DatePicker
+                    disabled={!deliveryDate}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    onChange={(date) => setBusinessHours(date)}
+                    filterTime={filterTime}
+                    className={`rounded-sm border border-gray-300 outline-none focus:border-primary ${
+                        !deliveryDate ? "cursor-not-allowed" : ""
+                    }`}
+                    dateFormat="h:mm aa"
+                    placeholderText="请选择时间"
+                    shouldCloseOnSelect={false}
+                    selected={businessHours}
+                />
+            </div>
         </>
     );
 };
