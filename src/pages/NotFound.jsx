@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
 import Error from "../assets/404.svg";
 import SectionContainer from "../components/SectionContainer";
 
@@ -8,21 +7,21 @@ const NotFound = () => {
     const navigate = useNavigate();
     const [countdown, setCountdown] = useState(5);
 
-    // useEffect(() => {
-    //     let timer = setTimeout(() => {
-    //         navigate("/");
-    //     }, 6000);
+    useEffect(() => {
+        let timer = setTimeout(() => {
+            navigate("/");
+        }, 6000);
 
-    //     return () => clearTimeout(timer);
-    // }, []);
+        return () => clearTimeout(timer);
+    }, []);
 
-    // useEffect(() => {
-    //     let timer = setInterval(() => {
-    //         setCountdown((prev) => (prev === 0 ? 0 : prev - 1));
-    //     }, 1000);
+    useEffect(() => {
+        let timer = setInterval(() => {
+            setCountdown((prev) => (prev === 0 ? 0 : prev - 1));
+        }, 1000);
 
-    //     return () => clearInterval(timer);
-    // }, []);
+        return () => clearInterval(timer);
+    }, []);
 
     return (
         <div className="grid h-full content-center">
