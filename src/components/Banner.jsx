@@ -4,28 +4,19 @@ import banner from "../assets/banner.jpg";
 const Banner = () => {
     return (
         <section className="relative">
-            <div className="absolute top-0 left-0 h-full w-full bg-primary" />
+            <div className="absolute top-0 left-0 h-full w-full" />
             <motion.img
                 initial={{
                     y: "-100vh",
                 }}
                 animate={{
-                    // y: [0, -70, 0, -40, 0],
-                    y: 0,
+                    y: [0, -60, 0, -30, 0],
+                    // y: 0,
                 }}
                 transition={{
-                    duration: 1.5,
-                    // duration: 1.5,
-                    // damping
-                    // repeat: Infinity,
-                    // repeatType: "loop",
+                    duration: 1,
+                    type: "damping",
                 }}
-                // transition={{
-                //     type: "spring",
-                //     damping: 10,
-                //     stiffness: 100,
-                //     duration: 1,
-                // }}
                 src={banner}
                 alt="一马风味横幅"
                 className="h-[calc(100vh-80px)] w-full object-cover"

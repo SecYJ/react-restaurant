@@ -3,10 +3,9 @@ import { AiFillStar } from "react-icons/ai";
 
 const variants = {
     initial: (custom) => {
-        if (custom === "") return;
         return {
             opacity: 0,
-            x: custom % 2 === 0 ? "-400" : "400",
+            x: custom % 2 === 0 ? "-400px" : "400px",
         };
     },
     animate: {
@@ -14,7 +13,8 @@ const variants = {
         x: 0,
     },
     transition: {
-        duration: 1.5,
+        duration: 5,
+        delay: 1.5,
     },
 };
 
@@ -23,13 +23,9 @@ const ReviewCard = ({ review, index }) => {
 
     return (
         <motion.li
-            key={text}
             variants={variants}
-            initial="initial"
-            animate="animate"
-            transition="transition"
             custom={index}
-            className="grid grid-cols-[auto_1fr] items-center gap-2 rounded-md border border-white bg-white p-6 transition-transform"
+            className="grid grid-cols-[auto_1fr] items-center gap-2 rounded-md border border-white bg-white p-6"
         >
             <img src={img} className="h-16 w-16 rounded-full object-cover" />
             <div className="space-y-1">

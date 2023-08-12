@@ -12,7 +12,6 @@ const MobileNavMenu = ({ toggleVisibility }) => {
 
     useEffect(() => {
         setHeight(menuRef.current.scrollHeight);
-
         return () => setHeight(0);
     }, []);
 

@@ -12,7 +12,18 @@ import Navbar from "./Navbar.jsx";
 
 const Component = forwardRef((_, ref) => (
     <Link ref={ref} to="/" className="flex items-center gap-2">
-        <img src={logo} className="h-9 w-9 object-cover" />
+        <motion.img
+            animate={{
+                scale: [1, 2, 1],
+                rotate: [0, 360, 0],
+            }}
+            transition={{
+                duration: 1,
+                delay: 2,
+            }}
+            src={logo}
+            className="h-9 w-9 object-cover"
+        />
         <p className="mr-4">满味芳</p>
     </Link>
 ));
@@ -28,8 +39,8 @@ const Header = () => {
     const toggleVisibility = () => setVisible((c) => !c);
 
     return (
-        <header className="navbar sticky top-0 left-0 z-[2] overflow-hidden bg-primary text-white">
-            <div className="container flex justify-between">
+        <header className="navbar sticky top-0 left-0 z-[2] bg-primary text-white">
+            <div className="container flex justify-between overflow-hidden">
                 <MotionComponent
                     initial={{
                         opacity: 0,
@@ -40,8 +51,7 @@ const Header = () => {
                         x: 0,
                     }}
                     transition={{
-                        duration: 1.5,
-                        delay: 3,
+                        duration: 2,
                     }}
                 />
                 <motion.div
@@ -55,8 +65,7 @@ const Header = () => {
                         x: 0,
                     }}
                     transition={{
-                        duration: 1.5,
-                        delay: 1.5,
+                        duration: 1.7,
                     }}
                 >
                     <button
@@ -79,7 +88,6 @@ const Header = () => {
                     <AnimatePresence>
                         {visible && (
                             <MobileNavMenu
-                                visible={visible}
                                 toggleVisibility={toggleVisibility}
                             />
                         )}
